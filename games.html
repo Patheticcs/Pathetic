@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Games</title>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+      * {
+        outline: none;
+      }
+
+      button,
+      input,
+      textarea,
+      select {
+        outline: none;
+      }
+
+      body {
+        margin: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        font-family: 'Lato', sans-serif;
+        background-color: white;
+        font-weight: bold;
+        text-align: center;
+        overflow-x: hidden;
+        overflow-y: auto;
+        height: 100%;
+      }
+
+      #background-image {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100vh;
+        object-fit: cover;
+        z-index: -1;
+      }
+
+      header {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        padding: 20px;
+        box-sizing: border-box;
+        position: fixed;
+        top: 0;
+        z-index: 1;
+      }
+
+      .back-button-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 20px;
+        width: 100%;
+      }
+
+      #searchInput {
+        padding: 10px;
+        font-size: 16px;
+        border-radius: 30px;
+        background-color: rgba(0, 0, 0, .5);
+        box-shadow: 0 0px 10px rgba(255, 255, 255, 0.6);
+        color: white;
+        transition: box-shadow 0.5s ease, transform 0.5s ease, margin 0.5s ease;
+        backdrop-filter: blur(3px);
+        border: none;
+      }
+
+      #searchInput:focus {
+        color: wwhite;
+        outline: none;
+      }
+
+      #searchInput:hover {
+        box-shadow: 0 0px 35px rgba(255, 255, 255, 0.6);
+        text-shadow: 0 0 20px rgba(255, 255, 255, 0.5), 0 0 50px rgba(255, 255, 255, 0.3);
+        transform: scale(1.03);
+        margin-left: 5px;
+        margin-right: 5px;
+      }
+
+      .button-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        min-height: 100vh;
+        padding-top: 80px;
+        box-sizing: border-box;
+        overflow-y: auto;
+      }
+
+      .buttons-grid {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 25px;
+        width: 100%;
+        max-width: 1000px;
+        padding: 0 20px;
+        margin-top: 100px;
+        margin-bottom: 100px;
+      }
+
+      .button {
+        width: 100px;
+        height: 40px;
+        padding: 15px 40px;
+        font-size: 1rem;
+        background-color: rgba(0, 0, 0, .5);
+        box-shadow: 0 0px 10px rgba(255, 255, 255, 0.6);
+        color: white;
+        border-radius: 30px;
+        cursor: pointer;
+        transition: all 0.4s ease-out;
+        backdrop-filter: blur(3px);
+        display: inline-flex;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        text-decoration: none;
+      }
+
+      .button:hover {
+        transform: scale(1.03);
+        box-shadow: 0 0px 35px rgba(255, 255, 255, 0.6);
+        text-shadow: 0 0 20px rgba(255, 255, 255, 0.5), 0 0 50px rgba(255, 255, 255, 0.3);
+      }
+
+      .back-button {
+        background-color: rgba(0, 0, 0, .5);
+        box-shadow: 0 0px 10px rgba(255, 255, 255, 0.6);
+        color: white;
+        height: 40px;
+        width: 100px;
+        text-align: center;
+        cursor: pointer;
+        border-radius: 30px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        transition: transform 0.3s ease, box-shadow 0.3s ease, margin-left 0.3s ease, margin-right 0.3s ease;
+        backdrop-filter: blur(2px);
+        border: none;
+        outline: none;
+      }
+
+      .back-button:hover {
+        color: white;
+        box-shadow: 0 0px 35px rgba(255, 255, 255, 0.6);
+        text-shadow: 0 0 20px rgba(255, 255, 255, 0.5), 0 0 50px rgba(255, 255, 255, 0.3);
+        transform: scale(1.03);
+        margin-right: 5px;
+        margin-left: 5px;
+        backdrop-filter: blur(2px);
+      }
+
+      .back-search-container {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        width: 100%;
+        padding: 10px;
+      }
+
+      @media (max-width: 768px) {
+        .button-container {
+          padding-top: 10px;
+        }
+
+        .button {
+          font-size: 12px;
+          height: 30px;
+          width: 90px;
+          margin: 5px 0;
+          user-select: none;
+          pointer-events: auto;
+        }
+
+        .button:hover {
+          text-shadow: 0 0 0px rgba(0, 0, 0, .3), 0 0 40px rgba(0, 0, 0, .5);
+          box-shadow: 0 4px 25px rgba(0, 0, 0, 0.6);
+          background-color: white;
+          font-size: 12px;
+          height: 30px;
+          width: 90px;
+          color: black;
+        }
+
+        ::-webkit-scrollbar {
+          width: 8px;
+        }
+
+        ::-webkit-scrollbar-thumb {
+          background: rgba(0, 0, 0, 0.5);
+          border-radius: 10px;
+        }
+
+        ::-webkit-scrollbar-track {
+          background: rgba(0, 0, 0, 0.1);
+          border-radius: 10px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="background-container">
+      <img src="https://iili.io/2XOdNiQ.png" alt="background image" id="background-image">
+    </div>
+    <header>
+      <div class="back-search-container">
+        <button class="back-button" onclick="navigateTo('/scripts.html')" aria-label="Navigate Back">Back</button>
+        <input type="text" id="searchInput" placeholder="Search..." oninput="filterButtons()" />
+      </div>
+    </header>
+    <div class="button-container">
+      <div class="buttons-grid" id="gamesButtons">
+        <div class="button" onclick="openLink('https://pastebin.com/raw/K0hmtmnh')" role="button" aria-label="Open Rivals">
+          <span>Rivals</span>
+        </div>
+        <div class="button" onclick="openLink('https://pastebin.com/raw/dXWLKiHr')" role="button" aria-label="Open Arsenal">
+          <span>Arsenal</span>
+        </div>
+        <div class="button" onclick="openLink('https://pastebin.com/raw/zKPuu46z')" role="button" aria-label="Murderer VS Sheriff Duels">
+          <span>Murderer VS Sheriff Duels</span>
+        </div>
+        <div class="button" onclick="openLink('https://raw.githubusercontent.com/Dekos-lgbty/dahood/main/starhook')" role="button" aria-label="Open Da Hood">
+          <span>Da Hood</span>
+        </div>
+        <div class="button" onclick="openLink('https://pastebin.com/raw/jxsu3X2g')" role="button" aria-label="Open Blade Ball">
+          <span>Blade Ball</span>
+        </div>
+        <div class="button" onclick="openLink('https://pastebin.com/raw/G4v1wbuD')" role="button" aria-label="Open Murder Mystery 2">
+          <span>Murder Mystery 2</span>
+        </div>
+        <div class="button" onclick="openLink('https://raw.githubusercontent.com/cocotv666/Aurora/main/Aurora_Loader')" role="button" aria-label="Open Bedwars">
+          <span>Bedwars</span>
+        </div>
+        <div class="button" onclick="openLink('https://raw.githubusercontent.com/elliexmln/PrizzLife/main/pladmin.lua')" role="button" aria-label="Open Prison Life">
+          <span>Prison Life</span>
+        </div>
+        <div class="button" onclick="openLink('https://pastebin.com/raw/TA8iRBnh')" role="button" aria-label="Open Doors FLOOR 2">
+          <span>Doors</span>
+        </div>
+        <div class="button" onclick="openLink('https://rawscripts.net/raw/Destruction-Simulator-*OP*-GUI-1858')" role="button" aria-label="Open Destruction Simulator">
+          <span>Destruction Simulator</span>
+        </div>
+        <div class="button" onclick="openLink('https://raw.githubusercontent.com/scripter1cursed1rade/BelugaWare-1.4/main/belugaware.lua')" role="button" aria-label="Open KAT">
+          <span>KAT</span>
+        </div>
+        <div class="button" onclick="openLink('https://pastebin.com/raw/s22K9ctU')" role="button" aria-label="Open Dandy's World">
+          <span>Dandy's World</span>
+        </div>
+        <div class="button" onclick="openLink('https://raw.githubusercontent.com/hellohellohell012321/rate-my-avatar-gui/main/main.lua')" role="button" aria-label="Open Rate My Avatar">
+          <span>Rate My Avatar</span>
+        </div>
+        <div class="button" onclick="openLink('https://raw.githubusercontent.com/TrollGuiMaker/f0rtuit0us-hub/refs/heads/main/old')" role="button" aria-label="Open Brookhaven">
+          <span>Brookhaven</span>
+        </div>
+        <div class="button" onclick="openLink('https://pastebin.com/raw/nwuU0dV5')" role="button" aria-label="Open Legends of Speed">
+          <span>Legends of Speed</span>
+        </div>
+        <div class="button" onclick="openLink('https://raw.githubusercontent.com/kingkaynex11/strucid-script-Undetected-2024/refs/heads/main/strucid%20script%20by%20znx')" role="button" aria-label="Open Strucid">
+          <span>Strucid</span>
+        </div>
+        <div class="button" onclick="openLink('https://pastebin.com/raw/1DJh7UQ7')" role="button" aria-label="Open Zombie Attack">
+          <span>Zombie Attack</span>
+        </div>
+        <div class="button" onclick="openLink('https://rawscripts.net/raw/Piggy-open-source-15390')" role="button" aria-label="Open Piggy">
+          <span>Piggy</span>
+        </div>
+        <div class="button" onclick="openLink('https://raw.githubusercontent.com/antisocialb2/SPIMINE-FLEETHEFACILITY/main/script.lua')" role="button" aria-label="Open Flee The Facility">
+          <span>Flee The Facility</span>
+        </div>
+        <div class="button" onclick="openLink('https://raw.githubusercontent.com/PerdHub/Blosfruitscript/main/PerdLoader')" role="button" aria-label="Open Bloxfruits">
+          <span>Bloxfruits</span>
+        </div>
+        <div class="button" onclick="openLink('https://raw.githubusercontent.com/wannagrindlikepablo/Linux-Hub/refs/heads/main/Linux%20Hub')" role="button" aria-label="Open Bloxfruits">
+          <span>Snow Plow Simulator</span>
+        </div>
+        <div class="button" onclick="openLink('https://raw.githubusercontent.com/railme37509124/komaruhubabilitywars/main/script.lua')" role="button" aria-label="Open Bloxfruits">
+          <span>Ability Wars</span>
+        </div>
+        <div class="button" onclick="openLink('https://pastebin.com/raw/F8PTSEDw')" role="button" aria-label="Open Bloxfruits">
+          <span>Gun Grounds FFA</span>
+        </div>
+        <div class="button" onclick="openLink('https://raw.githubusercontent.com/shlexware/Orion/main/source')" role="button" aria-label="Open Bloxfruits">
+          <span>Plinko RNG</span>
+        </div>
+        <div class="button" onclick="openLink('https://raw.githubusercontent.com/H20CalibreYT/SystemBroken/main/script')" role="button" aria-label="Open Bloxfruits">
+          <span>Ragdoll Engine</span>
+        </div>
+        <div class="button" onclick="openLink('https://raw.githubusercontent.com/JinxTheCatto/Neptune/main/NeptuneHub.lua')" role="button" aria-label="Open Bloxfruits">
+          <span>War Tycoon</span>
+        </div>
+        <div class="button" onclick="openLink('https://raw.githubusercontent.com/Waza80/scripts-new/main/Frontlines.lua')" role="button" aria-label="Open Bloxfruits">
+          <span>Frontlines</span>
+        </div>
+        <div class="button" onclick="openLink('https://rscripts.net/raw/op-gui-script_1729254511881_9gp5IsF4sf.txt')" role="button" aria-label="Open Bloxfruits">
+          <span>City Defense</span>
+        </div>
+        <div class="button" onclick="openLink('https://pastebin.com/raw/Fa62wsXP')" role="button" aria-label="Open Bloxfruits">
+          <span>Fisch</span>
+        </div>
+        <div class="button" onclick="openLink('https://pastebin.com/raw/ziYUdiUx')" role="button" aria-label="Open Bloxfruits">
+          <span>Build a Boat for Treasure</span>
+        </div>
+        <div class="button" onclick="openLink('https://pastebin.com/raw/dcyuEgyK')" role="button" aria-label="Open Bloxfruits">
+          <span>Funky Friday</span>
+        </div>
+        <div class="button" onclick="openLink('https://raw.githubusercontent.com/shuttle-r/crap/main/Main.txt')" role="button" aria-label="Open Bloxfruits">
+          <span>Red Light, Green Light</span>
+        </div>
+        <div class="button" onclick="openLink('https://raw.githubusercontent.com/Zepsyy2/asd/main/Ninja%20Legends.lua')" role="button" aria-label="Open Bloxfruits">
+          <span>Ninja Legends</span>
+        </div>
+        <div class="button" onclick="openLink('https://pastebin.com/raw/vTfyHTim')" role="button" aria-label="Open Bloxfruits">
+          <span>Aimblox</span>
+        </div>
+        <div class="button" onclick="openLink('http://scripts.projectauto.xyz/AutoRobV5')" role="button" aria-label="Open Bloxfruits">
+          <span>Jailbreak</span>
+        </div>
+        <div class="button" onclick="openLink('https://raw.githubusercontent.com/Bac0nHck/Scripts/main/BeNpcOrDie')" role="button" aria-label="Open Bloxfruits">
+          <span>Be NPC or DIE</span>
+        </div>
+        <div class="button" onclick="openLink('https://raw.githubusercontent.com/PorryDepTrai/exploit/main/DashBoostSolora.lua')" role="button" aria-label="Open Bloxfruits">
+          <span>Ro-Ghoul</span>
+        </div>
+        <div class="button" onclick="openLink('https://raw.githubusercontent.com/9ur98wh8fjkerbngo12ikontgg/fortnite/main/locky%20blocks12nyhubf87yh189j98ihuygrweyugf12ou8r')" role="button" aria-label="Open Bloxfruits">
+          <span>Lucky Blocks</span>
+        </div>
+        <div class="button" onclick="openLink('https://raw.githubusercontent.com/venoxcc/universalscripts/refs/heads/main/prestinehubv3')" role="button" aria-label="Open Bloxfruits">
+          <span>Pets Go</span>
+        </div>
+        <div class="button" onclick="openLink('https://raw.githubusercontent.com/fgdergewrgegr/SVH/main/VHSV4')" role="button" aria-label="Open Bloxfruits">
+          <span>Fling Things and People</span>
+        </div>
+        <div class="button" onclick="openLink('https://raw.githubusercontent.com/Marwanleprodu91670/lite-hub-ml/refs/heads/main/README.md')" role="button" aria-label="Open Bloxfruits">
+          <span>Muscle Legends</span>
+        </div>
+        <div class="button" onclick="openLink('https://raw.githubusercontent.com/Spooksmn/Tww-Stuff/main/EternalXcracked.lua')" role="button" aria-label="Open Bloxfruits">
+          <span>The Wild West</span>
+        </div>
+        <script>
+          function openLink(url) {
+            window.open(url, '_blank');
+          }
+
+          function filterButtons() {
+            const input = document.getElementById('searchInput');
+            const filter = input.value.toLowerCase();
+            const buttons = document.querySelectorAll('.button');
+            buttons.forEach(function(button) {
+              const text = button.textContent || button.innerText;
+              if (text.toLowerCase().indexOf(filter) > -1) {
+                button.style.display = '';
+              } else {
+                button.style.display = 'none';
+              }
+            });
+          }
+
+          function navigateTo(path) {
+            window.location.href = path;
+          }
+          document.addEventListener('contextmenu', function(e) {
+            e.preventDefault();
+          });
+          document.addEventListener('mousedown', function(e) {
+            if (e.target.tagName === 'A' || e.target.tagName === 'BUTTON') {
+              e.preventDefault();
+            }
+          });
+          document.addEventListener('touchstart', function(e) {
+            if (e.target.tagName === 'A' || e.target.tagName === 'BUTTON') {
+              e.preventDefault();
+            }
+          });
+          document.addEventListener("DOMContentLoaded", () => {
+            const links = document.querySelectorAll("a");
+            links.forEach(link => {
+              link.addEventListener("contextmenu", (event) => {
+                event.preventDefault();
+              });
+            });
+          });
+          document.querySelectorAll('header nav ul li a').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+              e.preventDefault();
+              const targetId = this.getAttribute('href').substring(1);
+              const targetElement = document.getElementById(targetId);
+              targetElement.scrollIntoView({
+                behavior: 'smooth',
+                block: 'start'
+              });
+              setTimeout(() => {
+                document.querySelector('header').classList.add('visible');
+              }, 500);
+            });
+          });
+          document.addEventListener("keydown", function(event) {
+            if (event.ctrlKey) {
+              event.preventDefault();
+            }
+            if (event.keyCode == 123) {
+              event.preventDefault();
+            }
+          });
+          document.querySelector('.down-button').addEventListener('click', function() {
+            window.scrollBy({
+              top: window.innerHeight,
+              behavior: 'smooth'
+            });
+          });
+        </script>
+  </body>
+</html>
