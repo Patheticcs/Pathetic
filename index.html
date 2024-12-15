@@ -269,7 +269,7 @@
         align-items: center;
         z-index: 2;
         max-width: 1300px;
-        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+        grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
         box-sizing: border-box;
       }
 
@@ -390,129 +390,6 @@
         list-style: none;
         padding: 0;
         margin: 0
-      }
-
-      @media only screen and (max-width: 600px) {
-        header {
-          width: 90%;
-          height: 125px;
-          border-radius: 35px;
-          padding: 10px;
-          transition: opacity 1s ease, background 1s ease, box-shadow 1s ease, width 1s ease, height 1s ease;
-        }
-
-        nav ul {
-          list-style: none;
-          font-size: 0.5rem;
-          display: flex;
-          gap: 5px;
-          flex-wrap: wrap;
-          justify-content: center;
-          font-weight: 700;
-          margin-top: 30px;
-        }
-
-        .welcome h2 {
-          font-size: 3.5rem;
-          margin-bottom: 30px;
-        }
-
-        .welcome p {
-          max-width: 70%;
-          font-size: 0.9rem;
-          margin-bottom: 10px;
-        }
-
-        .welcome button {
-          margin-top: 40px;
-          font-size: 1rem;
-          padding: 12px 30px;
-        }
-
-        .button {
-          margin-top: 15px;
-          margin-bottom: 15px;
-          width: 30px;
-          height: 30px;
-        }
-
-        .button img {
-          width: 10px;
-          height: 10px;
-        }
-
-        .services-container {
-          display: grid;
-          grid-template-columns: repeat(2, 1fr);
-          gap: 10px;
-        }
-
-        .section {
-          height: 190px;
-          width: 170px;
-          margin-bottom: 10px;
-        }
-
-        .section:hover {
-          height: 190px;
-          width: 170px;
-        }
-
-        .section h3 {
-          font-size: 1rem;
-          margin-top: 5px;
-          margin-bottom: 5px;
-          text-align: center;
-        }
-
-        .section a.button {
-          font-size: 0.8rem;
-          width: 100%;
-          max-width: 130px;
-          height: 30px;
-          padding: 10px 20px;
-          display: flex;
-          justify-content: center;
-          align-items: center;
-          text-align: center;
-          box-sizing: border-box;
-        }
-
-        .section a.button:hover {
-          font-size: 0.8rem;
-          width: 100%;
-          max-width: 130px;
-          height: 30px;
-          padding: 10px 20px;
-        }
-
-        .section p {
-          font-size: 0.75rem;
-          margin-bottom: 4px;
-          text-align: center;
-        }
-
-        .about {
-          height: 500px;
-          padding: 50px 15px;
-        }
-
-        .about h2 {
-          font-size: 3.5rem;
-        }
-
-        .about p {
-          font-size: 1rem;
-        }
-
-        footer {
-          height: auto;
-          padding: 10px 15px;
-        }
-
-        footer p {
-          font-size: 0.9rem;
-        }
       }
     </style>
     </head>
