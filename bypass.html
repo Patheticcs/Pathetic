@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Bypass</title>
+    <link rel="icon" href="https://iili.io/25Go0TF.png" type="image/x-icon">
+    <style>
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+        background: #000;
+        color: #fff;
+        overflow-x: hidden;
+        overflow-y: hidden;
+        font-size: 16px;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      #background-image {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100vh;
+        object-fit: cover;
+        z-index: -1;
+      }
+
+      .welcome {
+        position: relative;
+        height: 100vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        padding: 20px;
+        animation: fadeIn 1.5s ease-out;
+      }
+
+      .button {
+        margin: 10px 0;
+        padding: 16px 20px;
+        font-size: 1.2rem;
+        background-color: rgba(0, 0, 0, .5);
+        box-shadow: 0 0px 25px rgba(255, 255, 255, 0.6);
+        border: none;
+        color: white;
+        border-radius: 30px;
+        cursor: pointer;
+        transition:
+          transform 0.3s ease,
+          box-shadow 0.3s ease,
+          text-shadow 0.3s ease,
+          margin-top 0.3s ease,
+          margin-bottom 0.3s ease;
+        backdrop-filter: blur(3px);
+        display: inline-block;
+        text-align: center;
+        text-decoration: none;
+        width: 300px;
+        height: 60px;
+      }
+
+      .button:hover {
+        transform: scale(1.01);
+        box-shadow: 0 0px 35px rgba(255, 255, 255, 0.6);
+        text-shadow: 0 0 15px #fff, 0 0 25px #fff;
+      }
+
+      .button.back {
+        margin-top: 50px;
+        padding: 16px 20px;
+        font-size: 1.2rem;
+        background-color: rgba(0, 0, 0, .5);
+        box-shadow: 0 0px 25px rgba(255, 255, 255, 0.6);
+        border: none;
+        color: white;
+        border-radius: 30px;
+        cursor: pointer;
+        transition:
+          transform 0.3s ease,
+          box-shadow 0.3s ease,
+          text-shadow 0.3s ease,
+          margin-top 0.3s ease,
+          margin-bottom 0.3s ease;
+        backdrop-filter: blur(3px);
+        display: inline-block;
+        text-align: center;
+        text-decoration: none;
+        width: 120px;
+        height: 50px;
+      }
+
+      .button.back:hover {
+        transform: scale(1.01);
+        box-shadow: 0 0px 35px rgba(255, 255, 255, 0.6);
+        text-shadow: 0 0 15px #fff, 0 0 25px #fff;
+      }
+
+      @keyframes fadeIn {
+        0% {
+          opacity: 0;
+          transform: translateY(-50px);
+        }
+
+        100% {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      @media (max-width: 768px) {
+        .button {
+          width: 200px;
+          height: 60px;
+        }
+      }
+
+      @media (max-width: 480px) {
+        .button {
+          width: 180px;
+          height: 55px;
+          font-size: 1rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="background-container">
+      <img src="https://iili.io/2XOdNiQ.png" alt="background image" id="background-image">
+      <section id="welcome" class="welcome">
+        <a class="button" href="https://bypass.vip/" target="_blank" rel="noopener noreferrer" aria-label="Bypass.VIP">Bypass.vip</a>
+        <a class="button" href="https://bypass.city/" target="_blank" rel="noopener noreferrer" aria-label="Bypass.CITY">Bypass.city [ NOT REC ]</a>
+        <a class="button" href="https://rip.linkvertise.lol/" target="_blank" rel="noopener noreferrer" aria-label="rip.linkvertise.lol">rip.linkvertise.lol</a>
+        <a class="button" href="https://thebypasser.com" target="_blank" rel="noopener noreferrer" aria-label="thebypasser.com">thebypasser.com</a>
+        <button class="button back" onclick="window.location.href='/'" aria-label="Navigate Back">Home</button>
+      </section>
+      <script>
+        function replaceWithLink(url) {
+          window.location.href = url;
+        }
+
+        document.addEventListener('contextmenu', function(e) {
+          e.preventDefault();
+        });
+
+        document.addEventListener('mousedown', function(e) {
+          if (e.target.tagName === 'A' || e.target.tagName === 'BUTTON') {
+            e.preventDefault(); 
+          }
+        });
+
+        document.addEventListener('touchstart', function(e) {
+          if (e.target.tagName === 'A' || e.target.tagName === 'BUTTON') {
+            e.preventDefault(); 
+          }
+        });
+
+        document.addEventListener("DOMContentLoaded", () => {
+
+          const links = document.querySelectorAll("a");
+
+          links.forEach(link => {
+            link.addEventListener("contextmenu", (event) => {
+              event.preventDefault(); 
+            });
+          });
+        });
+
+        document.querySelectorAll('header nav ul li a').forEach(anchor => {
+          anchor.addEventListener('click', function(e) {
+            e.preventDefault();
+            const targetId = this.getAttribute('href').substring(1); 
+            const targetElement = document.getElementById(targetId);
+
+            targetElement.scrollIntoView({
+              behavior: 'smooth',
+              block: 'start' 
+            });
+
+            setTimeout(() => {
+              document.querySelector('header').classList.add('visible');
+            }, 500); 
+          });
+        });
+        document.addEventListener("keydown", function(event) {
+          if (event.ctrlKey) {
+            event.preventDefault();
+          }
+          if (event.keyCode == 123) {
+            event.preventDefault();
+          }
+        });
+        document.querySelector('.down-button').addEventListener('click', function() {
+          window.scrollBy({
+            top: window.innerHeight, 
+            behavior: 'smooth' 
+          });
+        });
+      </script>
+  </body>
+</html>
