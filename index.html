@@ -1,0 +1,730 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Home</title>
+    <link rel="icon" type="image/x-icon" href="https://freeimage.host/i/icon.27ddQyB">
+  </head>
+  <body>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        user-select: none
+      }
+
+      body {
+        font-family: Lato, Arial, sans-serif !important;
+        background-color: #000;
+        color: #fff;
+        align-items: center overflow-x: hidden;
+        justify-content: center overflow-y: auto;
+        font-size: 16px margin: 0;
+      }
+
+      body::-webkit-scrollbar {
+        display: none
+      }
+
+      #background-video {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        z-index: -1;
+      }
+
+      header {
+        margin-top: 10px;
+        position: fixed;
+        top: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 100%;
+        max-width: 800px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        padding: 20px 30px;
+        backdrop-filter: blur(50px);
+        z-index: 1000;
+        opacity: 0;
+        visibility: hidden;
+        background: rgba(0, 0, 0, .2);
+        border-radius: 50px;
+        transition: opacity 1s ease, background 1s ease, box-shadow 1s ease, max-width 1s ease, height 1s ease, backdrop-filter 2s ease;
+        height: 140px;
+        box-shadow: 0 0 5px rgba(255, 255, 255, .2), 0 0 20px rgba(255, 255, 255, .3);
+        backdrop-filter: blur(3px)
+      }
+
+      header.visible {
+        opacity: 1;
+        visibility: visible
+      }
+
+      header:hover {
+        height: 145px;
+        max-width: 850px;
+        background: rgba(0, 0, 0, .5);
+        box-shadow: 0 0 15px rgba(255, 255, 255, .4), 0 0 30px rgba(255, 255, 255, .6);
+        backdrop-filter: blur(15px)
+      }
+
+      header h1 {
+        margin-top: 20px;
+        font-size: 1.1rem;
+        font-weight: 700;
+        text-shadow: 0 0 8px var(--highlight);
+        width: 100%;
+        text-align: center
+      }
+
+      nav ul {
+        list-style: none;
+        font-size: .6rem;
+        display: flex;
+        gap: 20px;
+        flex-wrap: wrap;
+        justify-content: center;
+        margin-top: 50px
+      }
+
+      nav ul li a {
+        text-decoration: none;
+        color: #fff;
+        font-size: 16px;
+        transition: color .3s ease
+      }
+
+      nav ul li a:hover {
+        color: rgba(255, 255, 255, .5)
+      }
+
+      .button-container {
+        display: flex;
+        gap: 15px;
+      }
+
+      .button {
+        margin-top: 25px;
+        margin-bottom: 25px;
+        width: 35px;
+        height: 35px;
+        background-color: rgba(255, 255, 255, 1);
+        box-shadow: 0 0 5px rgba(255, 255, 255, .9), 0 0 0 rgba(255, 255, 255, .9);
+        font-size: 13px;
+        border: none;
+        color: #000;
+        border-radius: 100px;
+        cursor: pointer;
+        transition: width .3s ease, height .3s ease, box-shadow .3s ease, backdrop-filter .3s ease;
+        backdrop-filter: blur(15px);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        overflow: hidden;
+        position: relative;
+      }
+
+      .button img {
+        width: 17px;
+        height: 17px;
+        object-fit: contain;
+        transition: transform .4s ease, width .7s ease, height .7s ease;
+      }
+
+      .button .button-text {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-35%, -50%);
+        opacity: 0;
+        font-size: 13px;
+        color: #000;
+        pointer-events: none;
+        transition: opacity .4s ease;
+      }
+
+      .discord-button:hover {
+        box-shadow: 0 0 15px rgba(255, 255, 255, .8), 0 0 15px rgba(255, 255, 255, .7);
+        width: 150px;
+        height: 35px;
+      }
+
+      .discord-button:hover img {
+        transform: translateX(-40px);
+        width: 18px;
+        height: 18px;
+      }
+
+      .discord-button:hover .button-text {
+        opacity: 1;
+      }
+
+      .youtube-button:hover {
+        box-shadow: 0 0 15px rgba(255, 255, 255, .8), 0 0 15px rgba(255, 255, 255, .7);
+        width: 150px;
+        height: 35px;
+      }
+
+      .youtube-button:hover img {
+        transform: translateX(-40px);
+        width: 18px;
+        height: 18px;
+      }
+
+      .youtube-button:hover .button-text {
+        opacity: 1;
+      }
+
+      .roblox-button:hover {
+        box-shadow: 0 0 15px rgba(255, 255, 255, .8), 0 0 15px rgba(255, 255, 255, .7);
+        width: 150px;
+        height: 35px;
+      }
+
+      .roblox-button:hover img {
+        transform: translateX(-40px);
+        width: 18px;
+        height: 18px;
+      }
+
+      .roblox-button:hover .button-text {
+        opacity: 1;
+      }
+
+      .welcome {
+        position: relative;
+        height: 100vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        padding: 20px;
+        animation: fadeIn 1.5s ease-out;
+        background: linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, .4) 80%, rgba(0, 0, 0, .7))
+      }
+
+      .welcome h2 {
+        font-size: 6.5rem;
+        text-transform: uppercase;
+        text-shadow: 0 0 100px #fff, 0 0 20px #fff, 0 0 30px #fff;
+        margin-bottom: 30px
+      }
+
+      .welcome p {
+        font-size: 1.1rem;
+        max-width: 600px;
+        line-height: 1.8;
+        opacity: .8;
+        text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #fff, 0 0 40px #fff, 0 0 50px #fff, 0 0 60px #000, 0 0 70px #000;
+        margin-bottom: 50px
+      }
+
+      .welcome button {
+        margin-top: 5px;
+        padding: 15px 40px;
+        font-size: 1.2rem;
+        background-color: rgba(255, 255, 255, 0);
+        box-shadow: 0 0 35px rgba(255, 255, 255, 1);
+        border: none;
+        color: var(--white);
+        border-radius: 100px;
+        cursor: pointer;
+        transition: transform .5s ease, box-shadow .5s ease, text-shadow .5s ease;
+        backdrop-filter: blur(10px);
+      }
+
+      .welcome button:hover {
+        transform: scale(1.03);
+        box-shadow: 0 0 55px rgba(255, 255, 255, 1);
+        text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #fff, 0 0 40px #000, 0 0 50px #000, 0 0 60px #000, 0 0 70px #000
+      }
+
+      #roblox,
+      #exploits {
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        padding: 20px;
+        position: relative;
+        background: rgba(0, 0, 0, .7);
+        overflow-y: auto;
+        overflow-x: hidden;
+        scroll-behavior: smooth;
+      }
+
+      .services-container {
+        display: grid;
+        gap: 20px;
+        padding: 0 40px;
+        justify-items: center;
+        align-items: center;
+        z-index: 2;
+        max-width: 1300px;
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+        box-sizing: border-box;
+      }
+
+      .section {
+        color: #fff;
+        border-radius: 35px;
+        box-shadow: 0 0 15px rgba(255, 255, 255, 0.3);
+        padding: 15px;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        transition: transform 0.4s ease-out, box-shadow 0.3s ease, background-color 0.3s ease, backdrop-filter 0.3s ease, height 0.3s ease;
+        backdrop-filter: blur(2px);
+        height: 250px;
+        overflow: hidden;
+        box-sizing: border-box;
+      }
+
+      .section:hover {
+        box-shadow: 0 0 25px rgba(255, 255, 255, 0.7);
+        transform: scale(1.03);
+        background-color: rgba(0, 0, 0, 0.2);
+        backdrop-filter: blur(6px);
+      }
+
+      .section h3 {
+        font-size: 1.8rem;
+        margin-top: 40px;
+        margin-bottom: 25px;
+        text-shadow: 0 0 30px rgba(255, 255, 255, 1), 0 0 40px rgba(255, 255, 255, 1);
+      }
+
+      .section p {
+        font-size: 0.8rem;
+        margin-top: 20px;
+        margin-bottom: 35px;
+      }
+
+      .section a.button {
+        padding: 18px 22px;
+        background-color: rgba(255, 255, 255, 1);
+        color: #000;
+        font-size: 0.9rem;
+        font-weight: 700;
+        border-radius: 22px;
+        cursor: pointer;
+        text-decoration: none;
+        width: 100%;
+        max-width: 140px;
+        margin-top: 10px;
+        backdrop-filter: blur(10px);
+        transition: transform 0.5s ease, box-shadow 0.5s ease, height 0.5s ease;
+        text-align: center;
+      }
+
+      .section a.button:hover {
+        transform: scale(1.07);
+        box-shadow: 0 0 15px rgba(255, 255, 255, 0.8), 0 0 15px rgba(255, 255, 255, 0.7);
+        height: 275px;
+      }
+
+      .about {
+        background: rgba(0, 0, 0, .7);
+        color: var(--white);
+        padding: 500px 40px;
+        text-align: center
+      }
+
+      .about h2 {
+        font-size: 5rem;
+        margin-bottom: 70px;
+        text-transform: uppercase;
+        text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #000
+      }
+
+      .about p {
+        font-size: 1.2rem;
+        line-height: 1.8;
+        max-width: 800px;
+        margin: 0 auto
+      }
+
+      footer {
+        background: rgba(0, 0, 0, .85);
+        color: var(--white);
+        width: 100%;
+        height: 60px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 0 20px;
+      }
+
+      footer p {
+        font-size: 1rem;
+        margin: 0;
+      }
+
+      footer a {
+        text-decoration: none;
+        color: var(--highlight);
+        font-weight: 700;
+      }
+
+      .footer-link {
+        text-decoration: none;
+      }
+
+      ul.button-container li {
+        padding: 0;
+        margin: 0
+      }
+
+      ul.button-container {
+        list-style: none;
+        padding: 0;
+        margin: 0
+      }
+
+      @media only screen and (max-width: 600px) {
+        header {
+          width: 90%;
+          height: 125px;
+          border-radius: 35px;
+          padding: 10px;
+          transition: opacity 1s ease, background 1s ease, box-shadow 1s ease, width 1s ease, height 1s ease;
+        }
+
+        nav ul {
+          list-style: none;
+          font-size: 0.5rem;
+          display: flex;
+          gap: 5px;
+          flex-wrap: wrap;
+          justify-content: center;
+          font-weight: 700;
+          margin-top: 30px;
+        }
+
+        .welcome h2 {
+          font-size: 3.5rem;
+          margin-bottom: 30px;
+        }
+
+        .welcome p {
+          max-width: 70%;
+          font-size: 0.9rem;
+          margin-bottom: 10px;
+        }
+
+        .welcome button {
+          margin-top: 40px;
+          font-size: 1rem;
+          padding: 12px 30px;
+        }
+
+        .button {
+          margin-top: 15px;
+          margin-bottom: 15px;
+          width: 30px;
+          height: 30px;
+        }
+
+        .button img {
+          width: 10px;
+          height: 10px;
+        }
+
+        .services-container {
+          display: grid;
+          grid-template-columns: repeat(2, 1fr);
+          gap: 10px;
+        }
+
+        .section {
+          height: 190px;
+          width: 170px;
+          margin-bottom: 10px;
+        }
+
+        .section:hover {
+          height: 190px;
+          width: 170px;
+        }
+
+        .section h3 {
+          font-size: 1rem;
+          margin-top: 5px;
+          margin-bottom: 5px;
+          text-align: center;
+        }
+
+        .section a.button {
+          font-size: 0.8rem;
+          width: 100%;
+          max-width: 130px;
+          height: 30px;
+          padding: 10px 20px;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          text-align: center;
+          box-sizing: border-box;
+        }
+
+        .section a.button:hover {
+          font-size: 0.8rem;
+          width: 100%;
+          max-width: 130px;
+          height: 30px;
+          padding: 10px 20px;
+        }
+
+        .section p {
+          font-size: 0.75rem;
+          margin-bottom: 4px;
+          text-align: center;
+        }
+
+        .about {
+          height: 500px;
+          padding: 50px 15px;
+        }
+
+        .about h2 {
+          font-size: 3.5rem;
+        }
+
+        .about p {
+          font-size: 1rem;
+        }
+
+        footer {
+          height: auto;
+          padding: 10px 15px;
+        }
+
+        footer p {
+          font-size: 0.9rem;
+        }
+      }
+    </style>
+    </head>
+    <body>
+      <div class="background-container">
+        <video autoplay muted loop playsinline preload="auto" id="background-video">
+          <source src="https://r2.guns.lol/ca14367b-10d0-4b76-85dd-d02c4b0f1608.mp4" type="video/mp4" /> Your browser does not support the video tag.
+        </video>
+      </div>
+      <header>
+        <nav>
+          <ul>
+            <li>
+              <a href="#welcome">Home</a>
+            </li>
+            <li>
+              <a href="#roblox">Roblox</a>
+            </li>
+            <li>
+              <a href="#exploits">Exploits</a>
+            </li>
+            <li>
+              <a href="#about">About</a>
+            </li>
+          </ul>
+        </nav>
+        <div class="header-buttons">
+          <div class="button-container">
+            <button class="button discord-button" onclick='window.open("https://discord.gg/Eg2EWXwYcn","_blank")'>
+              <img src="https://cdn.prod.website-files.com/6257adef93867e50d84d30e2/636e0a6ac3c481f273141736_icon_clyde_black_RGB.png" alt="Discord" class="discord-icon" />
+              <span class="button-text">Discord</span>
+            </button>
+            <button class="button youtube-button" onclick='window.open("https://www.youtube.com/@patheticcs","_blank")'>
+              <img src="https://www.iconpacks.net/icons/1/free-youtube-icon-123-thumb.png" alt="YouTube" class="youtube-icon" />
+              <span class="button-text">YouTube</span>
+            </button>
+            <button class="button roblox-button" onclick='window.open("https://www.roblox.com/users/2625446554/profile","_blank")'>
+              <img src="https://devforum-uploads.s3.dualstack.us-east-2.amazonaws.com/uploads/original/4X/0/e/e/0eeeb19633422b1241f4306419a0f15f39d58de9.png" alt="Roblox" class="roblox-icon" />
+              <span class="button-text">Roblox</span>
+            </button>
+          </div>
+        </div>
+      </header>
+      <section id="welcome" class="welcome">
+        <h2>Welcome</h2>
+        <p>We are here to offer the best services for you!</p>
+        <button onclick='document.getElementById("roblox").scrollIntoView({behavior:"smooth"}),document.querySelector("header").classList.add("visible"),document.body.style.overflowY="scroll",document.getElementById("background-video").muted=false'> Get Started </button>
+      </section>
+      <section id="roblox">
+        <div class="services-container">
+          <div class="section">
+            <h3>SCRIPTS</h3>
+            <p>Free Scripts, all working.</p>
+            <a href="scripts.html" class="button">Enter</a>
+          </div>
+          <div class="section">
+            <h3>EXECUTORS</h3>
+            <p>Free Windows Executors</p>
+            <a href="executors.html" class="button">Enter</a>
+          </div>
+          <div class="section">
+            <h3>VOXLIS</h3>
+            <p>Ready to inject?</p>
+            <a href="https://voxlis.net/" class="button" target="_blank" rel="noopener noreferrer" aria-label="Visit VOXLIS website">Enter</a>
+          </div>
+          <div class="section">
+            <h3>EXPStatus</h3>
+            <p>Real-time exploit status monitoring</p>
+            <a href="https://www.expstatus.xyz/" class="button" target="_blank" rel="noopener noreferrer" aria-label="Visit EXPStatus website">Enter</a>
+          </div>
+          <div class="section">
+            <h3>RBXSERVERS</h3>
+            <p>The #1 site for finding ROBLOX VIP Servers</p>
+            <a href="https://rbxservers.xyz/" class="button" target="_blank" rel="noopener noreferrer" aria-label="Visit RBXSERVERS website">Enter</a>
+          </div>
+        </div>
+      </section>
+      <section id="exploits">
+        <div class="services-container">
+          <div class="section">
+            <h3>PROXIES</h3>
+            <p>Browse any website anonymously.</p>
+            <a href="proxies.html" class="button">Enter</a>
+          </div>
+          <div class="section">
+            <h3>BYPASS</h3>
+            <p>Bypass AD Links.</p>
+            <a href="bypass.html" class="button">Enter</a>
+          </div>
+          <div class="section">
+            <h3>FREE MOVIES</h3>
+            <p>Stream, Download, Torrent Videos</p>
+            <a href="movies.html" class="button">Enter</a>
+          </div>
+          <div class="section">
+            <h3>FMHY</h3>
+            <p>Collection of free stuff on the internet!</p>
+            <a href="https://fmhy.net/" class="button" target="_blank" rel="noopener noreferrer" aria-label="Visit FMHY website">Enter</a>
+          </div>
+          <div class="section">
+            <h3>UNBLOCKED GAMES</h3>
+            <p>Play Roblox and Minecraft UNBLOCKED!</p>
+            <a href="unblocked-games.html" class="button">Enter</a>
+          </div>
+      </section>
+      <section id="about" class="about">
+        <h2>About Us</h2>
+        <p> We’re a passionate team focused on creating reliable, effective tools to enhance your gaming and online experiences. We prioritize quality and ease of use, ensuring every solution we offer meets the highest standards to help you get the most out of your online activities. </p>
+      </section>
+      <footer>
+        <p>2024 Pathetic. All Rights Reserved.</p>
+        <a href="/404.html" class="footer-link">‎ ‎ ‎ 6MXg3OlzlWTz</a>
+      </footer>
+      <script>
+        document.addEventListener("DOMContentLoaded", () => {
+          window.scrollTo(0, 0);
+          const isGetStartedClicked = sessionStorage.getItem('getStartedClicked');
+          if (!isGetStartedClicked) {
+            document.body.style.overflowY = 'hidden';
+            document.querySelector('header').classList.remove('visible');
+          } else {
+            document.body.style.overflowY = 'scroll';
+            document.querySelector('header').classList.add('visible');
+          }
+          document.addEventListener('contextmenu', function(e) {
+            e.preventDefault();
+          });
+          document.addEventListener('mousedown', function(e) {
+            if (e.target.tagName === 'A' || e.target.tagName === 'BUTTON') {
+              e.preventDefault();
+            }
+          });
+          document.addEventListener('touchstart', function(e) {
+            if (e.target.tagName === 'A' || e.target.tagName === 'BUTTON') {
+              e.preventDefault();
+            }
+          });
+          const links = document.querySelectorAll("a");
+          links.forEach(link => {
+            link.addEventListener("contextmenu", (event) => {
+              event.preventDefault();
+            });
+          });
+          document.addEventListener("keydown", function(event) {
+            if (event.ctrlKey || event.keyCode === 123) {
+              event.preventDefault();
+            }
+          });
+          const navLinks = document.querySelectorAll("header nav ul li a");
+          navLinks.forEach(link => {
+            link.addEventListener("click", (event) => {
+              event.preventDefault();
+              const targetId = link.getAttribute("href").substring(1);
+              const targetSection = document.getElementById(targetId);
+              if (targetSection) {
+                targetSection.scrollIntoView({
+                  behavior: "smooth"
+                });
+              }
+            });
+          });
+          const buttons = document.querySelectorAll('.section a.button');
+          buttons.forEach(button => {
+            button.addEventListener('mouseover', () => {
+              const section = button.closest('.section');
+              section.style.height = '260px';
+            });
+            button.addEventListener('mouseout', () => {
+              const section = button.closest('.section');
+              section.style.height = '250px';
+            });
+          });
+          document.querySelector('button').addEventListener('click', () => {
+            document.body.style.overflowY = 'scroll';
+            document.querySelector('header').classList.add('visible');
+            sessionStorage.setItem('getStartedClicked', 'true');
+          });
+          let touchTimeout;
+          document.querySelectorAll('button').forEach(button => {
+            button.addEventListener('touchstart', function(event) {
+              touchTimeout = setTimeout(function() {
+                event.preventDefault();
+              }, 500);
+            });
+            button.addEventListener('touchend', function(event) {
+              clearTimeout(touchTimeout);
+            });
+            button.addEventListener('click', function(event) {
+              console.log("Button tapped!");
+            });
+          });
+          window.addEventListener('beforeunload', () => {
+            document.documentElement.style.scrollBehavior = 'auto';
+            window.scrollTo(0, 0);
+          });
+          window.addEventListener('load', () => {
+            setTimeout(() => {
+              document.documentElement.style.scrollBehavior = 'smooth';
+              window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+              });
+            }, 0);
+          });
+        });
+        if ('serviceWorker' in navigator) {
+          window.addEventListener('load', () => {
+            navigator.serviceWorker.register('/service-worker.js').then((registration) => {
+              console.log('Service Worker registered with scope:', registration.scope);
+            }).catch((error) => {
+              console.log('Service Worker registration failed:', error);
+            });
+          });
+        }
+      </script>
