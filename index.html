@@ -26,6 +26,16 @@
         display: none
       }
 
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+        }
+
+        to {
+          opacity: 1;
+        }
+      }
+
       #background-video {
         position: fixed;
         top: 0;
@@ -206,7 +216,6 @@
         align-items: center;
         text-align: center;
         padding: 20px;
-        animation: fadeIn 1.5s ease-out;
         background: linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, .4) 80%, rgba(0, 0, 0, .7))
       }
 
@@ -214,7 +223,9 @@
         font-size: 6.5rem;
         text-transform: uppercase;
         text-shadow: 0 0 100px #fff, 0 0 20px #fff, 0 0 30px #fff;
-        margin-bottom: 30px
+        margin-bottom: 30px;
+        opacity: 0;
+        animation: fadeIn 1s ease-in forwards;
       }
 
       .welcome p {
@@ -223,27 +234,34 @@
         line-height: 1.8;
         opacity: .8;
         text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #fff, 0 0 40px #fff, 0 0 50px #fff, 0 0 60px #000, 0 0 70px #000;
-        margin-bottom: 50px
+        margin-bottom: 50px opacity: 0;
+        animation: fadeIn 1s ease-in forwards;
       }
 
       .welcome button {
-        margin-top: 5px;
-        padding: 15px 40px;
+        margin-top: 55px;
+        padding: 15px 50px;
         font-size: 1.2rem;
-        background-color: rgba(255, 255, 255, 0);
+        background-color: rgba(0, 0, 0, 0);
         box-shadow: 0 0 35px rgba(255, 255, 255, 1);
         border: none;
         color: var(--white);
-        border-radius: 100px;
+        border-radius: 50px;
         cursor: pointer;
         transition: transform .5s ease, box-shadow .5s ease, text-shadow .5s ease;
-        backdrop-filter: blur(10px);
+        backdrop-filter: blur(5px);
+        background-image: url('');
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        opacity: 0;
+        animation: fadeIn 1s ease-in forwards;
       }
 
       .welcome button:hover {
         transform: scale(1.03);
         box-shadow: 0 0 55px rgba(255, 255, 255, 1);
-        text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #fff, 0 0 40px #000, 0 0 50px #000, 0 0 60px #000, 0 0 70px #000
+        text-shadow: 0 0 1px #fff, 0 0 10px #fff, 0 0 15px #fff, 0 0 20px #000, 0 0 25px #000, 0 0 30px #000, 0 0 35px #000
       }
 
       #roblox,
@@ -276,7 +294,6 @@
       .section {
         color: #fff;
         border-radius: 35px;
-        box-shadow: 0 0 15px rgba(255, 255, 255, 0.3);
         padding: 15px;
         width: 100%;
         display: flex;
@@ -284,15 +301,16 @@
         justify-content: center;
         align-items: center;
         text-align: center;
+        box-shadow: 0 0 25px rgba(255, 255, 255, 0.3);
         transition: transform 0.4s ease-out, box-shadow 0.3s ease, background-color 0.3s ease, backdrop-filter 0.3s ease, height 0.3s ease;
-        backdrop-filter: blur(2px);
+        backdrop-filter: blur(5px);
         height: 250px;
         overflow: hidden;
         box-sizing: border-box;
       }
 
       .section:hover {
-        box-shadow: 0 0 25px rgba(255, 255, 255, 0.7);
+        box-shadow: 0 0 15px rgba(255, 255, 255, 0.7);
         transform: scale(1.03);
         background-color: rgba(0, 0, 0, 0.2);
         backdrop-filter: blur(6px);
