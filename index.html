@@ -605,10 +605,10 @@
         });
         const sections = document.querySelectorAll('.section');
         sections.forEach((section) => {
-          let animationFrameId; // To track and cancel previous animations
-          // Set transition in advance
+          let animationFrameId; 
+
           section.style.transition = 'transform 0.5s ease-out';
-          // Mousemove Event
+
           section.addEventListener('mousemove', function(e) {
             if (animationFrameId) cancelAnimationFrame(animationFrameId);
             animationFrameId = requestAnimationFrame(() => {
@@ -619,13 +619,13 @@
               const rect = section.getBoundingClientRect();
               const offsetX = e.clientX - rect.left;
               const offsetY = e.clientY - rect.top;
-              const x = (offsetX / width) * 2 - 1; // Range: -1 to 1
-              const y = (offsetY / height) * 2 - 1; // Range: -1 to 1
-              // Combine scale and rotation
+              const x = (offsetX / width) * 2 - 1; 
+              const y = (offsetY / height) * 2 - 1; 
+
               section.style.transform = `perspective(1000px) scale(1.03) rotateX(${y * -5}deg) rotateY(${x * 5}deg)`;
             });
           });
-          // Mouseleave Event
+
           section.addEventListener('mouseleave', function() {
             if (animationFrameId) cancelAnimationFrame(animationFrameId);
             section.style.transform = 'perspective(1000px) scale(1) rotateX(0deg) rotateY(0deg)';
