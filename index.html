@@ -570,17 +570,6 @@
               }
             });
           });
-          const buttons = document.querySelectorAll('.section a.button');
-          buttons.forEach(button => {
-            button.addEventListener('mouseover', () => {
-              const section = button.closest('.section');
-              section.style.height = '260px';
-            });
-            button.addEventListener('mouseout', () => {
-              const section = button.closest('.section');
-              section.style.height = '250px';
-            });
-          });
           document.querySelector('button').addEventListener('click', () => {
             document.body.style.overflowY = 'scroll';
             document.querySelector('header').classList.add('visible');
@@ -614,13 +603,32 @@
             }, 0);
           });
         });
-        if ('serviceWorker' in navigator) {
-          window.addEventListener('load', () => {
-            navigator.serviceWorker.register('/service-worker.js').then((registration) => {
-              console.log('Service Worker registered with scope:', registration.scope);
-            }).catch((error) => {
-              console.log('Service Worker registration failed:', error);
+        const sections = document.querySelectorAll('.section');
+        sections.forEach((section) => {
+          let animationFrameId; // To track and cancel previous animations
+          // Set transition in advance
+          section.style.transition = 'transform 0.5s ease-out';
+          // Mousemove Event
+          section.addEventListener('mousemove', function(e) {
+            if (animationFrameId) cancelAnimationFrame(animationFrameId);
+            animationFrameId = requestAnimationFrame(() => {
+              const {
+                offsetWidth: width,
+                offsetHeight: height
+              } = section;
+              const rect = section.getBoundingClientRect();
+              const offsetX = e.clientX - rect.left;
+              const offsetY = e.clientY - rect.top;
+              const x = (offsetX / width) * 2 - 1; // Range: -1 to 1
+              const y = (offsetY / height) * 2 - 1; // Range: -1 to 1
+              // Combine scale and rotation
+              section.style.transform = `perspective(1000px) scale(1.03) rotateX(${y * -5}deg) rotateY(${x * 5}deg)`;
             });
           });
-        }
+          // Mouseleave Event
+          section.addEventListener('mouseleave', function() {
+            if (animationFrameId) cancelAnimationFrame(animationFrameId);
+            section.style.transform = 'perspective(1000px) scale(1) rotateX(0deg) rotateY(0deg)';
+          });
+        });
       </script>
