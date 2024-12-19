@@ -348,24 +348,29 @@
           <span>The Wild West</span>
         </div>
         <script>
-          window.onload = async function() {
-        const loggedIn = localStorage.getItem("loggedIn");
-        const savedKey = localStorage.getItem("loggedInKey");
+window.onload = async function() {
+  const loggedIn = localStorage.getItem("loggedIn");
+  const savedKey = localStorage.getItem("loggedInKey");
 
-        const validKeys = await fetchValidKeys(); 
+  // Fetch valid keys and handle login check
+  const validKeys = await fetchValidKeys();
 
-        if (loggedIn !== "true" || !validKeys.includes(savedKey)) {
-          window.location.href = "/index.html"; 
-        }
-      };
-      async function fetchValidKeys() {
-        const response = await fetch('keys.json');
-        const data = await response.json();
-        return data.validKeys;
-      }
-          function openLink(url) {
-            window.open(url, '_blank');
-          }
+  // If the user is not logged in or the saved key is invalid, redirect to index.html
+  if (loggedIn !== "true" || !validKeys.includes(savedKey)) {
+    // Only redirect to index.html if not logged in or key is invalid
+    if (window.location.pathname !== "/index.html") {
+      window.location.href = "/index.html";  // Redirect to index.html only if not already on index.html
+    }
+  }
+};
+
+// Fetch valid keys from keys.json
+async function fetchValidKeys() {
+  const response = await fetch('keys.json');
+  const data = await response.json();
+  return data.validKeys;
+}
+
 
           function filterButtons() {
             const input = document.getElementById('searchInput');
