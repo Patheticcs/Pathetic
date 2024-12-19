@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>Key Check</title>
+    <title>Key System</title>
     <link rel="icon" type="image/x-icon" href="https://iili.io/27ddQyB.png">
     <style>
       * {
@@ -182,7 +182,7 @@
   <body>
     <div class="background-container">
       <video autoplay muted loop playsinline preload="auto" id="background-video">
-        <source src="https://r2.ammo.lol/1733dba4-f59c-48d2-b1c2-6e8620dee401.mp4" type="video/mp4"> Your browser does not support the video tag.
+        <source src="https://r2.guns.lol/1e98fa65-06c0-4164-b805-bf459c2f148a.mov" type="video/mp4" /> Your browser does not support the video tag.
       </video>
       <div class="container" id="login-container">
         <h2>Key System</h2>
@@ -191,94 +191,26 @@
         <div id="alert" class="alert"></div>
         <button onclick="openDiscord()">Join Our Discord</button>
       </div>
-    </div>
-    <script>
-      const keys = ["2"];
-      window.onload = function() {
-        const savedKey = localStorage.getItem("loggedInKey");
-        const alertElement = document.getElementById("alert");
-        if (savedKey && !keys.includes(savedKey)) {
-          localStorage.removeItem("loggedIn");
-          localStorage.removeItem("loggedInKey");
-          window.location.reload();
-        } else if (localStorage.getItem("loggedIn") === "true") {
-          document.title = "Pathetic";
-          loadIframe();
-        } else {
-          alertElement.textContent = "Key Expired. Please Enter a new key to proceed!";
-          alertElement.style.color = "white";
-        }
-      };
-
-      function checkKey() {
-        const key = document.getElementById("key").value.trim();
-        const alertElement = document.getElementById("alert");
-        if (keys.includes(key)) {
-          document.title = "Pathetic";
-          localStorage.setItem("loggedIn", "true");
-          localStorage.setItem("loggedInKey", key);
-          loadIframe();
-        } else {
-          alertElement.textContent = "Incorrect key!";
-          alertElement.style.color = "white";
-        }
-      }
-
-      function loadIframe() {
-        const existingIframe = document.querySelector("iframe");
-        if (existingIframe) {
-          return;
-        }
-        const iframe = document.createElement("iframe");
-        iframe.src = "/home.html";
-        iframe.style.display = "block";
-        iframe.style.width = "100%";
-        iframe.style.height = "100vh";
-        document.body.appendChild(iframe);
-        iframe.onload = function() {
-          const iframeDocument = iframe.contentDocument || iframe.contentWindow.document;
-          const baseTag = iframeDocument.createElement('base');
-          baseTag.href = window.location.origin + '/';
-          iframeDocument.head.appendChild(baseTag);
+      <script>
+        const keys = ["2"];
+        window.onload = function() {
+          if (localStorage.getItem("loggedIn") === "true") {
+            window.location.href = "/home.html";
+          }
         };
-      }
 
-      function openDiscord() {
-        window.open("https://discord.gg/invite/Eg2EWXwYcn", "_blank");
-      }
-      document.querySelector('.container').addEventListener('mousemove', function(e) {
-        const container = e.currentTarget;
-        const {
-          offsetWidth: width,
-          offsetHeight: height
-        } = container;
-        const {
-          offsetX,
-          offsetY
-        } = e;
-        const x = (offsetX / width) * 2 - 1;
-        const y = (offsetY / height) * 2 - 1;
-        container.style.transform = `perspective(1000px) rotateX(${y * 5}deg) rotateY(${x * 5}deg)`;
-        container.style.transition = "transform 0.1s ease-out";
-      });
-      document.querySelector('.container').addEventListener('mouseleave', function(e) {
-        const container = e.currentTarget;
-        container.style.transition = "transform 0.5s ease-out";
-        container.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg)';
-      });
-      document.addEventListener("keydown", function(event) {
-        if (event.ctrlKey) {
-          if (event.key !== 'c' && event.key !== 'v' && event.key !== 'a') {
-            event.preventDefault();
+        function checkKey() {
+          const key = document.getElementById("key").value.trim();
+          const alertElement = document.getElementById("alert");
+          if (keys.includes(key)) {
+            localStorage.setItem("loggedIn", "true");
+            localStorage.setItem("loggedInKey", key);
+            window.location.href = "/home.html";
+          } else {
+            alertElement.textContent = "Incorrect key!";
+            alertElement.style.color = "white";
           }
         }
-        if (event.keyCode == 123) {
-          event.preventDefault();
-        }
-      });
-      document.addEventListener('contextmenu', function(event) {
-        event.preventDefault();
-      });
-    </script>
+      </script>
   </body>
 </html>
