@@ -191,26 +191,34 @@
         <div id="alert" class="alert"></div>
         <button onclick="openDiscord()">Join Our Discord</button>
       </div>
-      <script>
-        const keys = ["2"];
-        window.onload = function() {
-          if (localStorage.getItem("loggedIn") === "true") {
-            window.location.href = "/home.html";
-          }
-        };
-
-        function checkKey() {
-          const key = document.getElementById("key").value.trim();
-          const alertElement = document.getElementById("alert");
-          if (keys.includes(key)) {
-            localStorage.setItem("loggedIn", "true");
-            localStorage.setItem("loggedInKey", key);
-            window.location.href = "/home.html";
-          } else {
-            alertElement.textContent = "Incorrect key!";
-            alertElement.style.color = "white";
-          }
+    <script>
+      window.onload = function() {
+        if (localStorage.getItem("loggedIn") === "true") {
+          window.location.href = "/home.html";
         }
-      </script>
+      };
+
+      async function fetchValidKeys() {
+        const response = await fetch('keys.json');
+        const data = await response.json();
+        return data.validKeys;
+      }
+
+      async function checkKey() {
+        const key = document.getElementById("key").value.trim();
+        const alertElement = document.getElementById("alert");
+
+        const validKeys = await fetchValidKeys(); // Fetch the valid keys from the JSON file
+
+        if (validKeys.includes(key)) {
+          localStorage.setItem("loggedIn", "true");
+          localStorage.setItem("loggedInKey", key);
+          window.location.href = "/home.html"; // Redirect to home page
+        } else {
+          alertElement.textContent = "Incorrect key!";
+          alertElement.style.color = "white";
+        }
+      }
+    </script>
   </body>
 </html>
