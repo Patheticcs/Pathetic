@@ -524,21 +524,25 @@
       <a href="/404.html" class="footer-link">‎ ‎ ‎ 35k5S4hE0u6M</a>
     </footer>
     <script>
-      window.onload = async function() {
-        const loggedIn = localStorage.getItem("loggedIn");
-        const savedKey = localStorage.getItem("loggedInKey");
+// Check if the user is logged in and the key is valid
+window.onload = async function() {
+  const loggedIn = localStorage.getItem("loggedIn");
+  const savedKey = localStorage.getItem("loggedInKey");
 
-        const validKeys = await fetchValidKeys(); // Fetch the valid keys from the JSON file
+  const validKeys = await fetchValidKeys();
 
-        if (loggedIn !== "true" || !validKeys.includes(savedKey)) {
-          window.location.href = "/index.html"; // Redirect to index.html if key is invalid or not logged in
-        }
-      };
-      async function fetchValidKeys() {
-        const response = await fetch('keys.json');
-        const data = await response.json();
-        return data.validKeys;
-      }
+  // If the user is not logged in or the saved key is invalid, redirect to index.html
+  if (loggedIn !== "true" || !validKeys.includes(savedKey)) {
+    window.location.href = "/index.html"; // Redirect to index.html if not logged in or key is invalid
+  }
+};
+
+// Fetch valid keys from keys.json
+async function fetchValidKeys() {
+  const response = await fetch('keys.json');
+  const data = await response.json();
+  return data.validKeys;
+}
       document.addEventListener("DOMContentLoaded", () => {
         window.scrollTo(0, 0);
         const isGetStartedClicked = sessionStorage.getItem('getStartedClicked');
