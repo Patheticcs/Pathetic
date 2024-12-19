@@ -306,6 +306,21 @@
           <span>Jeff the Killer</span>
         </div>
         <script>
+          window.onload = async function() {
+        const loggedIn = localStorage.getItem("loggedIn");
+        const savedKey = localStorage.getItem("loggedInKey");
+
+        const validKeys = await fetchValidKeys(); 
+
+        if (loggedIn !== "true" || !validKeys.includes(savedKey)) {
+          window.location.href = "/index.html"; 
+        }
+      };
+      async function fetchValidKeys() {
+        const response = await fetch('keys.json');
+        const data = await response.json();
+        return data.validKeys;
+      }
           function openLink(url) {
             window.open(url, '_blank');
           }
