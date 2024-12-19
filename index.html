@@ -192,38 +192,30 @@
         <button onclick="openDiscord()">Join Our Discord</button>
       </div>
       <script>
-        window.onload = async function() {
-          const loggedIn = localStorage.getItem("loggedIn");
-          const savedKey = localStorage.getItem("loggedInKey");
-          const validKeys = await fetchValidKeys();
-          if (loggedIn !== "true" || !validKeys.includes(savedKey)) {
-            if (window.location.pathname !== "/index.html") {
-              window.location.href = "/index.html";
-            }
-          } else {
-            if (window.location.pathname === "/index.html") {
-              window.location.href = "/home.html";
-            }
-          }
-        };
-        async function fetchValidKeys() {
-          const response = await fetch('keys.json');
-          const data = await response.json();
-          return data.validKeys;
+      async function checkKey() {
+        const key = document.getElementById("key").value.trim();
+        const alertElement = document.getElementById("alert");
+
+        // Fetch valid keys from keys.json
+        const validKeys = await fetchValidKeys();
+
+        // If the entered key is valid
+        if (validKeys.includes(key)) {
+          // Save the login status and key in localStorage
+          localStorage.setItem("loggedIn", "true");
+          localStorage.setItem("loggedInKey", key);
+          window.location.href = "/home.html"; // Redirect to home page on successful login
+        } else {
+          alertElement.textContent = "Incorrect key!";
+          alertElement.style.color = "red";
         }
-        async function checkKey() {
-          const key = document.getElementById("key").value.trim();
-          const alertElement = document.getElementById("alert");
-          const validKeys = await fetchValidKeys();
-          if (validKeys.includes(key)) {
-            localStorage.setItem("loggedIn", "true");
-            localStorage.setItem("loggedInKey", key);
-            window.location.href = "/home.html";
-          } else {
-            alertElement.textContent = "Incorrect key!";
-            alertElement.style.color = "white";
-          }
-        }
+      }
+
+      async function fetchValidKeys() {
+        const response = await fetch('keys.json');
+        const data = await response.json();
+        return data.validKeys;
+      }
       </script>
   </body>
 </html>
