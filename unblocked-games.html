@@ -245,33 +245,22 @@
       <p>2024 Pathetic. All Rights Reserved.</p>
     </footer>
     <script>
-            window.onload = function() {
-        if (localStorage.getItem("loggedIn") === "true") {
-          window.location.href = "/home.html";
-        }
-      };
+window.onload = async function() {
+  const loggedIn = localStorage.getItem("loggedIn");
+  const savedKey = localStorage.getItem("loggedInKey");
 
-      async function fetchValidKeys() {
-        const response = await fetch('keys.json');
-        const data = await response.json();
-        return data.validKeys;
-      }
+  const validKeys = await fetchValidKeys();
 
-      async function checkKey() {
-        const key = document.getElementById("key").value.trim();
-        const alertElement = document.getElementById("alert");
+  if (loggedIn !== "true" || !validKeys.includes(savedKey)) {
+    window.location.href = "/index.html";
+  }
+};
 
-        const validKeys = await fetchValidKeys();
-
-        if (validKeys.includes(key)) {
-          localStorage.setItem("loggedIn", "true");
-          localStorage.setItem("loggedInKey", key);
-          window.location.href = "/home.html";
-        } else {
-          alertElement.textContent = "Incorrect key!";
-          alertElement.style.color = "white";
-        }
-      }
+async function fetchValidKeys() {
+  const response = await fetch('keys.json');
+  const data = await response.json();
+  return data.validKeys;
+}
       document.addEventListener('DOMContentLoaded', () => {
         const sections = document.querySelectorAll('.section');
         const PERSPECTIVE = '1000px';
