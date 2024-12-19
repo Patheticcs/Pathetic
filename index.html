@@ -192,47 +192,89 @@
         <button onclick="openDiscord()">Join Our Discord</button>
       </div>
       <script>
-      // Automatically check the key when the user types
-      async function checkKey() {
-        const key = document.getElementById("key").value.trim();
-        const alertElement = document.getElementById("alert");
 
-        // Fetch valid keys from keys.json
-        const validKeys = await fetchValidKeys();
+        async function checkKey() {
+          const key = document.getElementById("key").value.trim();
+          const alertElement = document.getElementById("alert");
 
-        // If the entered key is valid
-        if (validKeys.includes(key)) {
-          // Save the login status and key in localStorage
-          localStorage.setItem("loggedIn", "true");
-          localStorage.setItem("loggedInKey", key);
-          window.location.href = "/home.html"; // Redirect to home page on successful login
-        } else {
-          // Show an alert message for incorrect key
-          alertElement.textContent = "Incorrect key!";
-          alertElement.style.color = "red";
-        }
-      }
-
-      async function fetchValidKeys() {
-        const response = await fetch('keys.json');
-        const data = await response.json();
-        return data.validKeys;
-      }
-
-      // Check if the user is already logged in and has a valid key
-      window.onload = async function() {
-        const loggedIn = localStorage.getItem("loggedIn");
-        const savedKey = localStorage.getItem("loggedInKey");
-
-        if (loggedIn === "true") {
           const validKeys = await fetchValidKeys();
 
-          // If the stored key is valid, redirect to home.html
-          if (validKeys.includes(savedKey)) {
-            window.location.href = "/home.html";
+          if (validKeys.includes(key)) {
+
+            localStorage.setItem("loggedIn", "true");
+            localStorage.setItem("loggedInKey", key);
+            window.location.href = "/home.html"; 
+          } else {
+
+            alertElement.textContent = "Incorrect key!";
+            alertElement.style.color = "red";
           }
         }
-      }
+        async function fetchValidKeys() {
+          const response = await fetch('keys.json');
+          const data = await response.json();
+          return data.validKeys;
+        }
+
+        window.onload = async function() {
+          const loggedIn = localStorage.getItem("loggedIn");
+          const savedKey = localStorage.getItem("loggedInKey");
+          if (loggedIn === "true") {
+            const validKeys = await fetchValidKeys();
+
+            if (validKeys.includes(savedKey)) {
+              window.location.href = "/home.html";
+            }
+          }
+        }
+        const containers = document.querySelectorAll('.container');
+        containers.forEach((container) => {
+          let animationFrameId;
+          container.style.transition = 'transform 0.3s ease-out';
+          container.addEventListener('mousemove', function(e) {
+            if (animationFrameId) cancelAnimationFrame(animationFrameId);
+            animationFrameId = requestAnimationFrame(() => {
+              const {
+                offsetWidth: width,
+                offsetHeight: height
+              } = container;
+              const rect = container.getBoundingClientRect();
+              const offsetX = e.clientX - rect.left;
+              const offsetY = e.clientY - rect.top;
+              const x = (offsetX / width) * 2 - 1;
+              const y = (offsetY / height) * 2 - 1;
+              container.style.transform = `perspective(1000px) scale(1.03) rotateX(${y * -6}deg) rotateY(${x * 6}deg)`;
+            });
+          });
+          container.addEventListener('mouseleave', function() {
+            if (animationFrameId) cancelAnimationFrame(animationFrameId);
+            container.style.transform = 'perspective(1000px) scale(1) rotateX(0deg) rotateY(0deg)';
+          });
+        });
+        document.addEventListener('contextmenu', function(e) {
+          e.preventDefault();
+        });
+        document.addEventListener('mousedown', function(e) {
+          if (e.target.tagName === 'A' || e.target.tagName === 'BUTTON') {
+            e.preventDefault();
+          }
+        });
+        document.addEventListener('touchstart', function(e) {
+          if (e.target.tagName === 'A' || e.target.tagName === 'BUTTON') {
+            e.preventDefault();
+          }
+        });
+        const links = document.querySelectorAll("a");
+        links.forEach(link => {
+          link.addEventListener("contextmenu", (event) => {
+            event.preventDefault();
+          });
+        });
+        document.addEventListener("keydown", function(event) {
+          if (event.ctrlKey || event.keyCode === 123) {
+            event.preventDefault();
+          }
+        });
       </script>
   </body>
 </html>
