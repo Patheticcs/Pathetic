@@ -208,12 +208,12 @@
         const key = document.getElementById("key").value.trim();
         const alertElement = document.getElementById("alert");
 
-        const validKeys = await fetchValidKeys(); // Fetch the valid keys from the JSON file
+        const validKeys = await fetchValidKeys();
 
         if (validKeys.includes(key)) {
           localStorage.setItem("loggedIn", "true");
           localStorage.setItem("loggedInKey", key);
-          window.location.href = "/home.html"; // Redirect to home page
+          window.location.href = "/home.html";
         } else {
           alertElement.textContent = "Incorrect key!";
           alertElement.style.color = "white";
