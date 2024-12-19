@@ -3,7 +3,7 @@
   <head>
     <title>Key System</title>
     <link rel="icon" type="image/x-icon" href="https://iili.io/27ddQyB.png">
-    <style>
+   <style>
       * {
         box-sizing: border-box;
         margin: 0;
@@ -193,7 +193,8 @@
       </div>
     <script>
       window.onload = function() {
-        if (localStorage.getItem("loggedIn") === "true") {
+        // Check if user is logged in and redirect to home.html only if not already on it
+        if (localStorage.getItem("loggedIn") === "true" && window.location.pathname !== "/home.html") {
           window.location.href = "/home.html";
         }
       };
@@ -208,12 +209,12 @@
         const key = document.getElementById("key").value.trim();
         const alertElement = document.getElementById("alert");
 
-        const validKeys = await fetchValidKeys();
+        const validKeys = await fetchValidKeys(); // Fetch the valid keys from the JSON file
 
         if (validKeys.includes(key)) {
           localStorage.setItem("loggedIn", "true");
           localStorage.setItem("loggedInKey", key);
-          window.location.href = "/home.html";
+          window.location.href = "/home.html"; // Redirect to home page only once
         } else {
           alertElement.textContent = "Incorrect key!";
           alertElement.style.color = "white";
