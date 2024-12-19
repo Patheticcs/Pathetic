@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Key Check</title>
+    <link rel="icon" type="image/x-icon" href="https://iili.io/27ddQyB.png">
+    <style>
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #fff;
+        background-size: cover;
+        background-position: center;
+        height: 100vh;
+        margin: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        overflow: hidden;
+      }
+
+      #background-video {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        z-index: -1;
+      }
+
+      .container {
+        background: rgba(0, 0, 0, 0.5);
+        border-radius: 10px;
+        box-shadow: 0 0px 60px rgba(0, 0, 0, 1);
+        text-align: center;
+        backdrop-filter: blur(15px);
+        transition: transform 0.3s ease-out, box-shadow 0.3s ease-out;
+        height: 385px;
+        width: 550px;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .container:hover {
+        cursor: pointer;
+        transform: scale(1.05);
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8);
+      }
+
+      .container::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(0, 0, 0, 0.1);
+        transition: background 0.3s ease;
+        z-index: -1;
+      }
+
+      .container:hover::before {
+        background: rgba(0, 0, 0, 0.3);
+      }
+
+      h2 {
+        font-size: 40px;
+        margin: 60px 0;
+        color: #fff;
+        text-shadow: 0 0px 20px rgba(0, 0, 0, 1);
+      }
+
+      input[type="text"] {
+        padding: 12px 20px;
+        font-size: 16px;
+        border: none;
+        border-radius: 12px;
+        background: rgba(255, 255, 255, 1);
+        box-shadow: 0 0px 20px rgba(255, 255, 255, 0.3);
+        color: #000;
+        margin-right: 10px;
+        margin-left: 10px;
+        outline: none;
+        transition: all 0.3s ease;
+      }
+
+      input[type="text"]:focus {
+        box-shadow: 0 0px 25px rgba(255, 255, 255, 0.9);
+      }
+
+      input[type="text"]:hover {
+        margin-right: 15px;
+        margin-left: 15px;
+        transform: scale(1.05);
+        box-shadow: 0 0px 25px rgba(255, 255, 255, 1);
+      }
+
+      button {
+        background-color: rgba(0, 0, 0, 0.8);
+        color: #fff;
+        text-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+        box-shadow: 0 0px 20px rgba(255, 255, 255, 0.3);
+        padding: 12px 25px;
+        font-size: 16px;
+        border: none;
+        margin-top: 18px;
+        border-radius: 12px;
+        margin-right: 10px;
+        margin-left: 10px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+      }
+
+      button:hover {
+        margin-right: 15px;
+        margin-left: 15px;
+        transform: scale(1.05);
+        box-shadow: 0 0px 30px rgba(255, 255, 255, 0.7);
+      }
+
+      button:active {
+        background-color: rgba(0, 0, 0, 1);
+      }
+
+      .alert {
+        color: white;
+        font-size: 15px;
+        margin-top: 40px;
+        margin-bottom: 20px;
+      }
+
+      iframe {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        border: none;
+        z-index: 9999;
+      }
+
+      @media only screen and (max-width: 768px) {
+        .container {
+          height: 380px;
+          width: 365px;
+          text-align: center;
+          margin: 0 auto;
+        }
+
+        h2 {
+          font-size: 38px;
+        }
+
+        input[type="text"] {
+          font-size: 14px;
+          padding: 10px 20px;
+          margin-right: 5px;
+          margin-left: 5px;
+          margin-bottom: 15px;
+        }
+
+        button {
+          font-size: 14px;
+          margin-top: 10px;
+          text-align: center;
+          display: inline-block;
+          padding: 10px 20px;
+          width: auto;
+          margin-bottom: 0px;
+          margin-right: 5px;
+          margin-left: 5px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="background-container">
+      <video autoplay muted loop playsinline preload="auto" id="background-video">
+        <source src="https://r2.ammo.lol/1733dba4-f59c-48d2-b1c2-6e8620dee401.mp4" type="video/mp4"> Your browser does not support the video tag.
+      </video>
+      <div class="container" id="login-container">
+        <h2>Key System</h2>
+        <input type="text" id="key" placeholder="Enter key">
+        <button onclick="checkKey()">Submit</button>
+        <div id="alert" class="alert"></div>
+        <button onclick="openDiscord()">Join Our Discord</button>
+      </div>
+    </div>
+    <script>
+      const keys = ["2"];
+      window.onload = function() {
+        const savedKey = localStorage.getItem("loggedInKey");
+        const alertElement = document.getElementById("alert");
+        if (savedKey && !keys.includes(savedKey)) {
+          localStorage.removeItem("loggedIn");
+          localStorage.removeItem("loggedInKey");
+          window.location.reload();
+        } else if (localStorage.getItem("loggedIn") === "true") {
+          document.title = "Pathetic";
+          loadIframe();
+        } else {
+          alertElement.textContent = "Key Expired. Please Enter a new key to proceed!";
+          alertElement.style.color = "white";
+        }
+      };
+
+      function checkKey() {
+        const key = document.getElementById("key").value.trim();
+        const alertElement = document.getElementById("alert");
+        if (keys.includes(key)) {
+          document.title = "Pathetic";
+          localStorage.setItem("loggedIn", "true");
+          localStorage.setItem("loggedInKey", key);
+          loadIframe();
+        } else {
+          alertElement.textContent = "Incorrect key!";
+          alertElement.style.color = "white";
+        }
+      }
+
+      function loadIframe() {
+        const existingIframe = document.querySelector("iframe");
+        if (existingIframe) {
+          return;
+        }
+        const iframe = document.createElement("iframe");
+        iframe.src = "/home.html";
+        iframe.style.display = "block";
+        iframe.style.width = "100%";
+        iframe.style.height = "100vh";
+        document.body.appendChild(iframe);
+        iframe.onload = function() {
+          const iframeDocument = iframe.contentDocument || iframe.contentWindow.document;
+          const baseTag = iframeDocument.createElement('base');
+          baseTag.href = window.location.origin + '/';
+          iframeDocument.head.appendChild(baseTag);
+        };
+      }
+
+      function openDiscord() {
+        window.open("https://discord.gg/invite/Eg2EWXwYcn", "_blank");
+      }
+      document.querySelector('.container').addEventListener('mousemove', function(e) {
+        const container = e.currentTarget;
+        const {
+          offsetWidth: width,
+          offsetHeight: height
+        } = container;
+        const {
+          offsetX,
+          offsetY
+        } = e;
+        const x = (offsetX / width) * 2 - 1;
+        const y = (offsetY / height) * 2 - 1;
+        container.style.transform = `perspective(1000px) rotateX(${y * 5}deg) rotateY(${x * 5}deg)`;
+        container.style.transition = "transform 0.1s ease-out";
+      });
+      document.querySelector('.container').addEventListener('mouseleave', function(e) {
+        const container = e.currentTarget;
+        container.style.transition = "transform 0.5s ease-out";
+        container.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg)';
+      });
+      document.addEventListener("keydown", function(event) {
+        if (event.ctrlKey) {
+          if (event.key !== 'c' && event.key !== 'v' && event.key !== 'a') {
+            event.preventDefault();
+          }
+        }
+        if (event.keyCode == 123) {
+          event.preventDefault();
+        }
+      });
+      document.addEventListener('contextmenu', function(event) {
+        event.preventDefault();
+      });
+    </script>
+  </body>
+</html>
