@@ -126,6 +126,33 @@
       </section>
     </div>
     <script>
+            window.onload = function() {
+        if (localStorage.getItem("loggedIn") === "true") {
+          window.location.href = "/home.html";
+        }
+      };
+
+      async function fetchValidKeys() {
+        const response = await fetch('keys.json');
+        const data = await response.json();
+        return data.validKeys;
+      }
+
+      async function checkKey() {
+        const key = document.getElementById("key").value.trim();
+        const alertElement = document.getElementById("alert");
+
+        const validKeys = await fetchValidKeys();
+
+        if (validKeys.includes(key)) {
+          localStorage.setItem("loggedIn", "true");
+          localStorage.setItem("loggedInKey", key);
+          window.location.href = "/home.html";
+        } else {
+          alertElement.textContent = "Incorrect key!";
+          alertElement.style.color = "white";
+        }
+      }
       function navigateTo(url) {
         window.location.href = url;
       }
