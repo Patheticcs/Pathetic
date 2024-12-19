@@ -192,6 +192,7 @@
         <button onclick="openDiscord()">Join Our Discord</button>
       </div>
       <script>
+      // Automatically check the key when the user types
       async function checkKey() {
         const key = document.getElementById("key").value.trim();
         const alertElement = document.getElementById("alert");
@@ -206,6 +207,7 @@
           localStorage.setItem("loggedInKey", key);
           window.location.href = "/home.html"; // Redirect to home page on successful login
         } else {
+          // Show an alert message for incorrect key
           alertElement.textContent = "Incorrect key!";
           alertElement.style.color = "red";
         }
@@ -215,6 +217,21 @@
         const response = await fetch('keys.json');
         const data = await response.json();
         return data.validKeys;
+      }
+
+      // Check if the user is already logged in and has a valid key
+      window.onload = async function() {
+        const loggedIn = localStorage.getItem("loggedIn");
+        const savedKey = localStorage.getItem("loggedInKey");
+
+        if (loggedIn === "true") {
+          const validKeys = await fetchValidKeys();
+
+          // If the stored key is valid, redirect to home.html
+          if (validKeys.includes(savedKey)) {
+            window.location.href = "/home.html";
+          }
+        }
       }
       </script>
   </body>
