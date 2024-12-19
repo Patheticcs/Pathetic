@@ -1,10 +1,8 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
     <title>Home</title>
-    <link rel="icon" type="image/x-icon" href="https://iili.io/2hAfiKb.png">
-  </head>
-  <body>
+    <link rel="icon" type="image/x-icon" href="https://iili.io/27ddQyB.png">
     <style>
       * {
         margin: 0;
@@ -414,220 +412,230 @@
         margin: 0
       }
     </style>
-    </head>
-    <body>
-      <div class="background-container">
-        <video autoplay muted loop playsinline preload="auto" id="background-video">
-          <source src="https://r2.guns.lol/1e98fa65-06c0-4164-b805-bf459c2f148a.mov" type="video/mp4" /> Your browser does not support the video tag.
-        </video>
+  </head>
+  <body>
+    <div class="background-container">
+      <video autoplay muted loop playsinline preload="auto" id="background-video">
+        <source src="https://r2.guns.lol/1e98fa65-06c0-4164-b805-bf459c2f148a.mov" type="video/mp4" /> Your browser does not support the video tag.
+      </video>
+    </div>
+    <header>
+      <nav>
+        <ul>
+          <li>
+            <a href="#welcome">Home</a>
+          </li>
+          <li>
+            <a href="#roblox">Roblox</a>
+          </li>
+          <li>
+            <a href="#exploits">Exploits</a>
+          </li>
+          <li>
+            <a href="#about">About</a>
+          </li>
+        </ul>
+      </nav>
+      <div class="header-buttons">
+        <div class="button-container">
+          <button class="button discord-button" onclick='window.open("https://discord.gg/Eg2EWXwYcn","_blank")'>
+            <img src="https://cdn.prod.website-files.com/6257adef93867e50d84d30e2/636e0a6ac3c481f273141736_icon_clyde_black_RGB.png" alt="Discord" class="discord-icon" />
+            <span class="button-text">Discord</span>
+          </button>
+          <button class="button youtube-button" onclick='window.open("https://www.youtube.com/@patheticcs","_blank")'>
+            <img src="https://www.iconpacks.net/icons/1/free-youtube-icon-123-thumb.png" alt="YouTube" class="youtube-icon" />
+            <span class="button-text">YouTube</span>
+          </button>
+          <button class="button roblox-button" onclick='window.open("https://www.roblox.com/users/2625446554/profile","_blank")'>
+            <img src="https://devforum-uploads.s3.dualstack.us-east-2.amazonaws.com/uploads/original/4X/0/e/e/0eeeb19633422b1241f4306419a0f15f39d58de9.png" alt="Roblox" class="roblox-icon" />
+            <span class="button-text">Roblox</span>
+          </button>
+        </div>
       </div>
-      <header>
-        <nav>
-          <ul>
-            <li>
-              <a href="#welcome">Home</a>
-            </li>
-            <li>
-              <a href="#roblox">Roblox</a>
-            </li>
-            <li>
-              <a href="#exploits">Exploits</a>
-            </li>
-            <li>
-              <a href="#about">About</a>
-            </li>
-          </ul>
-        </nav>
-        <div class="header-buttons">
-          <div class="button-container">
-            <button class="button discord-button" onclick='window.open("https://discord.gg/Eg2EWXwYcn","_blank")'>
-              <img src="https://cdn.prod.website-files.com/6257adef93867e50d84d30e2/636e0a6ac3c481f273141736_icon_clyde_black_RGB.png" alt="Discord" class="discord-icon" />
-              <span class="button-text">Discord</span>
-            </button>
-            <button class="button youtube-button" onclick='window.open("https://www.youtube.com/@patheticcs","_blank")'>
-              <img src="https://www.iconpacks.net/icons/1/free-youtube-icon-123-thumb.png" alt="YouTube" class="youtube-icon" />
-              <span class="button-text">YouTube</span>
-            </button>
-            <button class="button roblox-button" onclick='window.open("https://www.roblox.com/users/2625446554/profile","_blank")'>
-              <img src="https://devforum-uploads.s3.dualstack.us-east-2.amazonaws.com/uploads/original/4X/0/e/e/0eeeb19633422b1241f4306419a0f15f39d58de9.png" alt="Roblox" class="roblox-icon" />
-              <span class="button-text">Roblox</span>
-            </button>
-          </div>
+    </header>
+    <section id="welcome" class="welcome">
+      <h2>Welcome</h2>
+      <p>We are here to offer the best services for you!</p>
+      <button onclick='document.getElementById("roblox").scrollIntoView({behavior:"smooth"}),document.querySelector("header").classList.add("visible"),document.body.style.overflowY="scroll",document.getElementById("background-video").muted=false'> Get Started </button>
+    </section>
+    <section id="roblox">
+      <div class="services-container">
+        <div class="section">
+          <h3>SCRIPTS</h3>
+          <p>Free Scripts, all working.</p>
+          <a href="scripts.html" class="button">Enter</a>
         </div>
-      </header>
-      <section id="welcome" class="welcome">
-        <h2>Welcome</h2>
-        <p>We are here to offer the best services for you!</p>
-        <button onclick='document.getElementById("roblox").scrollIntoView({behavior:"smooth"}),document.querySelector("header").classList.add("visible"),document.body.style.overflowY="scroll",document.getElementById("background-video").muted=false'> Get Started </button>
-      </section>
-      <section id="roblox">
-        <div class="services-container">
-          <div class="section">
-            <h3>SCRIPTS</h3>
-            <p>Free Scripts, all working.</p>
-            <a href="scripts.html" class="button">Enter</a>
-          </div>
-          <div class="section">
-            <h3>EXECUTORS</h3>
-            <p>Free Windows Executors</p>
-            <a href="executors.html" class="button">Enter</a>
-          </div>
-          <div class="section">
-            <h3>VOXLIS</h3>
-            <p>Ready to inject?</p>
-            <a href="https://voxlis.net/" class="button" target="_blank" rel="noopener noreferrer" aria-label="Visit VOXLIS website">Enter</a>
-          </div>
-          <div class="section">
-            <h3>EXPStatus</h3>
-            <p>Real-time exploit status monitoring</p>
-            <a href="https://www.expstatus.xyz/" class="button" target="_blank" rel="noopener noreferrer" aria-label="Visit EXPStatus website">Enter</a>
-          </div>
-          <div class="section">
-            <h3>RBXSERVERS</h3>
-            <p>The #1 site for finding ROBLOX VIP Servers</p>
-            <a href="https://rbxservers.xyz/" class="button" target="_blank" rel="noopener noreferrer" aria-label="Visit RBXSERVERS website">Enter</a>
-          </div>
+        <div class="section">
+          <h3>EXECUTORS</h3>
+          <p>Free Windows Executors</p>
+          <a href="executors.html" class="button">Enter</a>
         </div>
-      </section>
-      <section id="exploits">
-        <div class="services-container">
-          <div class="section">
-            <h3>PROXIES</h3>
-            <p>Browse any website anonymously.</p>
-            <a href="proxies.html" class="button">Enter</a>
-          </div>
-          <div class="section">
-            <h3>BYPASS</h3>
-            <p>Bypass AD Links.</p>
-            <a href="bypass.html" class="button">Enter</a>
-          </div>
-          <div class="section">
-            <h3>FREE MOVIES</h3>
-            <p>Stream, Download, Torrent Videos</p>
-            <a href="movies.html" class="button">Enter</a>
-          </div>
-          <div class="section">
-            <h3>FMHY</h3>
-            <p>Collection of free stuff on the internet!</p>
-            <a href="https://fmhy.net/" class="button" target="_blank" rel="noopener noreferrer" aria-label="Visit FMHY website">Enter</a>
-          </div>
-          <div class="section">
-            <h3>UNBLOCKED GAMES</h3>
-            <p>Play Roblox and Minecraft UNBLOCKED!</p>
-            <a href="unblocked-games.html" class="button">Enter</a>
-          </div>
-      </section>
-      <section id="about" class="about">
-        <h2>About Us</h2>
-        <p> We’re a passionate team focused on creating reliable, effective tools to enhance your gaming and online experiences. We prioritize quality and ease of use, ensuring every solution we offer meets the highest standards to help you get the most out of your online activities. </p>
-      </section>
-      <footer>
-        <p>2024 Pathetic. All Rights Reserved.</p>
-        <a href="/404.html" class="footer-link">‎ ‎ ‎ 35k5S4hE0u6M</a>
-      </footer>
-      <script>
-        document.addEventListener("DOMContentLoaded", () => {
-          window.scrollTo(0, 0);
-          const isGetStartedClicked = sessionStorage.getItem('getStartedClicked');
-          if (!isGetStartedClicked) {
-            document.body.style.overflowY = 'hidden';
-            document.querySelector('header').classList.remove('visible');
-          } else {
-            document.body.style.overflowY = 'scroll';
-            document.querySelector('header').classList.add('visible');
-          }
-          document.addEventListener('contextmenu', function(e) {
+        <div class="section">
+          <h3>VOXLIS</h3>
+          <p>Ready to inject?</p>
+          <a href="https://voxlis.net/" class="button" target="_blank" rel="noopener noreferrer" aria-label="Visit VOXLIS website">Enter</a>
+        </div>
+        <div class="section">
+          <h3>EXPStatus</h3>
+          <p>Real-time exploit status monitoring</p>
+          <a href="https://www.expstatus.xyz/" class="button" target="_blank" rel="noopener noreferrer" aria-label="Visit EXPStatus website">Enter</a>
+        </div>
+        <div class="section">
+          <h3>RBXSERVERS</h3>
+          <p>The #1 site for finding ROBLOX VIP Servers</p>
+          <a href="https://rbxservers.xyz/" class="button" target="_blank" rel="noopener noreferrer" aria-label="Visit RBXSERVERS website">Enter</a>
+        </div>
+      </div>
+    </section>
+    <section id="exploits">
+      <div class="services-container">
+        <div class="section">
+          <h3>PROXIES</h3>
+          <p>Browse any website anonymously.</p>
+          <a href="proxies.html" class="button">Enter</a>
+        </div>
+        <div class="section">
+          <h3>BYPASS</h3>
+          <p>Bypass AD Links.</p>
+          <a href="bypass.html" class="button">Enter</a>
+        </div>
+        <div class="section">
+          <h3>FREE MOVIES</h3>
+          <p>Stream, Download, Torrent Videos</p>
+          <a href="movies.html" class="button">Enter</a>
+        </div>
+        <div class="section">
+          <h3>FMHY</h3>
+          <p>Collection of free stuff on the internet!</p>
+          <a href="https://fmhy.net/" class="button" target="_blank" rel="noopener noreferrer" aria-label="Visit FMHY website">Enter</a>
+        </div>
+        <div class="section">
+          <h3>UNBLOCKED GAMES</h3>
+          <p>Play Roblox and Minecraft UNBLOCKED!</p>
+          <a href="unblocked-games.html" class="button">Enter</a>
+        </div>
+    </section>
+    <section id="about" class="about">
+      <h2>About Us</h2>
+      <p> We’re a passionate team focused on creating reliable, effective tools to enhance your gaming and online experiences. We prioritize quality and ease of use, ensuring every solution we offer meets the highest standards to help you get the most out of your online activities. </p>
+    </section>
+    <footer>
+      <p>2024 Pathetic. All Rights Reserved.</p>
+      <a href="/404.html" class="footer-link">‎ ‎ ‎ 35k5S4hE0u6M</a>
+    </footer>
+    <script>
+      window.onload = function() {
+        const loggedIn = localStorage.getItem("loggedIn");
+        const savedKey = localStorage.getItem("loggedInKey");
+        const validKeys = ["2"];
+        if (loggedIn !== "true" || !validKeys.includes(savedKey)) {
+          window.location.href = "/index.html";
+        }
+      };
+      document.addEventListener("DOMContentLoaded", () => {
+        window.scrollTo(0, 0);
+        const isGetStartedClicked = sessionStorage.getItem('getStartedClicked');
+        if (!isGetStartedClicked) {
+          document.body.style.overflowY = 'hidden';
+          document.querySelector('header').classList.remove('visible');
+        } else {
+          document.body.style.overflowY = 'scroll';
+          document.querySelector('header').classList.add('visible');
+        }
+        document.addEventListener('contextmenu', function(e) {
+          e.preventDefault();
+        });
+        document.addEventListener('mousedown', function(e) {
+          if (e.target.tagName === 'A' || e.target.tagName === 'BUTTON') {
             e.preventDefault();
+          }
+        });
+        document.addEventListener('touchstart', function(e) {
+          if (e.target.tagName === 'A' || e.target.tagName === 'BUTTON') {
+            e.preventDefault();
+          }
+        });
+        const links = document.querySelectorAll("a");
+        links.forEach(link => {
+          link.addEventListener("contextmenu", (event) => {
+            event.preventDefault();
           });
-          document.addEventListener('mousedown', function(e) {
-            if (e.target.tagName === 'A' || e.target.tagName === 'BUTTON') {
-              e.preventDefault();
-            }
-          });
-          document.addEventListener('touchstart', function(e) {
-            if (e.target.tagName === 'A' || e.target.tagName === 'BUTTON') {
-              e.preventDefault();
-            }
-          });
-          const links = document.querySelectorAll("a");
-          links.forEach(link => {
-            link.addEventListener("contextmenu", (event) => {
-              event.preventDefault();
-            });
-          });
-          document.addEventListener("keydown", function(event) {
-            if (event.ctrlKey || event.keyCode === 123) {
-              event.preventDefault();
-            }
-          });
-          const navLinks = document.querySelectorAll("header nav ul li a");
-          navLinks.forEach(link => {
-            link.addEventListener("click", (event) => {
-              event.preventDefault();
-              const targetId = link.getAttribute("href").substring(1);
-              const targetSection = document.getElementById(targetId);
-              if (targetSection) {
-                targetSection.scrollIntoView({
-                  behavior: "smooth"
-                });
-              }
-            });
-          });
-          document.querySelector('button').addEventListener('click', () => {
-            document.body.style.overflowY = 'scroll';
-            document.querySelector('header').classList.add('visible');
-            sessionStorage.setItem('getStartedClicked', 'true');
-          });
-          let touchTimeout;
-          document.querySelectorAll('button').forEach(button => {
-            button.addEventListener('touchstart', function(event) {
-              touchTimeout = setTimeout(function() {
-                event.preventDefault();
-              }, 500);
-            });
-            button.addEventListener('touchend', function(event) {
-              clearTimeout(touchTimeout);
-            });
-            button.addEventListener('click', function(event) {
-              console.log("Button tapped!");
-            });
-          });
-          window.addEventListener('beforeunload', () => {
-            document.documentElement.style.scrollBehavior = 'auto';
-            window.scrollTo(0, 0);
-          });
-          window.addEventListener('load', () => {
-            setTimeout(() => {
-              document.documentElement.style.scrollBehavior = 'smooth';
-              window.scrollTo({
-                top: 0,
-                behavior: 'smooth'
+        });
+        document.addEventListener("keydown", function(event) {
+          if (event.ctrlKey || event.keyCode === 123) {
+            event.preventDefault();
+          }
+        });
+        const navLinks = document.querySelectorAll("header nav ul li a");
+        navLinks.forEach(link => {
+          link.addEventListener("click", (event) => {
+            event.preventDefault();
+            const targetId = link.getAttribute("href").substring(1);
+            const targetSection = document.getElementById(targetId);
+            if (targetSection) {
+              targetSection.scrollIntoView({
+                behavior: "smooth"
               });
-            }, 0);
+            }
           });
         });
-        const sections = document.querySelectorAll('.section');
-        sections.forEach((section) => {
-          let animationFrameId;
-          section.style.transition = 'transform 0.3s ease-out';
-          section.addEventListener('mousemove', function(e) {
-            if (animationFrameId) cancelAnimationFrame(animationFrameId);
-            animationFrameId = requestAnimationFrame(() => {
-              const {
-                offsetWidth: width,
-                offsetHeight: height
-              } = section;
-              const rect = section.getBoundingClientRect();
-              const offsetX = e.clientX - rect.left;
-              const offsetY = e.clientY - rect.top;
-              const x = (offsetX / width) * 2 - 1;
-              const y = (offsetY / height) * 2 - 1;
-              section.style.transform = `perspective(1000px) scale(1.03) rotateX(${y * -6}deg) rotateY(${x * 6}deg)`;
+        document.querySelector('button').addEventListener('click', () => {
+          document.body.style.overflowY = 'scroll';
+          document.querySelector('header').classList.add('visible');
+          sessionStorage.setItem('getStartedClicked', 'true');
+        });
+        let touchTimeout;
+        document.querySelectorAll('button').forEach(button => {
+          button.addEventListener('touchstart', function(event) {
+            touchTimeout = setTimeout(function() {
+              event.preventDefault();
+            }, 500);
+          });
+          button.addEventListener('touchend', function(event) {
+            clearTimeout(touchTimeout);
+          });
+          button.addEventListener('click', function(event) {
+            console.log("Button tapped!");
+          });
+        });
+        window.addEventListener('beforeunload', () => {
+          document.documentElement.style.scrollBehavior = 'auto';
+          window.scrollTo(0, 0);
+        });
+        window.addEventListener('load', () => {
+          setTimeout(() => {
+            document.documentElement.style.scrollBehavior = 'smooth';
+            window.scrollTo({
+              top: 0,
+              behavior: 'smooth'
             });
-          });
-          section.addEventListener('mouseleave', function() {
-            if (animationFrameId) cancelAnimationFrame(animationFrameId);
-            section.style.transform = 'perspective(1000px) scale(1) rotateX(0deg) rotateY(0deg)';
+          }, 0);
+        });
+      });
+      const sections = document.querySelectorAll('.section');
+      sections.forEach((section) => {
+        let animationFrameId;
+        section.style.transition = 'transform 0.3s ease-out';
+        section.addEventListener('mousemove', function(e) {
+          if (animationFrameId) cancelAnimationFrame(animationFrameId);
+          animationFrameId = requestAnimationFrame(() => {
+            const {
+              offsetWidth: width,
+              offsetHeight: height
+            } = section;
+            const rect = section.getBoundingClientRect();
+            const offsetX = e.clientX - rect.left;
+            const offsetY = e.clientY - rect.top;
+            const x = (offsetX / width) * 2 - 1;
+            const y = (offsetY / height) * 2 - 1;
+            section.style.transform = `perspective(1000px) scale(1.03) rotateX(${y * -6}deg) rotateY(${x * 6}deg)`;
           });
         });
-      </script>
+        section.addEventListener('mouseleave', function() {
+          if (animationFrameId) cancelAnimationFrame(animationFrameId);
+          section.style.transform = 'perspective(1000px) scale(1) rotateX(0deg) rotateY(0deg)';
+        });
+      });
+    </script>
+  </body>
+</html>
