@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>Scripts</title>
+    <title>Executors</title>
     <link rel="icon" href="https://iili.io/25Go0TF.png" type="image/x-icon">
     <style>
       * {
@@ -14,8 +14,7 @@
         font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
         background: #000;
         color: #fff;
-        overflow-x: hidden;
-        overflow-y: hidden;
+        overflow: hidden;
         font-size: 16px;
       }
 
@@ -49,34 +48,34 @@
         margin: 10px 0;
         padding: 16px 20px;
         font-size: 1.2rem;
-        background-color: rgba(0, 0, 0, .5);
-        box-shadow: 0 0px 25px rgba(255, 255, 255, 0.6);
+        background-color: rgba(0, 0, 0, 0.5);
+        box-shadow: 0 0px 15px rgba(255, 255, 255, 1);
         border: none;
         color: white;
         border-radius: 30px;
         cursor: pointer;
-        transition:
-          transform 0.3s ease,
-          box-shadow 0.3s ease,
-          text-shadow 0.3s ease;
+        transition: transform 0.3s ease, box-shadow 0.3s ease, text-shadow 0.3s ease, margin 0.3s ease;
         backdrop-filter: blur(3px);
-        display: inline-block;
         text-align: center;
         text-decoration: none;
         width: 200px;
         height: 60px;
+        z-index: 1;
       }
 
       .button:hover {
         transform: scale(1.01);
-        box-shadow: 0 0px 35px rgba(255, 255, 255, 0.6);
+        margin-top: 15px;
+        margin-bottom: 15px;
+        box-shadow: 0 0px 20px rgba(255, 255, 255, 1);
         text-shadow: 0 0 15px #fff, 0 0 25px #fff;
       }
 
       .button.back {
-        margin-top: 50px;
         width: 120px;
         height: 50px;
+        margin-top: 30px;
+        margin-bottom: 30px;
       }
 
       @keyframes fadeIn {
@@ -99,13 +98,6 @@
         text-shadow: 0 0 100px #fff, 0 0 20px #fff, 0 0 30px #fff;
       }
 
-      @media (max-width: 768px) {
-        .button {
-          width: 200px;
-          height: 60px;
-        }
-      }
-
       @media (max-width: 480px) {
         .button {
           width: 180px;
@@ -117,7 +109,6 @@
   </head>
   <body>
     <div class="background-container">
-      <img src="https://iili.io/2XOdNiQ.png" alt="background image" id="background-image">
       <section id="welcome" class="welcome">
         <button class="button" onclick="navigateTo('games.html')" aria-label="Navigate to Games">Games</button>
         <button class="button" onclick="navigateTo('universal.html')" aria-label="Navigate to Universal">Universal</button>
@@ -126,36 +117,50 @@
       </section>
     </div>
     <script>
-window.onload = async function() {
-  const loggedIn = localStorage.getItem("loggedIn");
-  const savedKey = localStorage.getItem("loggedInKey");
-
-  const validKeys = await fetchValidKeys();
-
-  if (loggedIn !== "true" || !validKeys.includes(savedKey)) {
-    window.location.href = "/index.html";
-  }
-};
-
-async function fetchValidKeys() {
-  const response = await fetch('keys.json');
-  const data = await response.json();
-  return data.validKeys;
-}
       function navigateTo(url) {
         window.location.href = url;
       }
-      document.addEventListener('contextmenu', function(e) {
-        e.preventDefault();
-      });
-      document.addEventListener('touchstart', function(e) {
-        if (e.target.tagName === 'A' || e.target.tagName === 'BUTTON') {
-          e.preventDefault();
+      window.onload = async function() {
+        const loggedIn = localStorage.getItem("loggedIn");
+        const savedKey = localStorage.getItem("loggedInKey");
+        try {
+          const validKeys = await fetchValidKeys();
+          if (loggedIn !== "true" || !validKeys.includes(savedKey)) {
+            window.location.href = "/index.html";
+          }
+        } catch (error) {
+          console.error("Failed to fetch valid keys:", error);
+          window.location.href = "/index.html";
         }
+      };
+      async function fetchValidKeys() {
+        const response = await fetch('keys.json');
+        if (!response.ok) throw new Error('Network response was not ok');
+        const data = await response.json();
+        return data.validKeys;
+      }
+      const buttons = document.querySelectorAll('.button');
+      buttons.forEach(button => {
+        button.addEventListener('mousemove', (e) => {
+          const {
+            offsetWidth: width,
+            offsetHeight: height
+          } = button;
+          const rect = button.getBoundingClientRect();
+          const offsetX = e.clientX - rect.left;
+          const offsetY = e.clientY - rect.top;
+          const x = (offsetX / width) * 2 - 1;
+          const y = (offsetY / height) * 2 - 1;
+          button.style.transform = `perspective(1000px) scale(1.03) rotateX(${y * -10}deg) rotateY(${x * 10}deg)`;
+        });
+        button.addEventListener('mouseleave', () => {
+          button.style.transform = 'perspective(1000px) scale(1) rotateX(0deg) rotateY(0deg)';
+        });
       });
-      document.addEventListener("keydown", function(event) {
-        if (event.ctrlKey || event.keyCode == 123) {
-          event.preventDefault();
+      document.addEventListener('contextmenu', (e) => e.preventDefault());
+      document.addEventListener('keydown', (e) => {
+        if (e.ctrlKey || e.keyCode === 123) {
+          e.preventDefault();
         }
       });
     </script>
