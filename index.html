@@ -7,7 +7,7 @@
       * {
         box-sizing: border-box;
         margin: 0;
-        padding: 0
+        padding: 0;
       }
 
       body {
@@ -20,7 +20,7 @@
         display: flex;
         justify-content: center;
         align-items: center;
-        overflow: hidden
+        overflow: hidden;
       }
 
       #background-video {
@@ -30,25 +30,25 @@
         width: 100%;
         height: 100%;
         object-fit: cover;
-        z-index: -1
+        z-index: -1;
       }
 
       .container {
-        background: rgba(0, 0, 0, .5);
+        background: rgba(0, 0, 0, 0.5);
         border-radius: 10px;
-        box-shadow: 0 0 60px rgba(0, 0, 0, 1);
+        box-shadow: 0 0px 60px rgba(0, 0, 0, 1);
         text-align: center;
         backdrop-filter: blur(15px);
-        transition: transform .3s ease-out, box-shadow .3s ease-out;
+        transition: transform 0.3s ease-out, box-shadow 0.3s ease-out;
         height: 385px;
         width: 550px;
         position: relative;
-        overflow: hidden
+        overflow: hidden;
       }
 
       .container:hover {
         cursor: pointer;
-        box-shadow: 0 10px 30px rgba(0, 0, 0, .8)
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8);
       }
 
       .container::before {
@@ -58,52 +58,52 @@
         left: 0;
         right: 0;
         bottom: 0;
-        background: rgba(0, 0, 0, .1);
-        transition: background .3s ease;
-        z-index: -1
+        background: rgba(0, 0, 0, 0.1);
+        transition: background 0.3s ease;
+        z-index: -1;
       }
 
       .container:hover::before {
-        background: rgba(0, 0, 0, .3)
+        background: rgba(0, 0, 0, 0.3);
       }
 
       h2 {
         font-size: 40px;
         margin: 60px 0;
         color: #fff;
-        text-shadow: 0 0 20px rgba(0, 0, 0, 1)
+        text-shadow: 0 0px 20px rgba(0, 0, 0, 1);
       }
 
-      input[type=text] {
+      input[type="text"] {
         padding: 12px 20px;
         font-size: 16px;
         border: none;
         border-radius: 12px;
         background: rgba(255, 255, 255, 1);
-        box-shadow: 0 0 20px rgba(255, 255, 255, .3);
+        box-shadow: 0 0px 20px rgba(255, 255, 255, 0.3);
         color: #000;
         margin-right: 10px;
         margin-left: 10px;
-        outline: 0;
-        transition: all .3s ease
+        outline: none;
+        transition: all 0.3s ease;
       }
 
-      input[type=text]:focus {
-        box-shadow: 0 0 25px rgba(255, 255, 255, .9)
+      input[type="text"]:focus {
+        box-shadow: 0 0px 25px rgba(255, 255, 255, 0.9);
       }
 
-      input[type=text]:hover {
+      input[type="text"]:hover {
         margin-right: 15px;
         margin-left: 15px;
         transform: scale(1.05);
-        box-shadow: 0 0 25px rgba(255, 255, 255, 1)
+        box-shadow: 0 0px 25px rgba(255, 255, 255, 1);
       }
 
       button {
-        background-color: rgba(0, 0, 0, .8);
+        background-color: rgba(0, 0, 0, 0.8);
         color: #fff;
-        text-shadow: 0 0 10px rgba(0, 0, 0, .5);
-        box-shadow: 0 0 20px rgba(255, 255, 255, .3);
+        text-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+        box-shadow: 0 0px 20px rgba(255, 255, 255, 0.3);
         padding: 12px 25px;
         font-size: 16px;
         border: none;
@@ -112,33 +112,26 @@
         margin-right: 10px;
         margin-left: 10px;
         cursor: pointer;
-        transition: all .3s ease
+        transition: all 0.3s ease;
       }
 
       button:hover {
         margin-right: 15px;
         margin-left: 15px;
         transform: scale(1.05);
-        box-shadow: 0 0 30px rgba(255, 255, 255, .7)
+        box-shadow: 0 0px 30px rgba(255, 255, 255, 0.7);
       }
 
       button:active {
-        background-color: rgba(0, 0, 0, 1)
+        background-color: rgba(0, 0, 0, 1);
       }
 
       .alert {
-        color: #fff;
+        color: white;
         font-size: 15px;
         margin-top: 40px;
         margin-bottom: 20px;
-        opacity: 0;
-        transform: translateY(10px);
-        transition: opacity .3s ease, transform .3s ease
-      }
-
-      .alert.show {
-        opacity: 1;
-        transform: translateY(0)
+        transition: all 0.3s ease;
       }
 
       iframe {
@@ -149,27 +142,27 @@
         width: 100vw;
         height: 100vh;
         border: none;
-        z-index: 9999
+        z-index: 9999;
       }
 
-      @media only screen and (max-width:768px) {
+      @media only screen and (max-width: 768px) {
         .container {
           height: 380px;
           width: 365px;
           text-align: center;
-          margin: 0 auto
+          margin: 0 auto;
         }
 
         h2 {
-          font-size: 38px
+          font-size: 38px;
         }
 
-        input[type=text] {
+        input[type="text"] {
           font-size: 14px;
           padding: 10px 20px;
           margin-right: 5px;
           margin-left: 5px;
-          margin-bottom: 15px
+          margin-bottom: 15px;
         }
 
         button {
@@ -179,9 +172,9 @@
           display: inline-block;
           padding: 10px 20px;
           width: auto;
-          margin-bottom: 0;
+          margin-bottom: 0px;
           margin-right: 5px;
-          margin-left: 5px
+          margin-left: 5px;
         }
       }
     </style>
@@ -189,7 +182,7 @@
   <body>
     <div class="background-container">
       <video autoplay muted loop playsinline preload="auto" id="background-video">
-        <source src="https://r2.guns.lol/1e98fa65-06c0-4164-b805-bf459c2f148a.mov" type="video/mp4">Your browser does not support the video tag.
+        <source src="https://r2.guns.lol/1e98fa65-06c0-4164-b805-bf459c2f148a.mov" type="video/mp4" /> Your browser does not support the video tag.
       </video>
       <div class="container" id="login-container">
         <h2>Key System</h2>
@@ -200,74 +193,74 @@
       </div>
       <script>
         async function checkKey() {
-            const key = document.getElementById("key").value.trim();
-            const alertElement = document.getElementById("alert");
+          const key = document.getElementById("key").value.trim();
+          const alertElement = document.getElementById("alert");
+          const validKeys = await fetchValidKeys();
+          if (validKeys.includes(key)) {
+            localStorage.setItem("loggedIn", "true");
+            localStorage.setItem("loggedInKey", key);
+            window.location.href = "/home.html";
+          } else {
+            alertElement.textContent = "Incorrect key!";
+            alertElement.style.color = "white";
+          }
+        }
+        async function fetchValidKeys() {
+          const response = await fetch('keys.json');
+          const data = await response.json();
+          return data.validKeys;
+        }
+        window.onload = async function() {
+          const loggedIn = localStorage.getItem("loggedIn");
+          const savedKey = localStorage.getItem("loggedInKey");
+          const alertElement = document.getElementById("alert");
+          if (loggedIn === "true") {
             const validKeys = await fetchValidKeys();
-            if (validKeys.includes(key)) {
-              localStorage.setItem("loggedIn", "true");
-              localStorage.setItem("loggedInKey", key);
+            if (validKeys.includes(savedKey)) {
               window.location.href = "/home.html";
             } else {
-              alertElement.textContent = "Incorrect key!";
-              alertElement.classList.add("show");
+              localStorage.removeItem("loggedIn");
+              localStorage.removeItem("loggedInKey");
+              alertElement.textContent = "Key Expired. Please Enter a new key to proceed!";
               alertElement.style.color = "white";
             }
-            async function fetchValidKeys() {
-              const response = await fetch('keys.json');
-              const data = await response.json();
-              return data.validKeys;
-            }
-            window.onload = async function() {
-              const loggedIn = localStorage.getItem("loggedIn");
-              const savedKey = localStorage.getItem("loggedInKey");
-              const alertElement = document.getElementById("alert");
-              if (loggedIn === "true") {
-                const validKeys = await fetchValidKeys();
-                if (validKeys.includes(savedKey)) {
-                  window.location.href = "/home.html";
-                } else {
-                  localStorage.removeItem("loggedIn");
-                  localStorage.removeItem("loggedInKey");
-                  alertElement.textContent = "Key Expired. Please Enter a new key to proceed!";
-                  alertElement.style.color = "white";
-                }
-              }
-            };
-            const containers = document.querySelectorAll('.container');
-            containers.forEach((container) => {
-              let animationFrameId;
-              container.style.transition = 'transform 0.3s ease-out';
-              container.addEventListener('mousemove', function(e) {
-                if (animationFrameId) cancelAnimationFrame(animationFrameId);
-                animationFrameId = requestAnimationFrame(() => {
-                  const {
-                    offsetWidth: width,
-                    offsetHeight: height
-                  } = container;
-                  const rect = container.getBoundingClientRect();
-                  const offsetX = e.clientX - rect.left;
-                  const offsetY = e.clientY - rect.top;
-                  const x = (offsetX / width) * 2 - 1;
-                  const y = (offsetY / height) * 2 - 1;
-                  container.style.transform = `perspective(1000px) scale(1.03) rotateX(${y * -6}deg) rotateY(${x * 6}deg)`;
-                });
-              });
-              container.addEventListener('mouseleave', function() {
-                if (animationFrameId) cancelAnimationFrame(animationFrameId);
-                container.style.transform = 'perspective(1000px) scale(1) rotateX(0deg) rotateY(0deg)';
-              });
+          }
+        };
+        const containers = document.querySelectorAll('.container');
+        containers.forEach((container) => {
+          let animationFrameId;
+          container.style.transition = 'transform 0.3s ease-out';
+          container.addEventListener('mousemove', function(e) {
+            if (animationFrameId) cancelAnimationFrame(animationFrameId);
+            animationFrameId = requestAnimationFrame(() => {
+              const {
+                offsetWidth: width,
+                offsetHeight: height
+              } = container;
+              const rect = container.getBoundingClientRect();
+              const offsetX = e.clientX - rect.left;
+              const offsetY = e.clientY - rect.top;
+              const x = (offsetX / width) * 2 - 1;
+              const y = (offsetY / height) * 2 - 1;
+              container.style.transform = `perspective(1000px) scale(1.03) rotateX(${y * -6}deg) rotateY(${x * 6}deg)`;
             });
-            document.addEventListener('contextmenu', function(e) {
-              e.preventDefault();
-            });
-            document.addEventListener('keydown', function(e) {
-              if (e.ctrlKey && !(e.key === 'a' || e.key === 'v')) {
-                e.preventDefault();
-              }
-              if (e.keyCode === 123) {
-                e.preventDefault();
-              }
-            });
+          });
+          container.addEventListener('mouseleave', function() {
+            if (animationFrameId) cancelAnimationFrame(animationFrameId);
+            container.style.transform = 'perspective(1000px) scale(1) rotateX(0deg) rotateY(0deg)';
+          });
+        });
+        document.addEventListener('contextmenu', function(e) {
+          e.preventDefault();
+        });
+        document.addEventListener('keydown', function(e) {
+          if (e.ctrlKey && !(e.key === 'a' || e.key === 'v')) {
+            e.preventDefault();
+          }
+          if (e.keyCode === 123) {
+            e.preventDefault();
+          }
+        });
       </script>
   </body>
 </html>
