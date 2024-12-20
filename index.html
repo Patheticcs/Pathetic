@@ -245,32 +245,15 @@
           });
         });
         document.addEventListener('contextmenu', function(e) {
-          e.preventDefault();
+          e.preventDefault(); 
         });
-        document.addEventListener('mousedown', function(e) {
-          if (e.target.tagName === 'A' || e.target.tagName === 'BUTTON') {
-            e.preventDefault();
-          }
-        });
-        document.addEventListener('touchstart', function(e) {
-          if (e.target.tagName === 'A' || e.target.tagName === 'BUTTON') {
-            e.preventDefault();
-          }
-        });
+
         document.addEventListener('keydown', function(e) {
-          if (e.ctrlKey && (e.key === 'a' || e.key === 'v')) {
-            return; 
+          if (e.ctrlKey && !(e.key === 'a' || e.key === 'v')) {
+            e.preventDefault(); 
           }
-        });
-        const links = document.querySelectorAll("a");
-        links.forEach(link => {
-          link.addEventListener("contextmenu", (event) => {
-            event.preventDefault();
-          });
-        });
-        document.addEventListener("keydown", function(event) {
-          if (event.ctrlKey || event.keyCode === 123) {
-            event.preventDefault();
+          if (e.keyCode === 123) {
+            e.preventDefault(); 
           }
         });
       </script>
