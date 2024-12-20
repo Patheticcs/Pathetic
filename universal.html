@@ -305,27 +305,27 @@
         <div class="button" onclick="openLink('https://pastefy.app/riYch0rX/raw')" role="button" aria-label="Open Bloxfruits">
           <span>Jeff the Killer</span>
         </div>
-          </div>
         <div class="button" onclick="openLink('https://pastebin.com/raw/bp1qF3KU')" role="button" aria-label="Open Bloxfruits">
           <span>JayWare</span>
         </div>
+        <div class="button" onclick="openLink('https://raw.githubusercontent.com/AhmadV99/Speed-Hub-X/main/Speed%20Hub%20X.lua')" role="button" aria-label="Open Bloxfruits">
+          <span>Speed Hub X</span>
+        </div>
         <script>
-window.onload = async function() {
-  const loggedIn = localStorage.getItem("loggedIn");
-  const savedKey = localStorage.getItem("loggedInKey");
+          window.onload = async function() {
+            const loggedIn = localStorage.getItem("loggedIn");
+            const savedKey = localStorage.getItem("loggedInKey");
+            const validKeys = await fetchValidKeys();
+            if (loggedIn !== "true" || !validKeys.includes(savedKey)) {
+              window.location.href = "/index.html";
+            }
+          };
+          async function fetchValidKeys() {
+            const response = await fetch('keys.json');
+            const data = await response.json();
+            return data.validKeys;
+          }
 
-  const validKeys = await fetchValidKeys();
-
-  if (loggedIn !== "true" || !validKeys.includes(savedKey)) {
-    window.location.href = "/index.html";
-  }
-};
-
-async function fetchValidKeys() {
-  const response = await fetch('keys.json');
-  const data = await response.json();
-  return data.validKeys;
-}
           function openLink(url) {
             window.open(url, '_blank');
           }
