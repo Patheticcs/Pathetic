@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <title>Games</title>
-    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="icon" href="https://iili.io/25Go0TF.png" type="image/x-icon">
     <style>
       * {
         outline: none;
@@ -29,14 +29,20 @@
         height: 100%;
       }
 
-      #background-image {
-        position: absolute;
+      .background-container {
+        position: fixed;
         top: 0;
         left: 0;
         width: 100%;
-        height: 100vh;
-        object-fit: cover;
+        height: 100%;
         z-index: -1;
+        overflow: hidden;
+      }
+
+      #background-image {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
       }
 
       header {
@@ -348,22 +354,24 @@
           <span>The Wild West</span>
         </div>
         <script>
-window.onload = async function() {
-  const loggedIn = localStorage.getItem("loggedIn");
-  const savedKey = localStorage.getItem("loggedInKey");
+          window.onload = async function() {
+            const loggedIn = localStorage.getItem("loggedIn");
+            const savedKey = localStorage.getItem("loggedInKey");
+            const validKeys = await fetchValidKeys();
+            if (loggedIn !== "true" || !validKeys.includes(savedKey)) {
+              window.location.href = "/index.html";
+            }
+          };
+          async function fetchValidKeys() {
+            const response = await fetch('keys.json');
+            const data = await response.json();
+            return data.validKeys;
+          }
 
-  const validKeys = await fetchValidKeys();
+          function openLink(url) {
+            window.open(url, '_blank');
+          }
 
-  if (loggedIn !== "true" || !validKeys.includes(savedKey)) {
-    window.location.href = "/index.html";
-  }
-};
-
-async function fetchValidKeys() {
-  const response = await fetch('keys.json');
-  const data = await response.json();
-  return data.validKeys;
-}
           function filterButtons() {
             const input = document.getElementById('searchInput');
             const filter = input.value.toLowerCase();
