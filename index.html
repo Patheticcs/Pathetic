@@ -10,45 +10,33 @@
         padding: 0
       }
 
-body {
-  font-family: Lato, Arial, sans-serif !important;
-  background-image: url("https://www.transparenttextures.com/patterns/cartographer.png");
-  background-color: black;
-  color: white;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh; 
-  margin: 0;
-  overflow: hidden; 
-}
-
-      #background-video {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        z-index: -1
+      body {
+        font-family: Lato, Arial, sans-serif !important;
+        background-image: url(https://www.transparenttextures.com/patterns/cartographer.png);
+        background-color: rgb(0, 0, 0, 1);
+        color: #fff;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+        overflow: hidden
       }
 
       .container {
-        background: rgba(0, 0, 0, 0);
         border-radius: 40px;
-        box-shadow: 0 0 40px rgba(255, 255, 255, 0.6), 0 0 40px rgba(255, 255, 255, 0.6);
+        background: rgba(255, 255, 255, .01);
+        box-shadow: 0 0 5px rgba(255, 255, 255, .3), 0 0 30px rgba(255, 255, 255, 1);
         text-align: center;
-        backdrop-filter: blur(5px);
         transition: transform .3s ease-out, box-shadow .6s ease-out;
-        height: 385px;
-        width: 550px;
+        height: 500px;
+        width: 650px;
         position: relative;
         overflow: hidden
       }
 
       .container:hover {
-        cursor: pointer;
-        box-shadow: 0 0 60px rgba(255, 255, 255, 0.6), 0 0 40px rgba(255, 255, 255, 0.6);
+        box-shadow: 0 0 60px rgba(255, 255, 255, .6), 0 0 40px rgba(255, 255, 255, .6)
       }
 
       .container::before {
@@ -68,10 +56,11 @@ body {
       }
 
       h2 {
-        font-size: 40px;
-        margin: 60px 0;
+        font-size: 50px;
+        margin-top: 70px;
+        margin-bottom: 80px;
         color: #fff;
-        text-shadow: 0 0 20px rgba(0, 0, 0, 1)
+        text-shadow: 0 0 90px rgba(255, 255, 255, .8), 0 0 35px rgba(255, 255, 255, .8)
       }
 
       input[type=text] {
@@ -80,7 +69,6 @@ body {
         border: none;
         border-radius: 12px;
         background: rgba(255, 255, 255, 1);
-        box-shadow: 0 0 30px rgba(255, 255, 255, .3);
         color: #000;
         margin-right: 10px;
         margin-left: 10px;
@@ -92,22 +80,25 @@ body {
         box-shadow: 0 0 25px rgba(255, 255, 255, .9)
       }
 
+      input[type=text]:active {
+        background-color: rgba(255, 255, 255, .9);
+        color: #fff
+      }
+
       input[type=text]:hover {
         margin-right: 15px;
         margin-left: 15px;
         transform: scale(1.05);
-        box-shadow: 0 0 30px rgba(255, 255, 255, .7)
+        box-shadow: 0 0 15px rgba(255, 255, 255, .8), 0 0 20px rgba(255, 255, 255, .6)
       }
 
       button {
-        background-color: rgba(0, 0, 0, .8);
-        color: #fff;
-        text-shadow: 0 0 10px rgba(0, 0, 0, .5);
-        box-shadow: 0 0 30px rgba(255, 255, 255, .3);
+        background-color: rgba(255, 255, 255, 1);
+        color: #000;
         padding: 12px 25px;
         font-size: 16px;
         border: none;
-        margin-top: 18px;
+        margin-top: 30px;
         border-radius: 12px;
         margin-right: 10px;
         margin-left: 10px;
@@ -119,11 +110,11 @@ body {
         margin-right: 15px;
         margin-left: 15px;
         transform: scale(1.05);
-        box-shadow: 0 0 30px rgba(255, 255, 255, .7)
+        box-shadow: 0 0 15px rgba(255, 255, 255, .8), 0 0 20px rgba(255, 255, 255, .6)
       }
 
       button:active {
-        background-color: rgba(0, 0, 0, 1)
+        box-shadow: 0 0 25px rgba(255, 255, 255, .9)
       }
 
       .alert {
@@ -193,79 +184,83 @@ body {
         <input type="text" id="key" placeholder="Enter key">
         <button onclick="checkKey()">Submit</button>
         <div id="alert" class="alert"></div>
-        <button onclick="openDiscord()">Join Our Discord</button>
+        <button onclick="openDiscord()">Get Key on Our Discord</button>
+        <text>FREE</text>
       </div>
-      <script>
-        async function checkKey() {
-          const key = document.getElementById("key").value.trim();
-          const alertElement = document.getElementById("alert");
+    </div>
+    <script>
+      async function checkKey() {
+        const key = document.getElementById("key").value.trim();
+        const alertElement = document.getElementById("alert");
+        const validKeys = await fetchValidKeys();
+        if (validKeys.includes(key)) {
+          localStorage.setItem("loggedIn", "true");
+          localStorage.setItem("loggedInKey", key);
+          window.location.href = "/home.html";
+        } else {
+          alertElement.textContent = "Incorrect key!";
+          alertElement.classList.add("show");
+        }
+      }
+      async function fetchValidKeys() {
+        const response = await fetch('keys.json');
+        const data = await response.json();
+        return data.validKeys;
+      }
+      window.onload = async function() {
+        const loggedIn = localStorage.getItem("loggedIn");
+        const savedKey = localStorage.getItem("loggedInKey");
+        const alertElement = document.getElementById("alert");
+        if (loggedIn === "true") {
           const validKeys = await fetchValidKeys();
-          if (validKeys.includes(key)) {
-            localStorage.setItem("loggedIn", "true");
-            localStorage.setItem("loggedInKey", key);
+          if (validKeys.includes(savedKey)) {
             window.location.href = "/home.html";
           } else {
-            alertElement.textContent = "Incorrect key!";
+            localStorage.removeItem("loggedIn");
+            localStorage.removeItem("loggedInKey");
+            alertElement.textContent = "Key expired. Please enter a new key to proceed!";
             alertElement.classList.add("show");
-            alertElement.style.color = "white";
           }
         }
-        async function fetchValidKeys() {
-          const response = await fetch('keys.json');
-          const data = await response.json();
-          return data.validKeys;
-        }
-        window.onload = async function() {
-          const loggedIn = localStorage.getItem("loggedIn");
-          const savedKey = localStorage.getItem("loggedInKey");
-          const alertElement = document.getElementById("alert");
-          if (loggedIn === "true") {
-            const validKeys = await fetchValidKeys();
-            if (validKeys.includes(savedKey)) {
-              window.location.href = "/home.html";
-            } else {
-              localStorage.removeItem("loggedIn");
-              localStorage.removeItem("loggedInKey");
-              alertElement.textContent = "Key Expired. Please Enter a new key to proceed!";
-              alertElement.style.color = "white";
-            }
-          }
-        };
-        const containers = document.querySelectorAll('.container');
-        containers.forEach((container) => {
-          let animationFrameId;
-          container.style.transition = 'transform 0.3s ease-out';
-          container.addEventListener('mousemove', function(e) {
-            if (animationFrameId) cancelAnimationFrame(animationFrameId);
-            animationFrameId = requestAnimationFrame(() => {
-              const {
-                offsetWidth: width,
-                offsetHeight: height
-              } = container;
-              const rect = container.getBoundingClientRect();
-              const offsetX = e.clientX - rect.left;
-              const offsetY = e.clientY - rect.top;
-              const x = (offsetX / width) * 2 - 1;
-              const y = (offsetY / height) * 2 - 1;
-              container.style.transform = `perspective(1000px) scale(1.03) rotateX(${y * -6}deg) rotateY(${x * 6}deg)`;
-            });
-          });
-          container.addEventListener('mouseleave', function() {
-            if (animationFrameId) cancelAnimationFrame(animationFrameId);
-            container.style.transform = 'perspective(1000px) scale(1) rotateX(0deg) rotateY(0deg)';
+      };
+      const containers = document.querySelectorAll('.container');
+      containers.forEach((container) => {
+        let animationFrameId;
+        container.addEventListener('mousemove', function(e) {
+          if (animationFrameId) cancelAnimationFrame(animationFrameId);
+          animationFrameId = requestAnimationFrame(() => {
+            const {
+              offsetWidth: width,
+              offsetHeight: height
+            } = container;
+            const rect = container.getBoundingClientRect();
+            const offsetX = e.clientX - rect.left;
+            const offsetY = e.clientY - rect.top;
+            const x = (offsetX / width) * 2 - 1;
+            const y = (offsetY / height) * 2 - 1;
+            container.style.transform = `perspective(1000px) scale(1.03) rotateX(${y * -6}deg) rotateY(${x * 6}deg)`;
           });
         });
-        document.addEventListener('contextmenu', function(e) {
+        container.addEventListener('mouseleave', function() {
+          if (animationFrameId) cancelAnimationFrame(animationFrameId);
+          container.style.transform = 'perspective(1000px) scale(1) rotateX(0deg) rotateY(0deg)';
+        });
+      });
+      document.addEventListener('contextmenu', function(e) {
+        e.preventDefault();
+      });
+      document.addEventListener('keydown', function(e) {
+        if (e.ctrlKey && !(e.key === 'a' || e.key === 'v')) {
           e.preventDefault();
-        });
-        document.addEventListener('keydown', function(e) {
-          if (e.ctrlKey && !(e.key === 'a' || e.key === 'v')) {
-            e.preventDefault();
-          }
-          if (e.keyCode === 123) {
-            e.preventDefault();
-          }
-        });
-      </script>
+        }
+        if (e.keyCode === 123) {
+          e.preventDefault();
+        }
+      });
+
+      function openDiscord() {
+        window.open('https://discord.com/', '_blank');
+      }
+    </script>
   </body>
 </html>
