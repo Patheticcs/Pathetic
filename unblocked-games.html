@@ -4,13 +4,6 @@
     <title>Unblocked Games</title>
     <link rel="icon" type="image/x-icon" href="https://iili.io/27ddQyB.png">
     <style>
-      * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-        user-select: none;
-      }
-
       body {
         font-family: Lato, Arial, sans-serif !important;
         background-image: url(https://www.transparenttextures.com/patterns/cartographer.png);
@@ -18,60 +11,11 @@
         color: #fff;
         overflow-x: hidden;
         overflow-y: auto;
-        font-size: 16px;
+        font-size: 16px
       }
 
       body::-webkit-scrollbar {
-        display: none;
-      }
-
-      #background-video {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        z-index: -1;
-      }
-
-      .welcome {
-        position: relative;
-        height: 100vh;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        text-align: center;
-        padding: 20px;
-        animation: fadeIn 1.5s ease-out;
-        background: linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, .4) 80%, rgba(0, 0, 0, .7));
-      }
-
-      .welcome h2 {
-        font-size: 6.5rem;
-        text-transform: uppercase;
-        text-shadow: 0 0 100px #fff, 0 0 20px #fff, 0 0 30px #fff;
-      }
-
-      .welcome button {
-        margin-top: 100px;
-        padding: 15px 40px;
-        font-size: 1.2rem;
-        background-color: rgba(255, 255, 255, 0);
-        box-shadow: 0 0 35px rgba(255, 255, 255, 1);
-        border: none;
-        color: var(--white);
-        border-radius: 30px;
-        cursor: pointer;
-        transition: transform .5s ease, box-shadow .5s ease, text-shadow .5s ease;
-        backdrop-filter: blur(10px);
-      }
-
-      .welcome button:hover {
-        transform: scale(1.03);
-        box-shadow: 0 0 55px rgba(255, 255, 255, 1);
-        text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #fff, 0 0 40px #000, 0 0 50px #000, 0 0 60px #000, 0 0 70px #000;
+        display: none
       }
 
       #section1 {
@@ -82,10 +26,9 @@
         align-items: center;
         padding: 20px;
         position: relative;
-        background: rgba(0, 0, 0, .7);
         overflow-y: auto;
         overflow-x: hidden;
-        scroll-behavior: smooth;
+        scroll-behavior: smooth
       }
 
       .services-container {
@@ -95,99 +38,100 @@
         justify-items: center;
         align-items: center;
         grid-template-columns: repeat(auto-fill, minmax(1000px, 1fr));
-        box-sizing: border-box;
+        box-sizing: border-box
       }
 
       .section {
         color: #fff;
         border-radius: 35px;
-        box-shadow: 0 0 15px rgba(255, 255, 255, 0.3);
+        box-shadow: 0 0 15px rgba(255, 255, 255, .3);
         padding: 15px;
+        background-color: rgba(0, 0, 0, .2);
         width: 100%;
         display: flex;
         flex-direction: column;
         justify-content: center;
         align-items: center;
         text-align: center;
-        transition: transform 0.4s ease-out, box-shadow 0.3s ease, background-color 0.3s ease, backdrop-filter 0.3s ease, height 0.3s ease;
+        transition: transform .4s ease-out, box-shadow .3s ease, background-color .3s ease, backdrop-filter .3s ease, height .3s ease;
         backdrop-filter: blur(2px);
         height: 300px;
         overflow: hidden;
-        box-sizing: border-box;
+        box-sizing: border-box
       }
 
       .section-back {
-        height: 100px;
+        height: 100px
       }
 
       .section-back h3 {
-        font-size: 1.5rem;
+        font-size: 1.5rem
       }
 
       .section:hover {
-        box-shadow: 0 0 25px rgba(255, 255, 255, 0.7);
+        box-shadow: 0 0 25px rgba(255, 255, 255, .7);
         transform: scale(1.03);
-        background-color: rgba(0, 0, 0, 0.2);
-        backdrop-filter: blur(6px);
+        background-color: rgba(0, 0, 0, .2);
+        backdrop-filter: blur(6px)
       }
 
       .section h3 {
         margin-top: 20px;
         font-size: 3.5rem;
         margin-bottom: 30px;
-        text-shadow: 0 0 30px rgba(255, 255, 255, 1), 0 0 40px rgba(255, 255, 255, 1);
+        text-shadow: 0 0 30px rgba(255, 255, 255, 1), 0 0 40px rgba(255, 255, 255, 1)
       }
 
       .section a.button {
         padding: 10px 20px;
-        background-color: rgba(0, 0, 0, 0.5);
-        color: white;
-        font-size: 0.9rem;
-        font-weight: 700;
-        border-radius: 100px;
-        cursor: pointer;
-        text-decoration: none;
-        width: 300px;
-        height: 50px;
-        backdrop-filter: blur(10px);
-        transition: transform 0.5s ease, box-shadow 0.5s ease;
-        text-align: center;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        margin-top: 30px;
-      }
-
-      .section a.button:hover {
-        transform: scale(1.05);
-        box-shadow: 0 0 50px rgba(255, 255, 255, 0.4), 0 0 15px rgba(255, 255, 255, 0.5);
-      }
-
-      .home-button {
-        padding: 10px 20px;
-        background-color: rgba(0, 0, 0, 0.5);
-        color: white;
-        font-size: 0.9rem;
+        background-color: rgba(0, 0, 0, .3);
+        color: #fff;
+        font-size: .9rem;
         font-weight: 700;
         border-radius: 100px;
         cursor: pointer;
         text-decoration: none;
         width: 200px;
-        box-shadow: 0 0 50px rgba(255, 255, 255, 0.6);
+        height: 30px;
+        backdrop-filter: blur(10px);
+        transition: transform .5s ease, box-shadow .5s ease;
+        text-align: center;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-top: 30px
+      }
+
+      .section a.button:hover {
+        transform: scale(1.03);
+        box-shadow: 0 0 50px rgba(255, 255, 255, .4), 0 0 15px rgba(255, 255, 255, .5)
+      }
+
+      .home-button {
+        padding: 10px 20px;
+        background-color: rgba(0, 0, 0, .5);
+        color: #fff;
+        font-size: .9rem;
+        font-weight: 700;
+        border-radius: 100px;
+        cursor: pointer;
+        text-decoration: none;
+        width: 200px;
+        box-shadow: 0 0 50px rgba(255, 255, 255, .6);
         height: 50px;
         backdrop-filter: blur(10px);
-        transition: transform 0.5s ease, box-shadow 0.5s ease;
+        transition: transform .5s ease, box-shadow .5s ease;
         text-align: center;
         display: flex;
         align-items: center;
         justify-content: center;
         margin-top: 30px;
-        border: none;
+        border: none
       }
 
       .home-button:hover {
         transform: scale(1.05);
-        box-shadow: 0 0 50px rgba(255, 255, 255, 1);
+        box-shadow: 0 0 50px rgba(255, 255, 255, 1)
       }
 
       footer {
@@ -198,53 +142,47 @@
         display: flex;
         justify-content: center;
         align-items: center;
-        flex-direction: column;
+        flex-direction: column
       }
 
       footer p {
-        font-size: 1rem;
+        font-size: 1rem
       }
 
       footer a {
         text-decoration: none;
         color: var(--highlight);
-        font-weight: 700;
+        font-weight: 700
       }
 
-      @media (max-width: 768px) {
+      @media (max-width:768px) {
         .welcome h2 {
           font-size: 3.5rem;
-          margin-bottom: 55px;
+          margin-bottom: 55px
         }
 
         .welcome button {
           margin-top: 80px;
           font-size: 1rem;
-          padding: 12px 30px;
+          padding: 12px 30px
         }
       }
     </style>
   </head>
   <body>
-    <video autoplay muted loop playsinline preload="auto" id="background-video">
-      <source src="https://r2.guns.lol/1e98fa65-06c0-4164-b805-bf459c2f148a.mov" type="video/mp4" /> Your browser does not support the video tag.
-    </video>
     <section id="section1">
       <div class="services-container">
         <div class="section">
           <h3>ROBLOX</h3>
-          <a href="#" class="button" onclick="loadGameIframe('roblox')" aria-label="Play ROBLOX">Enter</a>
+          <a href="#" class="button" onclick='loadGameIframe("roblox")' aria-label="Play ROBLOX">Enter</a>
         </div>
         <div class="section">
           <h3>MINECRAFT</h3>
-          <a href="#" class="button" onclick="loadGameIframe('minecraft')" aria-label="Play MINECRAFT">Enter</a>
+          <a href="#" class="button" onclick='loadGameIframe("minecraft")' aria-label="Play MINECRAFT">Enter</a>
         </div>
       </div>
-      <button class="home-button" onclick="window.location.href='home.html'">Home</button>
+      <button class="home-button" onclick='window.location.href="home.html"'>Home</button>
     </section>
-    <footer>
-      <p>2024 Pathetic. All Rights Reserved.</p>
-    </footer>
     <script>
       window.onload = async function() {
         const loggedIn = localStorage.getItem("loggedIn");
@@ -276,20 +214,10 @@
             const offsetY = e.clientY - rect.top;
             const x = (offsetX / width) * 2 - 1;
             const y = (offsetY / height) * 2 - 1;
-            section.style.transform = `
-          perspective(${PERSPECTIVE})
-          scale(${SCALE})
-          rotateX(${y * -ROTATION_MULTIPLIER}deg)
-          rotateY(${x * ROTATION_MULTIPLIER}deg)
-        `;
+            section.style.transform = ` perspective(${PERSPECTIVE}) scale(${SCALE}) rotateX(${y * -ROTATION_MULTIPLIER}deg) rotateY(${x * ROTATION_MULTIPLIER}deg) `;
           });
           section.addEventListener('mouseleave', () => {
-            section.style.transform = `
-          perspective(${PERSPECTIVE})
-          scale(1)
-          rotateX(0deg)
-          rotateY(0deg)
-        `;
+            section.style.transform = ` perspective(${PERSPECTIVE}) scale(1) rotateX(0deg) rotateY(0deg) `;
           });
         });
       });
