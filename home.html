@@ -13,12 +13,12 @@
 
       body {
         font-family: Lato, Arial, sans-serif !important;
-        background-image: url("https://www.transparenttextures.com/patterns/cartographer.png");
-        background-color: black;
-        color: white;
+        background-image: url(https://www.transparenttextures.com/patterns/cartographer.png);
+        background-color: #000;
+        color: #fff;
         align-items: center overflow-x: hidden;
         justify-content: center overflow-y: auto;
-        font-size: 16px margin: 0;
+        font-size: 16px margin: 0
       }
 
       body::-webkit-scrollbar {
@@ -27,11 +27,11 @@
 
       @keyframes fadeIn {
         from {
-          opacity: 0;
+          opacity: 0
         }
 
         to {
-          opacity: 1;
+          opacity: 1
         }
       }
 
@@ -56,7 +56,7 @@
         border-radius: 50px;
         transition: opacity 1s ease, background 1s ease, box-shadow 1s ease, max-width 1s ease, height 1s ease, backdrop-filter 2s ease;
         height: 140px;
-        box-shadow: 0 0 5px rgba(255, 255, 255, .2), 0 0 20px rgba(255, 255, 255, .3);
+        box-shadow: 0 0 5px rgba(255, 255, 255, .2), 0 0 20px rgba(255, 255, 255, .3)
       }
 
       header.visible {
@@ -104,7 +104,7 @@
 
       .button-container {
         display: flex;
-        gap: 15px;
+        gap: 15px
       }
 
       .button {
@@ -125,14 +125,14 @@
         justify-content: center;
         align-items: center;
         overflow: hidden;
-        position: relative;
+        position: relative
       }
 
       .button img {
         width: 17px;
         height: 17px;
         object-fit: contain;
-        transition: transform .4s ease, width .7s ease, height .7s ease;
+        transition: transform .4s ease, width .7s ease, height .7s ease
       }
 
       .button .button-text {
@@ -144,55 +144,55 @@
         font-size: 13px;
         color: #000;
         pointer-events: none;
-        transition: opacity .4s ease;
+        transition: opacity .4s ease
       }
 
       .discord-button:hover {
         box-shadow: 0 0 15px rgba(255, 255, 255, .8), 0 0 15px rgba(255, 255, 255, .7);
         width: 150px;
-        height: 35px;
+        height: 35px
       }
 
       .discord-button:hover img {
         transform: translateX(-40px);
         width: 18px;
-        height: 18px;
+        height: 18px
       }
 
       .discord-button:hover .button-text {
-        opacity: 1;
+        opacity: 1
       }
 
       .youtube-button:hover {
         box-shadow: 0 0 15px rgba(255, 255, 255, .8), 0 0 15px rgba(255, 255, 255, .7);
         width: 150px;
-        height: 35px;
+        height: 35px
       }
 
       .youtube-button:hover img {
         transform: translateX(-40px);
         width: 18px;
-        height: 18px;
+        height: 18px
       }
 
       .youtube-button:hover .button-text {
-        opacity: 1;
+        opacity: 1
       }
 
       .roblox-button:hover {
         box-shadow: 0 0 15px rgba(255, 255, 255, .8), 0 0 15px rgba(255, 255, 255, .7);
         width: 150px;
-        height: 35px;
+        height: 35px
       }
 
       .roblox-button:hover img {
         transform: translateX(-40px);
         width: 18px;
-        height: 18px;
+        height: 18px
       }
 
       .roblox-button:hover .button-text {
-        opacity: 1;
+        opacity: 1
       }
 
       .welcome {
@@ -204,25 +204,25 @@
         align-items: center;
         text-align: center;
         padding: 20px;
-        background: linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(255, 255, 255, 0.1) 60%, rgba(0, 0, 0, 0))
+        background: linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(255, 255, 255, .2) 60%, rgba(0, 0, 0, 0))
       }
 
       .welcome h2 {
         font-size: 8rem;
         text-transform: uppercase;
-        text-shadow: 0 0 100px rgba(255, 255, 255, 0.8), 0 0 15px rgba(255, 255, 255, 0.8);
+        text-shadow: 0 0 100px rgba(255, 255, 255, .8), 0 0 15px rgba(255, 255, 255, .8);
         margin-bottom: 30px;
         opacity: 0;
-        animation: fadeIn 1s ease-in forwards;
+        animation: fadeIn 1s ease-in forwards
       }
 
       .welcome p {
         font-size: 1.2rem;
-        text-shadow: 0 0 20px rgba(255, 255, 255, 0.3), 0 0 15px rgba(255, 255, 255, 0.4);
+        text-shadow: 0 0 20px rgba(255, 255, 255, .3), 0 0 15px rgba(255, 255, 255, .4);
         max-width: 600px;
         line-height: 1.8;
         opacity: .8;
-        animation: fadeIn 1s ease-in forwards;
+        animation: fadeIn 1s ease-in forwards
       }
 
       .welcome button {
@@ -230,30 +230,30 @@
         padding: 15px 50px;
         font-size: 1.2rem;
         background-color: rgba(0, 0, 0, 0);
-        box-shadow: 0 0 50px rgba(255, 255, 255, 0.4), 0 0 15px rgba(255, 255, 255, 0.3);
+        box-shadow: 0 0 50px rgba(255, 255, 255, .4), 0 0 15px rgba(255, 255, 255, .3);
         border: none;
         color: var(--white);
         border-radius: 50px;
         cursor: pointer;
-        transition: transform .5s ease, box-shadow .5s ease, text-shadow .5s ease, margin 0.5s ease;
+        transition: transform .5s ease, box-shadow .5s ease, text-shadow .5s ease, margin .5s ease;
         backdrop-filter: blur(5px);
         background-image: url('');
         background-size: cover;
         background-position: center;
         background-repeat: no-repeat;
         opacity: 0;
-        animation: fadeIn 1s ease-in forwards;
+        animation: fadeIn 1s ease-in forwards
       }
 
       .welcome button:hover {
-        box-shadow: 0 0 50px rgba(255, 255, 255, 0.5), 0 0 15px rgba(255, 255, 255, 0.4);
+        box-shadow: 0 0 50px rgba(255, 255, 255, .5), 0 0 15px rgba(255, 255, 255, .4);
         margin-top: 70px;
         margin-bottom: 10px;
-        transform: scale(1.03);
+        transform: scale(1.03)
       }
 
-      #roblox,
-      #exploits {
+      #exploits,
+      #roblox {
         min-height: 100vh;
         display: flex;
         flex-direction: column;
@@ -263,7 +263,7 @@
         position: relative;
         overflow-y: auto;
         scroll-behavior: smooth;
-        background-color: rgba(0, 0, 0, 0);
+        background-color: rgba(0, 0, 0, 0)
       }
 
       .services-container {
@@ -277,7 +277,7 @@
         box-sizing: border-box;
         max-width: 1700px;
         margin: 0 auto;
-        transition: gap 0.3s ease;
+        transition: gap .3s ease
       }
 
       .section {
@@ -290,40 +290,40 @@
         justify-content: center;
         align-items: center;
         text-align: center;
-        box-shadow: 0 0 15px rgba(255, 255, 255, 0.2);
-        transition: transform 0.4s ease-out, box-shadow 0.3s ease, background-color 0.3s ease, backdrop-filter 0.3s ease, height 0.3s ease;
+        box-shadow: 0 0 15px rgba(255, 255, 255, .2);
+        transition: transform .4s ease-out, box-shadow .3s ease, background-color .3s ease, backdrop-filter .3s ease, height .3s ease;
         backdrop-filter: blur(2px);
-        background-color: rgba(0, 0, 0, 0.2);
+        background-color: rgba(0, 0, 0, .2);
         height: 230px;
         box-sizing: border-box;
-        justify-self: start;
+        justify-self: start
       }
 
       .section:hover {
-        box-shadow: 0 0 25px rgba(255, 255, 255, 0.3);
+        box-shadow: 0 0 25px rgba(255, 255, 255, .3);
         transform: scale(1.03);
-        background-color: rgba(0, 0, 0, 0.2);
-        backdrop-filter: blur(4px);
+        background-color: rgba(0, 0, 0, .2);
+        backdrop-filter: blur(4px)
       }
 
       .section h3 {
         font-size: 2rem;
-        text-shadow: 0 0 30px rgba(255, 255, 255, 0.5), 0 0 15px rgba(255, 255, 255, 0.4);
+        text-shadow: 0 0 30px rgba(255, 255, 255, .5), 0 0 15px rgba(255, 255, 255, .4);
         margin-top: 60px;
-        margin-bottom: 25px;
+        margin-bottom: 25px
       }
 
       .section p {
-        font-size: 0.8rem;
+        font-size: .8rem;
         margin-top: 15px;
-        margin-bottom: 35px;
+        margin-bottom: 35px
       }
 
       .section a.button {
         padding: 15px 10px;
         background-color: rgba(255, 255, 255, 1);
         color: #000;
-        font-size: 0.7rem;
+        font-size: .7rem;
         font-weight: 700;
         border-radius: 22px;
         cursor: pointer;
@@ -332,13 +332,13 @@
         margin-top: 5px;
         margin-bottom: 50px;
         backdrop-filter: blur(10px);
-        transition: transform 0.5s ease, box-shadow 0.5s ease, height 0.5s ease;
-        text-align: center;
+        transition: transform .5s ease, box-shadow .5s ease, height .5s ease;
+        text-align: center
       }
 
       .section a.button:hover {
         transform: scale(1.05);
-        box-shadow: 0 0 10px rgba(255, 255, 255, 0.8), 0 0 15px rgba(255, 255, 255, 0.3);
+        box-shadow: 0 0 10px rgba(255, 255, 255, .8), 0 0 15px rgba(255, 255, 255, .3)
       }
 
       .about {
@@ -350,15 +350,14 @@
         align-items: center;
         text-align: center;
         padding: 20px;
-        background: linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(255, 255, 255, 0.1) 60%, rgba(0, 0, 0, 0))
-
+        background: linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(255, 255, 255, .2) 95%, rgba(0, 0, 0, 1))
       }
 
       .about h2 {
         text-transform: uppercase;
         font-size: 5rem;
-        text-shadow: 0 0 100px rgba(255, 255, 255, 0.8), 0 0 15px rgba(255, 255, 255, 0.8);
-        margin-bottom: 70px;
+        text-shadow: 0 0 100px rgba(255, 255, 255, .8), 0 0 15px rgba(255, 255, 255, .8);
+        margin-bottom: 70px
       }
 
       .about p {
@@ -371,27 +370,28 @@
       footer {
         color: var(--white);
         width: 100%;
+        background-color: #000;
         height: 60px;
         display: flex;
         justify-content: center;
         align-items: center;
         padding: 0 20px;
-        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        box-shadow: 0 4px 6px rgba(0, 0, 0, .1)
       }
 
       footer p {
         font-size: 1rem;
-        margin: 0;
+        margin: 0
       }
 
       footer a {
         text-decoration: none;
         color: var(--highlight);
-        font-weight: 700;
+        font-weight: 700
       }
 
       .footer-link {
-        text-decoration: none;
+        text-decoration: none
       }
 
       ul.button-container li {
@@ -428,15 +428,15 @@
       <div class="header-buttons">
         <div class="button-container">
           <button class="button discord-button" onclick='window.open("https://discord.gg/Eg2EWXwYcn","_blank")'>
-            <img src="https://cdn.prod.website-files.com/6257adef93867e50d84d30e2/636e0a6ac3c481f273141736_icon_clyde_black_RGB.png" alt="Discord" class="discord-icon" />
+            <img src="https://cdn.prod.website-files.com/6257adef93867e50d84d30e2/636e0a6ac3c481f273141736_icon_clyde_black_RGB.png" alt="Discord" class="discord-icon">
             <span class="button-text">Discord</span>
           </button>
           <button class="button youtube-button" onclick='window.open("https://www.youtube.com/@patheticcs","_blank")'>
-            <img src="https://www.iconpacks.net/icons/1/free-youtube-icon-123-thumb.png" alt="YouTube" class="youtube-icon" />
+            <img src="https://www.iconpacks.net/icons/1/free-youtube-icon-123-thumb.png" alt="YouTube" class="youtube-icon">
             <span class="button-text">YouTube</span>
           </button>
           <button class="button roblox-button" onclick='window.open("https://www.roblox.com/users/2625446554/profile","_blank")'>
-            <img src="https://devforum-uploads.s3.dualstack.us-east-2.amazonaws.com/uploads/original/4X/0/e/e/0eeeb19633422b1241f4306419a0f15f39d58de9.png" alt="Roblox" class="roblox-icon" />
+            <img src="https://devforum-uploads.s3.dualstack.us-east-2.amazonaws.com/uploads/original/4X/0/e/e/0eeeb19633422b1241f4306419a0f15f39d58de9.png" alt="Roblox" class="roblox-icon">
             <span class="button-text">Roblox</span>
           </button>
         </div>
@@ -445,7 +445,7 @@
     <section id="welcome" class="welcome">
       <h2>Welcome</h2>
       <p>We are here to offer the best services for you!</p>
-      <button onclick='document.getElementById("roblox").scrollIntoView({behavior:"smooth"}),document.querySelector("header").classList.add("visible"),document.body.style.overflowY="scroll",document.getElementById("background-video").muted=false'> Get Started </button>
+      <button onclick='document.getElementById("roblox").scrollIntoView({behavior:"smooth"}),document.querySelector("header").classList.add("visible"),document.body.style.overflowY="scroll",document.getElementById("background-video").muted=!1'>Get Started</button>
     </section>
     <section id="roblox">
       <div class="services-container">
@@ -506,7 +506,7 @@
     </section>
     <section id="about" class="about">
       <h2>About Us</h2>
-      <p> We’re a passionate team focused on creating reliable, effective tools to enhance your gaming and online experiences. We prioritize quality and ease of use, ensuring every solution we offer meets the highest standards to help you get the most out of your online activities. </p>
+      <p>We’re a passionate team focused on creating reliable, effective tools to enhance your gaming and online experiences. We prioritize quality and ease of use, ensuring every solution we offer meets the highest standards to help you get the most out of your online activities.</p>
     </section>
     <footer>
       <p>2024 Pathetic. All Rights Reserved.</p>
