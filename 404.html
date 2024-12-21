@@ -11,6 +11,7 @@
         justify-content: center;
         align-items: center;
         height: 100vh;
+        background-color: black;
         overflow: hidden;
         margin: 0;
       }
@@ -27,11 +28,11 @@
 
       .container {
         background: rgba(0, 0, 0, 0.5);
-        border-radius: 10px;
-        box-shadow: 0 0px 60px rgba(0, 0, 0, 1);
+        border-radius: 40px;
+        box-shadow: 0 0 70px rgba(255, 255, 255, 0.5), 0 0 40px rgba(255, 255, 255, 0.7);
         text-align: center;
         backdrop-filter: blur(15px);
-        transition: transform 0.3s ease-out, box-shadow 0.3s ease-out;
+        transition: all 0.5s ease-in;
         height: 385px;
         width: 550px;
         position: relative;
@@ -42,7 +43,7 @@
       .container:hover {
         cursor: pointer;
         transform: scale(1.05);
-        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8);
+        box-shadow: 0 0 70px rgba(255, 255, 255, 0.6), 0 0 50px rgba(255, 255, 255, 0.7);
       }
 
       .container h1 {
@@ -75,7 +76,7 @@
 
       .container a:hover {
         transform: scale(1.03);
-        box-shadow: 0 0 5px rgba(255, 255, 255, 0.6), 0 0 20px rgba(255, 255, 255, 0.5);
+        box-shadow: 0 0 25px rgba(255, 255, 255, 0.4), 0 0 20px rgba(255, 255, 255, 0.5);
       }
 
       .container::before {
@@ -116,10 +117,6 @@
     </style>
   </head>
   <body>
-    <div class="background-container">
-      <video autoplay muted loop playsinline preload="auto" id="background-video" aria-hidden="true">
-        <source src="https://r2.guns.lol/1e98fa65-06c0-4164-b805-bf459c2f148a.mov" type="video/mp4" /> Your browser does not support the video tag.
-      </video>
     </div>
     <div class="container" aria-label="404 error container">
       <h1>404</h1>
