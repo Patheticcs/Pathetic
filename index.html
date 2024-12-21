@@ -10,18 +10,18 @@
         padding: 0
       }
 
-      body {
-        font-family: Arial, sans-serif;
-        background-color: #fff;
-        background-size: cover;
-        background-position: center;
-        height: 100vh;
-        margin: 0;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        overflow: hidden
-      }
+body {
+  font-family: Lato, Arial, sans-serif !important;
+  background-image: url("https://www.transparenttextures.com/patterns/cartographer.png");
+  background-color: black;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh; 
+  margin: 0;
+  overflow: hidden; 
+}
 
       #background-video {
         position: fixed;
@@ -34,12 +34,12 @@
       }
 
       .container {
-        background: rgba(0, 0, 0, .5);
-        border-radius: 10px;
-        box-shadow: 0 0 60px rgba(0, 0, 0, 1);
+        background: rgba(0, 0, 0, 0);
+        border-radius: 40px;
+        box-shadow: 0 0 40px rgba(255, 255, 255, 0.6), 0 0 40px rgba(255, 255, 255, 0.6);
         text-align: center;
-        backdrop-filter: blur(15px);
-        transition: transform .3s ease-out, box-shadow .3s ease-out;
+        backdrop-filter: blur(5px);
+        transition: transform .3s ease-out, box-shadow .6s ease-out;
         height: 385px;
         width: 550px;
         position: relative;
@@ -48,7 +48,7 @@
 
       .container:hover {
         cursor: pointer;
-        box-shadow: 0 10px 30px rgba(0, 0, 0, .8)
+        box-shadow: 0 0 60px rgba(255, 255, 255, 0.6), 0 0 40px rgba(255, 255, 255, 0.6);
       }
 
       .container::before {
@@ -80,7 +80,7 @@
         border: none;
         border-radius: 12px;
         background: rgba(255, 255, 255, 1);
-        box-shadow: 0 0 20px rgba(255, 255, 255, .3);
+        box-shadow: 0 0 30px rgba(255, 255, 255, .3);
         color: #000;
         margin-right: 10px;
         margin-left: 10px;
@@ -96,14 +96,14 @@
         margin-right: 15px;
         margin-left: 15px;
         transform: scale(1.05);
-        box-shadow: 0 0 25px rgba(255, 255, 255, 1)
+        box-shadow: 0 0 30px rgba(255, 255, 255, .7)
       }
 
       button {
         background-color: rgba(0, 0, 0, .8);
         color: #fff;
         text-shadow: 0 0 10px rgba(0, 0, 0, .5);
-        box-shadow: 0 0 20px rgba(255, 255, 255, .3);
+        box-shadow: 0 0 30px rgba(255, 255, 255, .3);
         padding: 12px 25px;
         font-size: 16px;
         border: none;
@@ -188,9 +188,6 @@
   </head>
   <body>
     <div class="background-container">
-      <video autoplay muted loop playsinline preload="auto" id="background-video">
-        <source src="https://r2.guns.lol/1e98fa65-06c0-4164-b805-bf459c2f148a.mov" type="video/mp4">Your browser does not support the video tag.
-      </video>
       <div class="container" id="login-container">
         <h2>Key System</h2>
         <input type="text" id="key" placeholder="Enter key">
