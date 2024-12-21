@@ -1,38 +1,26 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>Home</title>
+    <title>Key System</title>
     <link rel="icon" type="image/x-icon" href="https://iili.io/27ddQyB.png">
     <style>
       * {
-        margin: 0;
-        padding: 0;
         box-sizing: border-box;
-        user-select: none
+        margin: 0;
+        padding: 0
       }
 
       body {
-        font-family: Lato, Arial, sans-serif !important;
-        background-image: url("https://www.transparenttextures.com/patterns/cartographer.png");
-        background-color: black;
-        color: white;
-        align-items: center overflow-x: hidden;
-        justify-content: center overflow-y: auto;
-        font-size: 16px margin: 0;
-      }
-
-      body::-webkit-scrollbar {
-        display: none
-      }
-
-      @keyframes fadeIn {
-        from {
-          opacity: 0;
-        }
-
-        to {
-          opacity: 1;
-        }
+        font-family: Arial, sans-serif;
+        background-color: #fff;
+        background-size: cover;
+        background-position: center;
+        height: 100vh;
+        margin: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        overflow: hidden
       }
 
       #background-video {
@@ -42,609 +30,245 @@
         width: 100%;
         height: 100%;
         object-fit: cover;
-        z-index: -1;
+        z-index: -1
       }
 
-      header {
-        margin-top: 10px;
+      .container {
+        background: rgba(0, 0, 0, .5);
+        border-radius: 10px;
+        box-shadow: 0 0 60px rgba(0, 0, 0, 1);
+        text-align: center;
+        backdrop-filter: blur(15px);
+        transition: transform .3s ease-out, box-shadow .3s ease-out;
+        height: 385px;
+        width: 550px;
+        position: relative;
+        overflow: hidden
+      }
+
+      .container:hover {
+        cursor: pointer;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, .8)
+      }
+
+      .container::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(0, 0, 0, .1);
+        transition: background .3s ease;
+        z-index: -1
+      }
+
+      .container:hover::before {
+        background: rgba(0, 0, 0, .3)
+      }
+
+      h2 {
+        font-size: 40px;
+        margin: 60px 0;
+        color: #fff;
+        text-shadow: 0 0 20px rgba(0, 0, 0, 1)
+      }
+
+      input[type=text] {
+        padding: 12px 20px;
+        font-size: 16px;
+        border: none;
+        border-radius: 12px;
+        background: rgba(255, 255, 255, 1);
+        box-shadow: 0 0 20px rgba(255, 255, 255, .3);
+        color: #000;
+        margin-right: 10px;
+        margin-left: 10px;
+        outline: 0;
+        transition: all .3s ease
+      }
+
+      input[type=text]:focus {
+        box-shadow: 0 0 25px rgba(255, 255, 255, .9)
+      }
+
+      input[type=text]:hover {
+        margin-right: 15px;
+        margin-left: 15px;
+        transform: scale(1.05);
+        box-shadow: 0 0 25px rgba(255, 255, 255, 1)
+      }
+
+      button {
+        background-color: rgba(0, 0, 0, .8);
+        color: #fff;
+        text-shadow: 0 0 10px rgba(0, 0, 0, .5);
+        box-shadow: 0 0 20px rgba(255, 255, 255, .3);
+        padding: 12px 25px;
+        font-size: 16px;
+        border: none;
+        margin-top: 18px;
+        border-radius: 12px;
+        margin-right: 10px;
+        margin-left: 10px;
+        cursor: pointer;
+        transition: all .3s ease
+      }
+
+      button:hover {
+        margin-right: 15px;
+        margin-left: 15px;
+        transform: scale(1.05);
+        box-shadow: 0 0 30px rgba(255, 255, 255, .7)
+      }
+
+      button:active {
+        background-color: rgba(0, 0, 0, 1)
+      }
+
+      .alert {
+        color: #fff;
+        font-size: 15px;
+        margin-top: 40px;
+        margin-bottom: 20px;
+        opacity: 0;
+        transform: translateY(10px);
+        transition: opacity .3s ease, transform .3s ease
+      }
+
+      .alert.show {
+        opacity: 1;
+        transform: translateY(0)
+      }
+
+      iframe {
+        display: none;
         position: fixed;
         top: 0;
-        left: 50%;
-        transform: translateX(-50%);
-        width: 100%;
-        max-width: 1000px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        flex-direction: column;
-        padding: 20px 30px;
-        backdrop-filter: blur(3px);
-        z-index: 1000;
-        opacity: 0;
-        visibility: hidden;
-        background: rgba(0, 0, 0, .2);
-        border-radius: 50px;
-        transition: opacity 1s ease, background 1s ease, box-shadow 1s ease, max-width 1s ease, height 1s ease, backdrop-filter 2s ease;
-        height: 140px;
-        box-shadow: 0 0 5px rgba(255, 255, 255, .2), 0 0 20px rgba(255, 255, 255, .3);
-      }
-
-      header.visible {
-        opacity: 1;
-        visibility: visible
-      }
-
-      header:hover {
-        height: 145px;
-        max-width: 1030px;
-        background: rgba(0, 0, 0, .3);
-        box-shadow: 0 0 15px rgba(255, 255, 255, .4), 0 0 30px rgba(255, 255, 255, .6);
-        backdrop-filter: blur(5px)
-      }
-
-      header h1 {
-        margin-top: 20px;
-        font-size: 1.1rem;
-        font-weight: 700;
-        text-shadow: 0 0 8px var(--highlight);
-        width: 100%;
-        text-align: center
-      }
-
-      nav ul {
-        list-style: none;
-        font-size: .6rem;
-        display: flex;
-        gap: 20px;
-        flex-wrap: wrap;
-        justify-content: center;
-        margin-top: 50px
-      }
-
-      nav ul li a {
-        text-decoration: none;
-        color: #fff;
-        font-size: 16px;
-        transition: color .3s ease
-      }
-
-      nav ul li a:hover {
-        color: rgba(255, 255, 255, .5)
-      }
-
-      .button-container {
-        display: flex;
-        gap: 15px;
-      }
-
-      .button {
-        margin-top: 25px;
-        margin-bottom: 25px;
-        width: 35px;
-        height: 35px;
-        background-color: rgba(255, 255, 255, 1);
-        box-shadow: 0 0 5px rgba(255, 255, 255, .9), 0 0 0 rgba(255, 255, 255, .9);
-        font-size: 13px;
-        border: none;
-        color: #000;
-        border-radius: 100px;
-        cursor: pointer;
-        transition: width .3s ease, height .3s ease, box-shadow .3s ease, backdrop-filter .3s ease;
-        backdrop-filter: blur(15px);
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        overflow: hidden;
-        position: relative;
-      }
-
-      .button img {
-        width: 17px;
-        height: 17px;
-        object-fit: contain;
-        transition: transform .4s ease, width .7s ease, height .7s ease;
-      }
-
-      .button .button-text {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-35%, -50%);
-        opacity: 0;
-        font-size: 13px;
-        color: #000;
-        pointer-events: none;
-        transition: opacity .4s ease;
-      }
-
-      .discord-button:hover {
-        box-shadow: 0 0 15px rgba(255, 255, 255, .8), 0 0 15px rgba(255, 255, 255, .7);
-        width: 150px;
-        height: 35px;
-      }
-
-      .discord-button:hover img {
-        transform: translateX(-40px);
-        width: 18px;
-        height: 18px;
-      }
-
-      .discord-button:hover .button-text {
-        opacity: 1;
-      }
-
-      .youtube-button:hover {
-        box-shadow: 0 0 15px rgba(255, 255, 255, .8), 0 0 15px rgba(255, 255, 255, .7);
-        width: 150px;
-        height: 35px;
-      }
-
-      .youtube-button:hover img {
-        transform: translateX(-40px);
-        width: 18px;
-        height: 18px;
-      }
-
-      .youtube-button:hover .button-text {
-        opacity: 1;
-      }
-
-      .roblox-button:hover {
-        box-shadow: 0 0 15px rgba(255, 255, 255, .8), 0 0 15px rgba(255, 255, 255, .7);
-        width: 150px;
-        height: 35px;
-      }
-
-      .roblox-button:hover img {
-        transform: translateX(-40px);
-        width: 18px;
-        height: 18px;
-      }
-
-      .roblox-button:hover .button-text {
-        opacity: 1;
-      }
-
-      .welcome {
-        position: relative;
+        left: 0;
+        width: 100vw;
         height: 100vh;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        text-align: center;
-        padding: 20px;
-        background: linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, .2) 70%, rgba(0, 0, 0, 0.5))
-      }
-
-      .welcome h2 {
-        font-size: 6.5rem;
-        text-transform: uppercase;
-        text-shadow: 0 0 100px #fff, 0 0 20px #fff, 0 0 30px #fff;
-        margin-bottom: 30px;
-        opacity: 0;
-        animation: fadeIn 1s ease-in forwards;
-      }
-
-      .welcome p {
-        font-size: 1.1rem;
-        max-width: 600px;
-        line-height: 1.8;
-        opacity: .8;
-        text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #fff, 0 0 40px #fff, 0 0 50px #fff, 0 0 60px #000, 0 0 70px #000;
-        margin-bottom: 50px opacity: 0;
-        animation: fadeIn 1s ease-in forwards;
-      }
-
-      .welcome button {
-        margin-top: 55px;
-        padding: 15px 50px;
-        font-size: 1.2rem;
-        background-color: rgba(0, 0, 0, 0);
-        box-shadow: 0 0 35px rgba(255, 255, 255, 1);
         border: none;
-        color: var(--white);
-        border-radius: 50px;
-        cursor: pointer;
-        transition: transform .5s ease, box-shadow .5s ease, text-shadow .5s ease;
-        backdrop-filter: blur(5px);
-        background-image: url('');
-        background-size: cover;
-        background-position: center;
-        background-repeat: no-repeat;
-        opacity: 0;
-        animation: fadeIn 1s ease-in forwards;
+        z-index: 9999
       }
 
-      .welcome button:hover {
-        transform: scale(1.03);
-        box-shadow: 0 0 55px rgba(255, 255, 255, 1);
-        text-shadow: 0 0 1px #fff, 0 0 10px #fff, 0 0 15px #fff, 0 0 20px #000, 0 0 25px #000, 0 0 30px #000, 0 0 35px #000
-      }
+      @media only screen and (max-width:768px) {
+        .container {
+          height: 380px;
+          width: 365px;
+          text-align: center;
+          margin: 0 auto
+        }
 
-      #roblox,
-      #exploits {
-        min-height: 100vh;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        padding: 20px;
-        position: relative;
-        overflow-y: auto;
-        overflow-x: hidden;
-        scroll-behavior: smooth;
-        background-color: rgba(0, 0, 0, 0.5);
-      }
+        h2 {
+          font-size: 38px
+        }
 
-      .services-container {
-        display: grid;
-        gap: 1rem;
-        padding: 0 40px;
-        place-content: center;
-        justify-items: center;
-        align-items: center;
-        grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
-        box-sizing: border-box;
-        max-width: 1700px;
-        margin: 0 auto;
-        transition: gap 0.3s ease;
-      }
+        input[type=text] {
+          font-size: 14px;
+          padding: 10px 20px;
+          margin-right: 5px;
+          margin-left: 5px;
+          margin-bottom: 15px
+        }
 
-      .section {
-        color: #fff;
-        border-radius: 35px;
-        padding: 15px;
-        width: 100%;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        text-align: center;
-        box-shadow: 0 0 15px rgba(255, 255, 255, 0.2);
-        transition: transform 0.4s ease-out, box-shadow 0.3s ease, background-color 0.3s ease, backdrop-filter 0.3s ease, height 0.3s ease;
-        backdrop-filter: blur(2px);
-        background-color: rgba(0, 0, 0, 0.2);
-        height: 230px;
-        overflow: hidden;
-        box-sizing: border-box;
-        justify-self: start;
-      }
-
-      .section:hover {
-        box-shadow: 0 0 25px rgba(255, 255, 255, 0.3);
-        transform: scale(1.03);
-        background-color: rgba(0, 0, 0, 0.2);
-        backdrop-filter: blur(4px);
-      }
-
-      .section h3 {
-        font-size: 1.8rem;
-        margin-top: 60px;
-        margin-bottom: 25px;
-        text-shadow: 0 0 30px rgba(255, 255, 255, 1), 0 0 40px rgba(255, 255, 255, 1);
-      }
-
-      .section p {
-        font-size: 0.8rem;
-        margin-top: 15px;
-        margin-bottom: 35px;
-      }
-
-      .section a.button {
-        padding: 15px 10px;
-        background-color: rgba(255, 255, 255, 1);
-        color: #000;
-        font-size: 0.7rem;
-        font-weight: 700;
-        border-radius: 22px;
-        cursor: pointer;
-        text-decoration: none;
-        width: 120px;
-        margin-top: 5px;
-        margin-bottom: 50px;
-        backdrop-filter: blur(10px);
-        transition: transform 0.5s ease, box-shadow 0.5s ease, height 0.5s ease;
-        text-align: center;
-      }
-
-      .section a.button:hover {
-        transform: scale(1.05);
-        box-shadow: 0 0 0px rgba(255, 255, 255, 0.8), 0 0 15px rgba(255, 255, 255, 0.7);
-      }
-
-      .about {
-        background: linear-gradient(to top, rgba(0, 0, 0, 0) 10%, rgba(0, 0, 0, 0.5) 100%), linear-gradient(to bottom, rgba(0, 0, 0, 0) 30%, rgba(0, 0, 0, 1) 100%);
-        color: var(--white);
-        padding: 500px 40px;
-        text-align: center;
-      }
-
-      .about h2 {
-        font-size: 5rem;
-        margin-bottom: 70px;
-        text-transform: uppercase;
-        text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #000
-      }
-
-      .about p {
-        font-size: 1.2rem;
-        line-height: 1.8;
-        max-width: 800px;
-        margin: 0 auto
-      }
-
-      footer {
-        background: rgba(0, 0, 0, 1);
-        color: var(--white);
-        width: 100%;
-        height: 60px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        padding: 0 20px;
-        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-      }
-
-      footer p {
-        font-size: 1rem;
-        margin: 0;
-      }
-
-      footer a {
-        text-decoration: none;
-        color: var(--highlight);
-        font-weight: 700;
-      }
-
-      .footer-link {
-        text-decoration: none;
-      }
-
-      ul.button-container li {
-        padding: 0;
-        margin: 0
-      }
-
-      ul.button-container {
-        list-style: none;
-        padding: 0;
-        margin: 0
+        button {
+          font-size: 14px;
+          margin-top: 10px;
+          text-align: center;
+          display: inline-block;
+          padding: 10px 20px;
+          width: auto;
+          margin-bottom: 0;
+          margin-right: 5px;
+          margin-left: 5px
+        }
       }
     </style>
   </head>
   <body>
     <div class="background-container">
-    </div>
-    <header>
-      <nav>
-        <ul>
-          <li>
-            <a href="#welcome">Home</a>
-          </li>
-          <li>
-            <a href="#roblox">Roblox</a>
-          </li>
-          <li>
-            <a href="#exploits">Exploits</a>
-          </li>
-          <li>
-            <a href="#about">About</a>
-          </li>
-        </ul>
-      </nav>
-      <div class="header-buttons">
-        <div class="button-container">
-          <button class="button discord-button" onclick='window.open("https://discord.gg/Eg2EWXwYcn","_blank")'>
-            <img src="https://cdn.prod.website-files.com/6257adef93867e50d84d30e2/636e0a6ac3c481f273141736_icon_clyde_black_RGB.png" alt="Discord" class="discord-icon" />
-            <span class="button-text">Discord</span>
-          </button>
-          <button class="button youtube-button" onclick='window.open("https://www.youtube.com/@patheticcs","_blank")'>
-            <img src="https://www.iconpacks.net/icons/1/free-youtube-icon-123-thumb.png" alt="YouTube" class="youtube-icon" />
-            <span class="button-text">YouTube</span>
-          </button>
-          <button class="button roblox-button" onclick='window.open("https://www.roblox.com/users/2625446554/profile","_blank")'>
-            <img src="https://devforum-uploads.s3.dualstack.us-east-2.amazonaws.com/uploads/original/4X/0/e/e/0eeeb19633422b1241f4306419a0f15f39d58de9.png" alt="Roblox" class="roblox-icon" />
-            <span class="button-text">Roblox</span>
-          </button>
-        </div>
+      <video autoplay muted loop playsinline preload="auto" id="background-video">
+        <source src="https://r2.guns.lol/1e98fa65-06c0-4164-b805-bf459c2f148a.mov" type="video/mp4">Your browser does not support the video tag.
+      </video>
+      <div class="container" id="login-container">
+        <h2>Key System</h2>
+        <input type="text" id="key" placeholder="Enter key">
+        <button onclick="checkKey()">Submit</button>
+        <div id="alert" class="alert"></div>
+        <button onclick="openDiscord()">Join Our Discord</button>
       </div>
-    </header>
-    <section id="welcome" class="welcome">
-      <h2>Welcome</h2>
-      <p>We are here to offer the best services for you!</p>
-      <button onclick='document.getElementById("roblox").scrollIntoView({behavior:"smooth"}),document.querySelector("header").classList.add("visible"),document.body.style.overflowY="scroll",document.getElementById("background-video").muted=false'> Get Started </button>
-    </section>
-    <section id="roblox">
-      <div class="services-container">
-        <div class="section">
-          <h3>SCRIPTS</h3>
-          <p>Free Scripts, all working.</p>
-          <a href="scripts.html" class="button">Enter</a>
-        </div>
-        <div class="section">
-          <h3>EXECUTORS</h3>
-          <p>Free Windows Executors</p>
-          <a href="executors.html" class="button">Enter</a>
-        </div>
-        <div class="section">
-          <h3>VOXLIS</h3>
-          <p>Ready to inject?</p>
-          <a href="https://voxlis.net/" class="button" target="_blank" rel="noopener noreferrer" aria-label="Visit VOXLIS website">Enter</a>
-        </div>
-        <div class="section">
-          <h3>EXPStatus</h3>
-          <p>Real-time exploit status monitoring</p>
-          <a href="https://www.expstatus.xyz/" class="button" target="_blank" rel="noopener noreferrer" aria-label="Visit EXPStatus website">Enter</a>
-        </div>
-        <div class="section">
-          <h3>RBXSERVERS</h3>
-          <p>The #1 site for finding ROBLOX VIP Servers</p>
-          <a href="https://rbxservers.xyz/" class="button" target="_blank" rel="noopener noreferrer" aria-label="Visit RBXSERVERS website">Enter</a>
-        </div>
-      </div>
-    </section>
-    <section id="exploits">
-      <div class="services-container">
-        <div class="section">
-          <h3>PROXIES</h3>
-          <p>Browse any website anonymously.</p>
-          <a href="proxies.html" class="button">Enter</a>
-        </div>
-        <div class="section">
-          <h3>BYPASS</h3>
-          <p>Bypass AD Links.</p>
-          <a href="bypass.html" class="button">Enter</a>
-        </div>
-        <div class="section">
-          <h3>FREE MOVIES</h3>
-          <p>Stream, Download, Torrent Videos</p>
-          <a href="movies.html" class="button">Enter</a>
-        </div>
-        <div class="section">
-          <h3>FMHY</h3>
-          <p>Collection of free stuff on the internet!</p>
-          <a href="https://fmhy.net/" class="button" target="_blank" rel="noopener noreferrer" aria-label="Visit FMHY website">Enter</a>
-        </div>
-        <div class="section">
-          <h3>UNBLOCKED GAMES</h3>
-          <p>Play Roblox and Minecraft UNBLOCKED!</p>
-          <a href="unblocked-games.html" class="button">Enter</a>
-        </div>
-    </section>
-    <section id="about" class="about">
-      <h2>About Us</h2>
-      <p> We’re a passionate team focused on creating reliable, effective tools to enhance your gaming and online experiences. We prioritize quality and ease of use, ensuring every solution we offer meets the highest standards to help you get the most out of your online activities. </p>
-    </section>
-    <footer>
-      <p>2024 Pathetic. All Rights Reserved.</p>
-      <a href="/404.html" class="footer-link">‎ ‎ ‎ 35k5S4hE0u6M</a>
-    </footer>
-    <script>
-// Check if the user is logged in and the key is valid
-window.onload = async function() {
-  const loggedIn = localStorage.getItem("loggedIn");
-  const savedKey = localStorage.getItem("loggedInKey");
-
-  const validKeys = await fetchValidKeys();
-
-  // If the user is not logged in or the saved key is invalid, redirect to index.html
-  if (loggedIn !== "true" || !validKeys.includes(savedKey)) {
-    window.location.href = "/index.html"; // Redirect to index.html if not logged in or key is invalid
-  }
-};
-
-// Fetch valid keys from keys.json
-async function fetchValidKeys() {
-  const response = await fetch('keys.json');
-  const data = await response.json();
-  return data.validKeys;
-}
-
-      document.addEventListener("DOMContentLoaded", () => {
-        window.scrollTo(0, 0);
-        const isGetStartedClicked = sessionStorage.getItem('getStartedClicked');
-        if (!isGetStartedClicked) {
-          document.body.style.overflowY = 'hidden';
-          document.querySelector('header').classList.remove('visible');
-        } else {
-          document.body.style.overflowY = 'scroll';
-          document.querySelector('header').classList.add('visible');
+      <script>
+        async function checkKey() {
+          const key = document.getElementById("key").value.trim();
+          const alertElement = document.getElementById("alert");
+          const validKeys = await fetchValidKeys();
+          if (validKeys.includes(key)) {
+            localStorage.setItem("loggedIn", "true");
+            localStorage.setItem("loggedInKey", key);
+            window.location.href = "/home.html";
+          } else {
+            alertElement.textContent = "Incorrect key!";
+            alertElement.classList.add("show");
+            alertElement.style.color = "white";
+          }
         }
+        async function fetchValidKeys() {
+          const response = await fetch('keys.json');
+          const data = await response.json();
+          return data.validKeys;
+        }
+        window.onload = async function() {
+          const loggedIn = localStorage.getItem("loggedIn");
+          const savedKey = localStorage.getItem("loggedInKey");
+          const alertElement = document.getElementById("alert");
+          if (loggedIn === "true") {
+            const validKeys = await fetchValidKeys();
+            if (validKeys.includes(savedKey)) {
+              window.location.href = "/home.html";
+            } else {
+              localStorage.removeItem("loggedIn");
+              localStorage.removeItem("loggedInKey");
+              alertElement.textContent = "Key Expired. Please Enter a new key to proceed!";
+              alertElement.style.color = "white";
+            }
+          }
+        };
+        const containers = document.querySelectorAll('.container');
+        containers.forEach((container) => {
+          let animationFrameId;
+          container.style.transition = 'transform 0.3s ease-out';
+          container.addEventListener('mousemove', function(e) {
+            if (animationFrameId) cancelAnimationFrame(animationFrameId);
+            animationFrameId = requestAnimationFrame(() => {
+              const {
+                offsetWidth: width,
+                offsetHeight: height
+              } = container;
+              const rect = container.getBoundingClientRect();
+              const offsetX = e.clientX - rect.left;
+              const offsetY = e.clientY - rect.top;
+              const x = (offsetX / width) * 2 - 1;
+              const y = (offsetY / height) * 2 - 1;
+              container.style.transform = `perspective(1000px) scale(1.03) rotateX(${y * -6}deg) rotateY(${x * 6}deg)`;
+            });
+          });
+          container.addEventListener('mouseleave', function() {
+            if (animationFrameId) cancelAnimationFrame(animationFrameId);
+            container.style.transform = 'perspective(1000px) scale(1) rotateX(0deg) rotateY(0deg)';
+          });
+        });
         document.addEventListener('contextmenu', function(e) {
           e.preventDefault();
         });
-        document.addEventListener('mousedown', function(e) {
-          if (e.target.tagName === 'A' || e.target.tagName === 'BUTTON') {
+        document.addEventListener('keydown', function(e) {
+          if (e.ctrlKey && !(e.key === 'a' || e.key === 'v')) {
+            e.preventDefault();
+          }
+          if (e.keyCode === 123) {
             e.preventDefault();
           }
         });
-        document.addEventListener('touchstart', function(e) {
-          if (e.target.tagName === 'A' || e.target.tagName === 'BUTTON') {
-            e.preventDefault();
-          }
-        });
-        const links = document.querySelectorAll("a");
-        links.forEach(link => {
-          link.addEventListener("contextmenu", (event) => {
-            event.preventDefault();
-          });
-        });
-        document.addEventListener("keydown", function(event) {
-          if (event.ctrlKey || event.keyCode === 123) {
-            event.preventDefault();
-          }
-        });
-        const navLinks = document.querySelectorAll("header nav ul li a");
-        navLinks.forEach(link => {
-          link.addEventListener("click", (event) => {
-            event.preventDefault();
-            const targetId = link.getAttribute("href").substring(1);
-            const targetSection = document.getElementById(targetId);
-            if (targetSection) {
-              targetSection.scrollIntoView({
-                behavior: "smooth"
-              });
-            }
-          });
-        });
-        document.querySelector('button').addEventListener('click', () => {
-          document.body.style.overflowY = 'scroll';
-          document.querySelector('header').classList.add('visible');
-          sessionStorage.setItem('getStartedClicked', 'true');
-        });
-        let touchTimeout;
-        document.querySelectorAll('button').forEach(button => {
-          button.addEventListener('touchstart', function(event) {
-            touchTimeout = setTimeout(function() {
-              event.preventDefault();
-            }, 500);
-          });
-          button.addEventListener('touchend', function(event) {
-            clearTimeout(touchTimeout);
-          });
-          button.addEventListener('click', function(event) {
-            console.log("Button tapped!");
-          });
-        });
-        window.addEventListener('beforeunload', () => {
-          document.documentElement.style.scrollBehavior = 'auto';
-          window.scrollTo(0, 0);
-        });
-        window.addEventListener('load', () => {
-          setTimeout(() => {
-            document.documentElement.style.scrollBehavior = 'smooth';
-            window.scrollTo({
-              top: 0,
-              behavior: 'smooth'
-            });
-          }, 0);
-        });
-      });
-      const sections = document.querySelectorAll('.section');
-      sections.forEach((section) => {
-        let animationFrameId;
-        section.style.transition = 'transform 0.3s ease-out';
-        section.addEventListener('mousemove', function(e) {
-          if (animationFrameId) cancelAnimationFrame(animationFrameId);
-          animationFrameId = requestAnimationFrame(() => {
-            const {
-              offsetWidth: width,
-              offsetHeight: height
-            } = section;
-            const rect = section.getBoundingClientRect();
-            const offsetX = e.clientX - rect.left;
-            const offsetY = e.clientY - rect.top;
-            const x = (offsetX / width) * 2 - 1;
-            const y = (offsetY / height) * 2 - 1;
-            section.style.transform = `perspective(1000px) scale(1.03) rotateX(${y * -6}deg) rotateY(${x * 6}deg)`;
-          });
-        });
-        section.addEventListener('mouseleave', function() {
-          if (animationFrameId) cancelAnimationFrame(animationFrameId);
-          section.style.transform = 'perspective(1000px) scale(1) rotateX(0deg) rotateY(0deg)';
-        });
-      });
-    </script>
+      </script>
   </body>
 </html>
