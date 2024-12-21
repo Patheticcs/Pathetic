@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>Movies</title>
+    <title>Bypass</title>
     <link rel="icon" href="https://iili.io/25Go0TF.png" type="image/x-icon">
     <style>
       * {
@@ -12,8 +12,7 @@
 
       body {
         font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-        background-image: url(https://www.transparenttextures.com/patterns/cartographer.png);
-        background: #000;
+        background: #000 url("https://www.transparenttextures.com/patterns/cartographer.png") repeat;
         color: #fff;
         overflow: hidden;
         font-size: 16px;
@@ -59,7 +58,7 @@
         backdrop-filter: blur(3px);
         text-align: center;
         text-decoration: none;
-        width: 200px;
+        width: 250px;
         height: 60px;
         z-index: 1;
       }
@@ -108,52 +107,52 @@
         <button class="button back" onclick="window.location.href='home.html'">Home</button>
       </section>
       <script>
-      function navigateTo(url) {
-        window.location.href = url;
-      }
-      window.onload = async function() {
-        const loggedIn = localStorage.getItem("loggedIn");
-        const savedKey = localStorage.getItem("loggedInKey");
-        try {
-          const validKeys = await fetchValidKeys();
-          if (loggedIn !== "true" || !validKeys.includes(savedKey)) {
+        function navigateTo(url) {
+          window.location.href = url;
+        }
+        window.onload = async function() {
+          const loggedIn = localStorage.getItem("loggedIn");
+          const savedKey = localStorage.getItem("loggedInKey");
+          try {
+            const validKeys = await fetchValidKeys();
+            if (loggedIn !== "true" || !validKeys.includes(savedKey)) {
+              window.location.href = "/index.html";
+            }
+          } catch (error) {
+            console.error("Failed to fetch valid keys:", error);
             window.location.href = "/index.html";
           }
-        } catch (error) {
-          console.error("Failed to fetch valid keys:", error);
-          window.location.href = "/index.html";
+        };
+        async function fetchValidKeys() {
+          const response = await fetch('keys.json');
+          if (!response.ok) throw new Error('Network response was not ok');
+          const data = await response.json();
+          return data.validKeys;
         }
-      };
-      async function fetchValidKeys() {
-        const response = await fetch('keys.json');
-        if (!response.ok) throw new Error('Network response was not ok');
-        const data = await response.json();
-        return data.validKeys;
-      }
-      const buttons = document.querySelectorAll('.button');
-      buttons.forEach(button => {
-        button.addEventListener('mousemove', (e) => {
-          const {
-            offsetWidth: width,
-            offsetHeight: height
-          } = button;
-          const rect = button.getBoundingClientRect();
-          const offsetX = e.clientX - rect.left;
-          const offsetY = e.clientY - rect.top;
-          const x = (offsetX / width) * 2 - 1;
-          const y = (offsetY / height) * 2 - 1;
-          button.style.transform = `perspective(1000px) scale(1.03) rotateX(${y * -10}deg) rotateY(${x * 10}deg)`;
+        const buttons = document.querySelectorAll('.button');
+        buttons.forEach(button => {
+          button.addEventListener('mousemove', (e) => {
+            const {
+              offsetWidth: width,
+              offsetHeight: height
+            } = button;
+            const rect = button.getBoundingClientRect();
+            const offsetX = e.clientX - rect.left;
+            const offsetY = e.clientY - rect.top;
+            const x = (offsetX / width) * 2 - 1;
+            const y = (offsetY / height) * 2 - 1;
+            button.style.transform = `perspective(1000px) scale(1.03) rotateX(${y * -10}deg) rotateY(${x * 10}deg)`;
+          });
+          button.addEventListener('mouseleave', () => {
+            button.style.transform = 'perspective(1000px) scale(1) rotateX(0deg) rotateY(0deg)';
+          });
         });
-        button.addEventListener('mouseleave', () => {
-          button.style.transform = 'perspective(1000px) scale(1) rotateX(0deg) rotateY(0deg)';
+        document.addEventListener('contextmenu', (e) => e.preventDefault());
+        document.addEventListener('keydown', (e) => {
+          if (e.ctrlKey || e.keyCode === 123) {
+            e.preventDefault();
+          }
         });
-      });
-      document.addEventListener('contextmenu', (e) => e.preventDefault());
-      document.addEventListener('keydown', (e) => {
-        if (e.ctrlKey || e.keyCode === 123) {
-          e.preventDefault();
-        }
-      });
-    </script>
+      </script>
   </body>
 </html>
