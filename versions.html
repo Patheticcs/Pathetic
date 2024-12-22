@@ -12,7 +12,7 @@
 
       body {
         font-family: Lato, Arial, sans-serif !important;
-        background-image: url('your-background-image.jpg');
+        background-image: url(https://www.transparenttextures.com/patterns/cartographer.png);
         background-color: rgb(0, 0, 0, 1);
         color: #fff;
         display: flex;
@@ -20,7 +20,7 @@
         align-items: center;
         height: 100vh;
         margin: 0;
-        overflow: hidden;
+        overflow: hidden
       }
 
       .container {
@@ -29,8 +29,8 @@
         box-shadow: 0 0 5px rgba(255, 255, 255, .3), 0 0 30px rgba(255, 255, 255, 1);
         text-align: center;
         transition: transform .3s ease-out, box-shadow .6s ease-out;
-        height: 550px;
-        width: 650px;
+        height: 650px;
+        width: 950px;
         position: relative;
         overflow: hidden;
       }
@@ -66,17 +66,13 @@
       .version-list {
         list-style: none;
         padding-left: 0;
-        max-height: 200px;
-        /* Set a maximum height */
+        max-height: 300px;
         overflow-y: scroll;
-        /* Enable vertical scrolling */
         scrollbar-width: none;
-        /* For Firefox */
       }
 
       .version-list::-webkit-scrollbar {
         display: none;
-        /* For Chrome, Safari, and Edge */
       }
 
       .version-list li {
@@ -84,7 +80,7 @@
         margin-bottom: 20px;
         height: 50px;
         width: 600px;
-        background-color: rgba(255, 255, 255, 0.1);
+        background-color: rgba(0, 0, 0, 1);
         border-radius: 100px;
         font-size: 1.1rem;
         margin-left: auto;
@@ -124,10 +120,28 @@
         box-shadow: 0 0 25px rgba(255, 255, 255, .9);
       }
 
-      .footer {
+      .back {
+        margin-top: 70px;
+        height: 50px;
+        width: 200px;
+        background-color: rgba(255, 255, 255, 1);
+        color: black;
+        border-radius: 100px;
+        font-size: 1.1rem;
+        margin-left: auto;
+        margin-right: auto;
         text-align: center;
-        margin-top: 40px;
-        font-size: 0.9rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        text-decoration: none;
+        transition: all .3s ease
+      }
+
+      .back:hover {
+        transform: scale(1.03);
+        box-shadow: 0 0 15px rgba(255, 255, 255, .8), 0 0 20px rgba(255, 255, 255, .6)
       }
     </style>
   </head>
@@ -157,9 +171,7 @@
           <span>Version 1.6.0</span> ‎ - Enhanced UI for version history list.
         </li>
       </ul>
-      <div class="footer">
-        <p>&copy; 2024 PATHETIC. All Rights Reserved.</p>
-      </div>
+<a href="home.html" style="text-decoration: none; color: black;"><div class="back button">Home</div></a>
     </div>
   </body>
   <script>
