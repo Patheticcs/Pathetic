@@ -187,6 +187,22 @@
     </div>
 
     <script>
+      const container = document.querySelector('.container');
+      container.addEventListener('mousemove', function(e) {
+        const {
+          offsetWidth: width,
+          offsetHeight: height
+        } = container;
+        const rect = container.getBoundingClientRect();
+        const offsetX = e.clientX - rect.left;
+        const offsetY = e.clientY - rect.top;
+        const x = (offsetX / width) * 2 - 1;
+        const y = (offsetY / height) * 2 - 1;
+        container.style.transform = `perspective(1000px) scale(1.03) rotateX(${y * -5}deg) rotateY(${x * 5}deg)`;
+      });
+      container.addEventListener('mouseleave', function() {
+        container.style.transform = `perspective(1000px) scale(1) rotateX(0deg) rotateY(0deg)`;
+      });
       async function checkKey() {
         const key = document.getElementById("key").value.trim();
         const alertElement = document.getElementById("alert");
