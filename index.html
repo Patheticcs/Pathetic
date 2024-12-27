@@ -7,7 +7,7 @@
       * {
         box-sizing: border-box;
         margin: 0;
-        padding: 0
+        padding: 0;
       }
 
       body {
@@ -20,7 +20,7 @@
         align-items: center;
         height: 100vh;
         margin: 0;
-        overflow: hidden
+        overflow: hidden;
       }
 
       .container {
@@ -32,11 +32,11 @@
         height: 500px;
         width: 650px;
         position: relative;
-        overflow: hidden
+        overflow: hidden;
       }
 
       .container:hover {
-        box-shadow: 0 0 60px rgba(255, 255, 255, .6), 0 0 40px rgba(255, 255, 255, .6)
+        box-shadow: 0 0 60px rgba(255, 255, 255, .6), 0 0 40px rgba(255, 255, 255, .6);
       }
 
       .container::before {
@@ -48,11 +48,11 @@
         bottom: 0;
         background: rgba(0, 0, 0, .1);
         transition: background .3s ease;
-        z-index: -1
+        z-index: -1;
       }
 
       .container:hover::before {
-        background: rgba(0, 0, 0, .3)
+        background: rgba(0, 0, 0, .3);
       }
 
       h2 {
@@ -60,7 +60,7 @@
         margin-top: 70px;
         margin-bottom: 80px;
         color: #fff;
-        text-shadow: 0 0 90px rgba(255, 255, 255, .8), 0 0 35px rgba(255, 255, 255, .8)
+        text-shadow: 0 0 90px rgba(255, 255, 255, .8), 0 0 35px rgba(255, 255, 255, .8);
       }
 
       input[type=text] {
@@ -73,23 +73,23 @@
         margin-right: 10px;
         margin-left: 10px;
         outline: 0;
-        transition: all .3s ease
+        transition: all .3s ease;
       }
 
       input[type=text]:focus {
-        box-shadow: 0 0 25px rgba(255, 255, 255, .9)
+        box-shadow: 0 0 25px rgba(255, 255, 255, .9);
       }
 
       input[type=text]:active {
         background-color: rgba(255, 255, 255, .9);
-        color: #fff
+        color: #fff;
       }
 
       input[type=text]:hover {
         margin-right: 15px;
         margin-left: 15px;
         transform: scale(1.05);
-        box-shadow: 0 0 15px rgba(255, 255, 255, .8), 0 0 20px rgba(255, 255, 255, .6)
+        box-shadow: 0 0 15px rgba(255, 255, 255, .8), 0 0 20px rgba(255, 255, 255, .6);
       }
 
       button {
@@ -103,18 +103,18 @@
         margin-right: 10px;
         margin-left: 10px;
         cursor: pointer;
-        transition: all .3s ease
+        transition: all .3s ease;
       }
 
       button:hover {
         margin-right: 15px;
         margin-left: 15px;
         transform: scale(1.05);
-        box-shadow: 0 0 15px rgba(255, 255, 255, .8), 0 0 20px rgba(255, 255, 255, .6)
+        box-shadow: 0 0 15px rgba(255, 255, 255, .8), 0 0 20px rgba(255, 255, 255, .6);
       }
 
       button:active {
-        box-shadow: 0 0 25px rgba(255, 255, 255, .9)
+        box-shadow: 0 0 25px rgba(255, 255, 255, .9);
       }
 
       .alert {
@@ -124,12 +124,12 @@
         margin-bottom: 20px;
         opacity: 0;
         transform: translateY(10px);
-        transition: opacity .3s ease, transform .3s ease
+        transition: opacity .3s ease, transform .3s ease;
       }
 
       .alert.show {
         opacity: 1;
-        transform: translateY(0)
+        transform: translateY(0);
       }
 
       iframe {
@@ -140,19 +140,19 @@
         width: 100vw;
         height: 100vh;
         border: none;
-        z-index: 9999
+        z-index: 9999;
       }
 
-      @media only screen and (max-width:768px) {
+      @media only screen and (max-width: 768px) {
         .container {
           height: 380px;
           width: 365px;
           text-align: center;
-          margin: 0 auto
+          margin: 0 auto;
         }
 
         h2 {
-          font-size: 38px
+          font-size: 38px;
         }
 
         input[type=text] {
@@ -160,7 +160,7 @@
           padding: 10px 20px;
           margin-right: 5px;
           margin-left: 5px;
-          margin-bottom: 15px
+          margin-bottom: 15px;
         }
 
         button {
@@ -172,21 +172,20 @@
           width: auto;
           margin-bottom: 0;
           margin-right: 5px;
-          margin-left: 5px
+          margin-left: 5px;
         }
       }
     </style>
   </head>
   <body>
-    <div class="background-container">
-      <div class="container" id="login-container">
-        <h2>Key System</h2>
-        <input type="text" id="key" placeholder="Enter key">
-        <button onclick="checkKey()">Submit</button>
-        <div id="alert" class="alert"></div>
-        <button onclick="openDiscord()">Get Key</button>
-      </div>
+    <div class="container" id="login-container">
+      <h2>Key System</h2>
+      <input type="text" id="key" placeholder="Enter key">
+      <button onclick="checkKey()">Submit</button>
+      <div id="alert" class="alert"></div>
+      <button onclick="openDiscord()">Get Key</button>
     </div>
+
     <script>
       async function checkKey() {
         const key = document.getElementById("key").value.trim();
@@ -201,11 +200,13 @@
           alertElement.classList.add("show");
         }
       }
+
       async function fetchValidKeys() {
         const response = await fetch('keys.json');
         const data = await response.json();
         return data.validKeys;
       }
+
       window.onload = async function() {
         const loggedIn = localStorage.getItem("loggedIn");
         const savedKey = localStorage.getItem("loggedInKey");
@@ -222,32 +223,11 @@
           }
         }
       };
-      const containers = document.querySelectorAll('.container');
-      containers.forEach((container) => {
-        let animationFrameId;
-        container.addEventListener('mousemove', function(e) {
-          if (animationFrameId) cancelAnimationFrame(animationFrameId);
-          animationFrameId = requestAnimationFrame(() => {
-            const {
-              offsetWidth: width,
-              offsetHeight: height
-            } = container;
-            const rect = container.getBoundingClientRect();
-            const offsetX = e.clientX - rect.left;
-            const offsetY = e.clientY - rect.top;
-            const x = (offsetX / width) * 2 - 1;
-            const y = (offsetY / height) * 2 - 1;
-            container.style.transform = perspective(1000px) scale(1.03) rotateX(${y * -6}deg) rotateY(${x * 6}deg);
-          });
-        });
-        container.addEventListener('mouseleave', function() {
-          if (animationFrameId) cancelAnimationFrame(animationFrameId);
-          container.style.transform = 'perspective(1000px) scale(1) rotateX(0deg) rotateY(0deg)';
-        });
-      });
+
       document.addEventListener('contextmenu', function(e) {
         e.preventDefault();
       });
+
       document.addEventListener('keydown', function(e) {
         if (e.ctrlKey && !(e.key === 'a' || e.key === 'v')) {
           e.preventDefault();
