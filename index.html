@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
+    <meta charset="UTF-8">
     <title>Key System</title>
     <link rel="icon" type="image/x-icon" href="https://iili.io/27ddQyB.png">
     <style>
@@ -188,78 +189,49 @@
       </div>
     </div>
     <script>
-      async function checkKey() {
-        const key = document.getElementById("key").value.trim();
-        const alertElement = document.getElementById("alert");
-        const validKeys = await fetchValidKeys();
-        if (validKeys.includes(key)) {
-          localStorage.setItem("loggedIn", "true");
-          localStorage.setItem("loggedInKey", key);
-          window.location.href = "/home.html";
-        } else {
-          alertElement.textContent = "Incorrect key!";
-          alertElement.classList.add("show");
-        }
-      }
-      async function fetchValidKeys() {
-        const response = await fetch('keys.json');
-        const data = await response.json();
-        return data.validKeys;
-      }
-      window.onload = async function() {
-        const loggedIn = localStorage.getItem("loggedIn");
-        const savedKey = localStorage.getItem("loggedInKey");
-        const alertElement = document.getElementById("alert");
-        if (loggedIn === "true") {
-          const validKeys = await fetchValidKeys();
-          if (validKeys.includes(savedKey)) {
-            window.location.href = "/home.html";
-          } else {
-            localStorage.removeItem("loggedIn");
-            localStorage.removeItem("loggedInKey");
-            alertElement.textContent = "Key expired. Please enter a new key to proceed!";
-            alertElement.classList.add("show");
-          }
-        }
-      };
-      const containers = document.querySelectorAll('.container');
-      containers.forEach((container) => {
-        let animationFrameId;
-        container.addEventListener('mousemove', function(e) {
-          if (animationFrameId) cancelAnimationFrame(animationFrameId);
-          animationFrameId = requestAnimationFrame(() => {
-            const {
-              offsetWidth: width,
-              offsetHeight: height
-            } = container;
-            const rect = container.getBoundingClientRect();
-            const offsetX = e.clientX - rect.left;
-            const offsetY = e.clientY - rect.top;
-            const x = (offsetX / width) * 2 - 1;
-            const y = (offsetY / height) * 2 - 1;
-            container.style.transform = `perspective(1000px) scale(1.03) rotateX(${y * -6}deg) rotateY(${x * 6}deg)`;
-          });
-        });
-        container.addEventListener('mouseleave', function() {
-          if (animationFrameId) cancelAnimationFrame(animationFrameId);
-          container.style.transform = 'perspective(1000px) scale(1) rotateX(0deg) rotateY(0deg)';
-        });
-      });
-      document.addEventListener('contextmenu', function(e) {
-        e.preventDefault();
-      });
-      document.addEventListener('keydown', function(e) {
-        if (e.ctrlKey && !(e.key === 'a' || e.key === 'v')) {
-          e.preventDefault();
-        }
-        if (e.keyCode === 123) {
-          e.preventDefault();
-        }
-      });
+async function checkKey() {
+  const key = document.getElementById("key").value.trim();
+  const alertElement = document.getElementById("alert");
+  const validKeys = await fetchValidKeys();
 
-      function openDiscord() {
-        window.open('https://discord.gg/Eg2EWXwYcn', '_blank');
-      }
+  if (validKeys.includes(key)) {
+    localStorage.setItem("loggedIn", "true");
+    localStorage.setItem("loggedInKey", key);
+    window.location.href = "/home.html";
+  } else {
+    alertElement.textContent = "Incorrect key!";
+    alertElement.classList.add("show");
+  }
+}
+
+async function fetchValidKeys() {
+  const response = await fetch('/keys');
+  const data = await response.json();
+  return data.validKeys;
+}
+
+window.onload = async function() {
+  const loggedIn = localStorage.getItem("loggedIn");
+  const savedKey = localStorage.getItem("loggedInKey");
+  const alertElement = document.getElementById("alert");
+
+  if (loggedIn === "true") {
+    const validKeys = await fetchValidKeys();
+
+    if (validKeys.includes(savedKey)) {
+      window.location.href = "/home.html";
+    } else {
+      localStorage.removeItem("loggedIn");
+      localStorage.removeItem("loggedInKey");
+      alertElement.textContent = "Key expired. Please enter a new key to proceed!";
+      alertElement.classList.add("show");
+    }
+  }
+};
+
+function openDiscord() {
+  window.open('https://discord.gg/Eg2EWXwYcn', '_blank');
+}
     </script>
   </body>
 </html>
