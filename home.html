@@ -16,9 +16,12 @@
         background-image: url(https://www.transparenttextures.com/patterns/cartographer.png);
         background-color: #000;
         color: #fff;
-        align-items: center overflow-x: hidden;
-        justify-content: center overflow-y: auto;
-        font-size: 16px margin: 0
+        align-items: center;
+        overflow-x: hidden;
+        justify-content: center;
+        overflow-y: auto;
+        font-size: 16px;
+        margin: 0;
       }
 
       body::-webkit-scrollbar {
@@ -213,7 +216,7 @@
         text-shadow: 0 0 100px rgba(255, 255, 255, .8), 0 0 15px rgba(255, 255, 255, .8);
         margin-bottom: 30px;
         opacity: 0;
-        animation: fadeIn 1s ease-in forwards
+        animation: fadeInUp 1s forwards;
       }
 
       .welcome p {
@@ -221,8 +224,8 @@
         text-shadow: 0 0 20px rgba(255, 255, 255, .3), 0 0 15px rgba(255, 255, 255, .4);
         max-width: 600px;
         line-height: 1.8;
-        opacity: .8;
-        animation: fadeIn 1s ease-in forwards
+        opacity: 0;
+        animation: fadeInUp 1s forwards 0.3s;
       }
 
       .welcome button {
@@ -232,7 +235,7 @@
         background-color: rgba(0, 0, 0, 0);
         box-shadow: 0 0 50px rgba(255, 255, 255, .4), 0 0 15px rgba(255, 255, 255, .3);
         border: none;
-        color: var(--white);
+        color: #fff;
         border-radius: 50px;
         cursor: pointer;
         transition: transform .5s ease, box-shadow .5s ease, text-shadow .5s ease, margin .5s ease;
@@ -242,7 +245,7 @@
         background-position: center;
         background-repeat: no-repeat;
         opacity: 0;
-        animation: fadeIn 1s ease-in forwards
+        animation: fadeInUp 1s forwards 0.6s;
       }
 
       .welcome button:hover {
@@ -277,7 +280,7 @@
         box-sizing: border-box;
         max-width: 1700px;
         margin: 0 auto;
-        transition: gap .3s ease
+        transition: gap 0.3s ease;
       }
 
       .section {
@@ -290,13 +293,20 @@
         justify-content: center;
         align-items: center;
         text-align: center;
-        box-shadow: 0 0 15px rgba(255, 255, 255, .2);
-        transition: transform .4s ease-out, box-shadow .3s ease, background-color .3s ease, backdrop-filter .3s ease, height .3s ease;
+        box-shadow: 0 0 15px rgba(255, 255, 255, 0.2);
+        transition: transform 0.4s ease-out, box-shadow 0.3s ease, background-color 0.3s ease, backdrop-filter 0.3s ease, height 0.3s ease;
         backdrop-filter: blur(2px);
-        background-color: rgba(0, 0, 0, .2);
+        background-color: rgba(0, 0, 0, 0.2);
         height: 230px;
         box-sizing: border-box;
-        justify-self: start
+        opacity: 0;
+        transform: translateY(20px);
+        transition: opacity 0.6s ease, transform 0.6s ease;
+      }
+
+      .section.visible {
+        opacity: 1;
+        transform: translateY(0);
       }
 
       .section:hover {
@@ -361,18 +371,22 @@
         text-transform: uppercase;
         font-size: 6rem;
         text-shadow: 0 0 100px rgba(255, 255, 255, .8), 0 0 15px rgba(255, 255, 255, .8);
-        margin-bottom: 90px
+        margin-bottom: 90px;
+        opacity: 0;
+        animation: fadeInUp 1s forwards;
       }
 
       .about p {
         font-size: 1.2rem;
         line-height: 1.8;
         max-width: 800px;
-        margin: 0 auto
+        margin: 0 auto;
+        opacity: 0;
+        animation: fadeInUp 1s forwards 0.3s;
       }
 
       footer {
-        color: var(--white);
+        color: #fff;
         width: 100%;
         background-color: #000;
         height: 60px;
@@ -407,6 +421,18 @@
         list-style: none;
         padding: 0;
         margin: 0
+      }
+
+      @keyframes fadeInUp {
+        from {
+          opacity: 0;
+          transform: translateY(30px);
+        }
+
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
       }
     </style>
   </head>
@@ -507,10 +533,11 @@
           <p>Play Roblox and Minecraft UNBLOCKED!</p>
           <a href="unblocked-games.html" class="button">Enter</a>
         </div>
+      </div>
     </section>
     <section id="about" class="about">
       <h2>About Us</h2>
-      <p>We’re a passionate team focused on creating reliable, effective tools to enhance your gaming and online experiences. We prioritize quality and ease of use, ensuring every solution we offer meets the highest standards to help you get the most out of your online activities.</p>
+      <p>We're a passionate team focused on creating reliable, effective tools to enhance your gaming and online experiences. We prioritize quality and ease of use, ensuring every solution we offer meets the highest standards to help you get the most out of your online activities.</p>
     </section>
     <footer>
       <p>2024 Pathetic. All Rights Reserved.</p>
@@ -526,46 +553,69 @@
         }
       };
       async function fetchValidKeys() {
-        const response = await fetch('keys.json');
+        const response = await fetch("keys.json");
         const data = await response.json();
         return data.validKeys;
       }
       document.addEventListener("DOMContentLoaded", () => {
+        // Initial setup
         window.scrollTo(0, 0);
-        const isGetStartedClicked = sessionStorage.getItem('getStartedClicked');
-        if (!isGetStartedClicked) {
-          document.body.style.overflowY = 'hidden';
-          document.querySelector('header').classList.remove('visible');
-        } else {
-          document.body.style.overflowY = 'scroll';
-          document.querySelector('header').classList.add('visible');
-        }
-        document.addEventListener('contextmenu', function(e) {
-          e.preventDefault();
-        });
-        document.addEventListener('mousedown', function(e) {
-          if (e.target.tagName === 'A' || e.target.tagName === 'BUTTON') {
-            e.preventDefault();
-          }
-        });
-        document.addEventListener('touchstart', function(e) {
-          if (e.target.tagName === 'A' || e.target.tagName === 'BUTTON') {
-            e.preventDefault();
-          }
-        });
-        const links = document.querySelectorAll("a");
-        links.forEach(link => {
-          link.addEventListener("contextmenu", (event) => {
-            event.preventDefault();
+        const isGetStartedClicked = sessionStorage.getItem("getStartedClicked");
+        document.body.style.overflowY = isGetStartedClicked ? "scroll" : "hidden";
+        document.querySelector("header").classList.toggle("visible", !!isGetStartedClicked);
+        // Intersection Observer for sections
+        const sections = document.querySelectorAll(".section");
+        const observerOptions = {
+          threshold: 0.1
+        };
+        const observer = new IntersectionObserver((entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add("visible");
+              observer.unobserve(entry.target);
+            }
+          });
+        }, observerOptions);
+        sections.forEach((section) => observer.observe(section));
+        // Section hover effects
+        sections.forEach((section) => {
+          let animationFrameId;
+          section.style.transition = "transform 0.3s ease-out";
+          section.addEventListener("mousemove", (e) => {
+            if (animationFrameId) cancelAnimationFrame(animationFrameId);
+            animationFrameId = requestAnimationFrame(() => {
+              const {
+                offsetWidth: width,
+                offsetHeight: height
+              } = section;
+              const rect = section.getBoundingClientRect();
+              const offsetX = e.clientX - rect.left;
+              const offsetY = e.clientY - rect.top;
+              const x = (offsetX / width) * 2 - 1;
+              const y = (offsetY / height) * 2 - 1;
+              section.style.transform = `perspective(1000px) scale(1.03) rotateX(${y * -6}deg) rotateY(${x * 6}deg)`;
+            });
+          });
+          section.addEventListener("mouseleave", () => {
+            if (animationFrameId) cancelAnimationFrame(animationFrameId);
+            section.style.transform = "perspective(1000px) scale(1) rotateX(0deg) rotateY(0deg)";
           });
         });
-        document.addEventListener("keydown", function(event) {
+        // Security measures
+        document.addEventListener("contextmenu", (e) => e.preventDefault());
+        document.addEventListener("mousedown", (e) => {
+          if (e.target.tagName === "A" || e.target.tagName === "BUTTON") {
+            e.preventDefault();
+          }
+        });
+        document.addEventListener("keydown", (event) => {
           if (event.ctrlKey || event.keyCode === 123) {
             event.preventDefault();
           }
         });
+        // Smooth navigation
         const navLinks = document.querySelectorAll("header nav ul li a");
-        navLinks.forEach(link => {
+        navLinks.forEach((link) => {
           link.addEventListener("click", (event) => {
             event.preventDefault();
             const targetId = link.getAttribute("href").substring(1);
@@ -577,62 +627,25 @@
             }
           });
         });
-        document.querySelector('button').addEventListener('click', () => {
-          document.body.style.overflowY = 'scroll';
-          document.querySelector('header').classList.add('visible');
-          sessionStorage.setItem('getStartedClicked', 'true');
-        });
-        let touchTimeout;
-        document.querySelectorAll('button').forEach(button => {
-          button.addEventListener('touchstart', function(event) {
-            touchTimeout = setTimeout(function() {
-              event.preventDefault();
-            }, 500);
-          });
-          button.addEventListener('touchend', function(event) {
-            clearTimeout(touchTimeout);
-          });
-          button.addEventListener('click', function(event) {
-            console.log("Button tapped!");
-          });
-        });
-        window.addEventListener('beforeunload', () => {
-          document.documentElement.style.scrollBehavior = 'auto';
-          window.scrollTo(0, 0);
-        });
-        window.addEventListener('load', () => {
-          setTimeout(() => {
-            document.documentElement.style.scrollBehavior = 'smooth';
-            window.scrollTo({
-              top: 0,
-              behavior: 'smooth'
+        // Get Started button
+        const getStartedButton = document.querySelector("button");
+        if (getStartedButton) {
+          getStartedButton.addEventListener("click", () => {
+            document.body.style.overflowY = "scroll";
+            document.querySelector("header").classList.add("visible");
+            sessionStorage.setItem("getStartedClicked", "true");
+            // Make sections fade in from bottom
+            sections.forEach((section, index) => {
+              section.style.opacity = 0;
+              section.style.transform = "translateY(50px)";
+              section.style.transition = `opacity 0.6s ease ${index * 0.2}s, transform 0.6s ease ${index * 0.2}s`;
+              setTimeout(() => {
+                section.style.opacity = 1;
+                section.style.transform = "translateY(0)";
+              }, 100);
             });
-          }, 0);
-        });
-      });
-      const sections = document.querySelectorAll('.section');
-      sections.forEach((section) => {
-        let animationFrameId;
-        section.style.transition = 'transform 0.3s ease-out';
-        section.addEventListener('mousemove', function(e) {
-          if (animationFrameId) cancelAnimationFrame(animationFrameId);
-          animationFrameId = requestAnimationFrame(() => {
-            const {
-              offsetWidth: width,
-              offsetHeight: height
-            } = section;
-            const rect = section.getBoundingClientRect();
-            const offsetX = e.clientX - rect.left;
-            const offsetY = e.clientY - rect.top;
-            const x = (offsetX / width) * 2 - 1;
-            const y = (offsetY / height) * 2 - 1;
-            section.style.transform = `perspective(1000px) scale(1.03) rotateX(${y * -6}deg) rotateY(${x * 6}deg)`;
           });
-        });
-        section.addEventListener('mouseleave', function() {
-          if (animationFrameId) cancelAnimationFrame(animationFrameId);
-          section.style.transform = 'perspective(1000px) scale(1) rotateX(0deg) rotateY(0deg)';
-        });
+        }
       });
     </script>
   </body>
