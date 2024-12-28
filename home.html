@@ -23,15 +23,27 @@
 
       body {
         font-family: 'Inter', sans-serif;
-        background-image: url("https://www.transparenttextures.com/patterns/cartographer.png");
-        background-color: #000;
-        color: #fff;
-        align-items: center;
-        overflow-x: hidden;
+        min-height: 100vh;
+        background-size: 400% 400%;
+        animation: gradientMove 15s ease infinite;
         justify-content: center;
-        overflow-y: hidden;
-        font-size: 16px;
+        align-items: center;
         margin: 0;
+        color: #fff;
+        overflow: hidden;
+        position: relative;
+      }
+      
+      body::before {
+        content: '';
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: url("https://www.transparenttextures.com/patterns/cartographer.png");
+        opacity: 0.9;
+        z-index: 0;
       }
 
       header {
@@ -290,7 +302,7 @@
         text-align: center;
         opacity: 0;
         transform: translateY(50px);
-        transition: all 0.8s ease;
+        transition: all 1.8s ease;
         width: 500px;
       }
 
@@ -340,7 +352,7 @@
         min-height: 100vh;
         display: flex;
         flex-direction: column;
-        justify-content: center;
+        justify-content: center; 
         align-items: center;
         text-align: center;
         padding: 50px 20px;
@@ -364,7 +376,7 @@
         max-width: 800px;
         line-height: 1.8;
       }
-
+      
       footer {
         background: rgba(0, 0, 0, 0);
         backdrop-filter: blur(10px);
@@ -609,7 +621,7 @@
           e.preventDefault();
         }
       });
-              async function checkAuth() {
+          async function checkAuth() {
           try {
             const response = await fetch('keys.json');
             const data = await response.json();
@@ -623,6 +635,7 @@
           }
         }
         checkAuth();
+
     </script>
   </body>
 </html>
