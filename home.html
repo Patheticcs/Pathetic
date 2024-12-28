@@ -621,6 +621,17 @@ document.addEventListener('DOMContentLoaded', () => {
         sessionStorage.setItem('lastScrollY', window.scrollY);
     });
 });
+window.addEventListener('load', () => {
+    // Ensure the page scrolls to the welcome section on load (if not already there)
+    const welcomeSection = document.querySelector('#welcome');
+    if (!window.location.hash || window.location.hash !== "#welcome") {
+        window.scrollTo(0, 0); // Scroll to the top first (ensures clean scroll)
+        welcomeSection.scrollIntoView({
+            behavior: 'smooth',
+            block: 'start'
+        });
+    }
+});
 
     </script>
   </body>
