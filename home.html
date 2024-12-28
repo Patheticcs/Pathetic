@@ -214,13 +214,14 @@
         font-size: 8rem;
         margin-bottom: 30px;
         animation: fadeInUp 1s forwards;
-        text-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
+        text-shadow: 0 0 30px rgba(255, 255, 255, 0.4);
       }
 
       .welcome p {
-        font-size: 1.3rem;
+        font-size: 1.2rem;
         margin-bottom: 40px;
         animation: fadeInUp 1s forwards 0.3s;
+        text-shadow: 0 0 20px rgba(255, 255, 255, 0.8);
         opacity: 0;
       }
 
@@ -229,6 +230,7 @@
         padding: 15px 40px;
         font-size: 1.1rem;
         background: rgba(255, 255, 255, 0.1);
+        text-shadow: 0 0 20px rgba(255, 255, 255, 0.8);
         border: 1px solid rgba(255, 255, 255, 0.2);
         border-radius: 30px;
         color: #fff;
@@ -240,7 +242,7 @@
       }
 
       .welcome button:hover {
-        box-shadow: 0 0 50px rgba(255, 255, 255, .5), 0 0 15px rgba(255, 255, 255, .4);
+        box-shadow: 0 0px 20px rgba(255, 255, 255, 0.4);
         transform: scale(1.03)
       }
 
@@ -289,7 +291,7 @@
         text-align: center;
         opacity: 0;
         transform: translateY(50px);
-        transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        transition: all 0.8s ease;
         width: 500px;
       }
 
@@ -298,29 +300,9 @@
         transform: translateY(0);
       }
 
-      .services-container .section:nth-child(1) {
-        transition-delay: 0.1s;
-      }
-
-      .services-container .section:nth-child(2) {
-        transition-delay: 0.2s;
-      }
-
-      .services-container .section:nth-child(3) {
-        transition-delay: 0.3s;
-      }
-
-      .services-container .section:nth-child(4) {
-        transition-delay: 0.4s;
-      }
-
-      .services-container .section:nth-child(5) {
-        transition-delay: 0.5s;
-      }
-
       .section:hover {
         background: rgba(255, 255, 255, 0.15);
-        box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+        box-shadow: 0 0px 30px rgba(255, 255, 255, 0.4);
       }
 
       .section h3 {
@@ -340,7 +322,7 @@
         display: inline-block;
         height: 35px;
         width: 200px;
-        background: rgba(255, 255, 255, 0.9);
+        background: rgba(255, 255, 255, 1);
         color: #000;
         text-decoration: none;
         border-radius: 25px;
@@ -363,24 +345,25 @@
         align-items: center;
         text-align: center;
         padding: 50px 20px;
-        background: linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(255, 255, 255, .2) 60%, rgba(0, 0, 0, 0))
+        background: linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(255, 255, 255, .2) 60%, rgba(0, 0, 0, 0)) opacity: 0;
+        transform: translateY(30px);
+        transition: all 0.8s ease;
+      }
+
+      .about.visible {
+        opacity: 1;
+        transform: translateY(0);
       }
 
       .about h2 {
         font-size: 5rem;
         margin-bottom: 50px;
         text-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
-        opacity: 0;
-        transform: translateY(30px);
-        animation: fadeInUp 1s forwards;
       }
 
       .about p {
         max-width: 800px;
         line-height: 1.8;
-        opacity: 0;
-        transform: translateY(30px);
-        animation: fadeInUp 1s forwards 0.3s;
       }
 
       footer {
@@ -583,20 +566,6 @@
             });
           }
         });
-        async function checkAuth() {
-          try {
-            const response = await fetch('keys.json');
-            const data = await response.json();
-            const savedKey = localStorage.getItem('loggedInKey');
-            if (!localStorage.getItem('loggedIn') || !data.validKeys.includes(savedKey)) {
-              window.location.href = '/index.html';
-            }
-          } catch (error) {
-            console.error('Auth check failed:', error);
-            window.location.href = '/index.html';
-          }
-        }
-        checkAuth();
         window.addEventListener('beforeunload', () => {
           document.documentElement.style.scrollBehavior = 'auto';
           window.scrollTo(0, 0);
@@ -611,9 +580,38 @@
           }, 0);
         });
       });
-    document.getElementById('get-started-btn').addEventListener('click', () => {
-      document.documentElement.style.overflow = 'auto';
-    });
+      document.getElementById('get-started-btn').addEventListener('click', () => {
+        document.documentElement.style.overflow = 'auto';
+      });
+      document.addEventListener('DOMContentLoaded', () => {
+        const observerOptions = {
+          threshold: 0.1
+        };
+        const observer = new IntersectionObserver((entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add("visible");
+              observer.unobserve(entry.target);
+            }
+          });
+        }, observerOptions);
+
+        observer.observe(document.querySelector('.about'));
+      });
+        async function checkAuth() {
+          try {
+            const response = await fetch('keys.json');
+            const data = await response.json();
+            const savedKey = localStorage.getItem('loggedInKey');
+            if (!localStorage.getItem('loggedIn') || !data.validKeys.includes(savedKey)) {
+              window.location.href = '/index.html';
+            }
+          } catch (error) {
+            console.error('Auth check failed:', error);
+            window.location.href = '/index.html';
+          }
+        }
+        checkAuth();
     </script>
   </body>
 </html>
