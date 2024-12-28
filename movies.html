@@ -110,25 +110,20 @@
         function navigateTo(url) {
           window.location.href = url;
         }
-        window.onload = async function() {
-          const loggedIn = localStorage.getItem("loggedIn");
-          const savedKey = localStorage.getItem("loggedInKey");
+        async function checkAuth() {
           try {
-            const validKeys = await fetchValidKeys();
-            if (loggedIn !== "true" || !validKeys.includes(savedKey)) {
-              window.location.href = "/index.html";
+            const response = await fetch('keys.json');
+            const data = await response.json();
+            const savedKey = localStorage.getItem('loggedInKey');
+            if (!localStorage.getItem('loggedIn') || !data.validKeys.includes(savedKey)) {
+              window.location.href = '/index.html';
             }
           } catch (error) {
-            console.error("Failed to fetch valid keys:", error);
-            window.location.href = "/index.html";
+            console.error('Auth check failed:', error);
+            window.location.href = '/index.html';
           }
-        };
-        async function fetchValidKeys() {
-          const response = await fetch('keys.json');
-          if (!response.ok) throw new Error('Network response was not ok');
-          const data = await response.json();
-          return data.validKeys;
         }
+        checkAuth();
         const buttons = document.querySelectorAll('.button');
         buttons.forEach(button => {
           button.addEventListener('mousemove', (e) => {
