@@ -11,6 +11,10 @@
         user-select: none;
       }
 
+      ::-webkit-scrollbar {
+        display: none;
+      }
+
       :root {
         --glass-bg: rgba(255, 255, 255, 0.1);
         --glass-border: rgba(255, 255, 255, 0.2);
@@ -25,7 +29,7 @@
         align-items: center;
         overflow-x: hidden;
         justify-content: center;
-        overflow-y: auto;
+        overflow-y: hidden;
         font-size: 16px;
         margin: 0;
       }
@@ -54,13 +58,11 @@
         box-shadow: 0 0 5px rgba(255, 255, 255, .2), 0 0 20px rgba(255, 255, 255, .3)
       }
 
-      /* Visible header state */
       header.visible {
         opacity: 1;
         visibility: visible;
       }
 
-      /* Disable scrolling */
       body.no-scroll {
         overflow: hidden;
       }
@@ -287,13 +289,33 @@
         text-align: center;
         opacity: 0;
         transform: translateY(50px);
-        transition: opacity 0.6s ease, transform 2.6s ease;
+        transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
         width: 500px;
       }
 
       .section.visible {
         opacity: 1;
         transform: translateY(0);
+      }
+
+      .services-container .section:nth-child(1) {
+        transition-delay: 0.1s;
+      }
+
+      .services-container .section:nth-child(2) {
+        transition-delay: 0.2s;
+      }
+
+      .services-container .section:nth-child(3) {
+        transition-delay: 0.3s;
+      }
+
+      .services-container .section:nth-child(4) {
+        transition-delay: 0.4s;
+      }
+
+      .services-container .section:nth-child(5) {
+        transition-delay: 0.5s;
       }
 
       .section:hover {
@@ -327,7 +349,7 @@
         text-align: center;
         line-height: 35px;
       }
-      
+
       .section a.button:hover {
         transform: scale(1.05);
         box-shadow: 0 0 10px rgba(255, 255, 255, .8), 0 0 15px rgba(255, 255, 255, .3)
@@ -389,7 +411,7 @@
       @keyframes fadeInUp {
         from {
           opacity: 0;
-          transform: translateY(30px);
+          transform: translateY(50px);
         }
 
         to {
@@ -511,13 +533,11 @@
         const header = document.querySelector('header');
         const getStartedBtn = document.getElementById('get-started-btn');
         let lastScrollY = window.scrollY;
-        // Show header based on scroll
         window.addEventListener('scroll', () => {
           const currentScrollY = window.scrollY;
           header.classList.toggle('visible', currentScrollY > 50);
           lastScrollY = currentScrollY;
         });
-        // Smooth scroll for Get Started button
         getStartedBtn.addEventListener('click', () => {
           document.querySelector('#roblox').scrollIntoView({
             behavior: 'smooth',
@@ -525,7 +545,6 @@
           });
           header.classList.add('visible');
         });
-        // Intersection Observer for sections
         const observer = new IntersectionObserver(
           (entries) => {
             entries.forEach(entry => {
@@ -536,12 +555,10 @@
           }, {
             threshold: 0.1
           });
-        // Observe all sections
         document.querySelectorAll('.section').forEach(section => {
           observer.observe(section);
         });
       });
-      // Authentication check
       async function checkAuth() {
         try {
           const response = await fetch('keys.json');
@@ -556,43 +573,21 @@
         }
       }
       window.onload = checkAuth;
-       const sections = document.querySelectorAll(".section");
-        const observerOptions = {
-          threshold: 0.1
-        };
-        const observer = new IntersectionObserver((entries) => {
-          entries.forEach((entry) => {
-            if (entry.isIntersecting) {
-              entry.target.classList.add("visible");
-              observer.unobserve(entry.target);
-            }
-          });
-        }, observerOptions);
-        sections.forEach((section) => observer.observe(section));
-        // Section hover effects
-        sections.forEach((section) => {
-          let animationFrameId;
-          section.style.transition = "transform 0.3s ease-out";
-          section.addEventListener("mousemove", (e) => {
-            if (animationFrameId) cancelAnimationFrame(animationFrameId);
-            animationFrameId = requestAnimationFrame(() => {
-              const {
-                offsetWidth: width,
-                offsetHeight: height
-              } = section;
-              const rect = section.getBoundingClientRect();
-              const offsetX = e.clientX - rect.left;
-              const offsetY = e.clientY - rect.top;
-              const x = (offsetX / width) * 2 - 1;
-              const y = (offsetY / height) * 2 - 1;
-              section.style.transform = `perspective(1000px) scale(1.03) rotateX(${y * -6}deg) rotateY(${x * 6}deg)`;
-            });
-          });
-          section.addEventListener("mouseleave", () => {
-            if (animationFrameId) cancelAnimationFrame(animationFrameId);
-            section.style.transform = "perspective(1000px) scale(1) rotateX(0deg) rotateY(0deg)";
-          });
+      const sections = document.querySelectorAll(".section");
+      const observerOptions = {
+        threshold: 0.1
+      };
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("visible");
+            observer.unobserve(entry.target);
+          }
         });
+      }, observerOptions);
+      document.getElementById('get-started-btn').addEventListener('click', () => {
+        document.body.style.overflowY = 'visible';
+      });
     </script>
   </body>
 </html>
