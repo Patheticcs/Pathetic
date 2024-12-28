@@ -588,6 +588,66 @@
       document.getElementById('get-started-btn').addEventListener('click', () => {
         document.body.style.overflowY = 'visible';
       });
+      document.addEventListener('DOMContentLoaded', () => {
+    const header = document.querySelector('header');
+    const getStartedBtn = document.getElementById('get-started-btn');
+    let lastScrollY = window.scrollY;
+
+    // Smooth scroll for all header links
+    const links = document.querySelectorAll('header nav ul li a');
+    links.forEach(link => {
+        link.addEventListener('click', (event) => {
+            event.preventDefault(); // Prevent default behavior
+            const targetId = link.getAttribute('href').substring(1); // Remove '#' from href
+            const targetSection = document.getElementById(targetId);
+            
+            if (targetSection) {
+                targetSection.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            }
+        });
+    });
+
+    // Header visibility toggle on scroll
+    window.addEventListener('scroll', () => {
+        const currentScrollY = window.scrollY;
+        header.classList.toggle('visible', currentScrollY > 50);
+        lastScrollY = currentScrollY;
+    });
+
+    // Get Started button click handler
+    getStartedBtn.addEventListener('click', () => {
+        document.querySelector('#roblox').scrollIntoView({
+            behavior: 'smooth',
+            block: 'start'
+        });
+        header.classList.add('visible');
+    });
+
+    // IntersectionObserver for visibility animations on scroll
+    const observer = new IntersectionObserver(
+        (entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, {
+            threshold: 0.1
+        });
+
+    document.querySelectorAll('.section').forEach(section => {
+        observer.observe(section);
+    });
+});
+
+// Reset scroll position to top on page load
+window.onload = function () {
+    window.scrollTo(0, 0);
+};
+
     </script>
   </body>
 </html>
