@@ -1,9 +1,59 @@
 <!DOCTYPE html>
 <html lang="en">
+  <!-- Previous head content remains the same until the container style -->
   <head>
     <title>Key System</title>
-    <link rel="icon" type="image/x-icon" href="https://iili.io/27ddQyB.png">
+    <link rel="icon" type="image/x-icon" href="/api/placeholder/32/32">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <style>
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(20px);
+        }
+
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      @keyframes gradientMove {
+        0% {
+          background-position: 0% 50%;
+        }
+
+        50% {
+          background-position: 100% 50%;
+        }
+
+        100% {
+          background-position: 0% 50%;
+        }
+      }
+
+      @keyframes glowPulse {
+
+        0%,
+        100% {
+          box-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
+        }
+
+        50% {
+          box-shadow: 0 0 40px rgba(255, 255, 255, 0.4);
+        }
+      }
+
+      @keyframes borderFlow {
+        0% {
+          background-position: 0% 0%;
+        }
+
+        100% {
+          background-position: 200% 0%;
+        }
+      }
+
       * {
         box-sizing: border-box;
         margin: 0;
@@ -11,251 +61,307 @@
       }
 
       body {
-        font-family: Lato, Arial, sans-serif !important;
-        background-image: url(https://www.transparenttextures.com/patterns/cartographer.png);
-        background-color: rgb(0, 0, 0, 1);
-        color: #fff;
+        font-family: 'Inter', sans-serif;
+        min-height: 100vh;
+        background-size: 400% 400%;
+        animation: gradientMove 15s ease infinite;
         display: flex;
         justify-content: center;
         align-items: center;
-        height: 100vh;
         margin: 0;
         overflow: hidden;
+        position: relative;
+      }
+
+      body::before {
+        content: '';
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: url("https://www.transparenttextures.com/patterns/cartographer.png");
+        opacity: 0.9;
+        z-index: 0;
+      }
+
+      .glass-overlay {
+        position: fixed;
+        top: -50%;
+        left: -50%;
+        width: 200%;
+        height: 200%;
+        background: radial-gradient(circle at center, transparent 0%, rgba(0, 0, 0, 0.4) 100%);
+        pointer-events: none;
+        z-index: 1;
       }
 
       .container {
-        border-radius: 40px;
-        background: rgba(255, 255, 255, .01);
-        box-shadow: 0 0 5px rgba(255, 255, 255, .3), 0 0 30px rgba(255, 255, 255, 1);
-        text-align: center;
-        transition: transform .3s ease-out, box-shadow .6s ease-out;
-        height: 500px;
-        width: 650px;
         position: relative;
-        overflow: hidden;
+        width: 650px;
+        min-height: 450px;
+        padding: 50px;
+        border-radius: 25px;
+        background: rgba(255, 255, 255, 0.08);
+        backdrop-filter: blur(12px);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+        z-index: 2;
+        transform-style: preserve-3d;
+        transition: height 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        animation: fadeIn 1s ease-out;
       }
 
       .container:hover {
-        box-shadow: 0 0 60px rgba(255, 255, 255, .6), 0 0 40px rgba(255, 255, 255, .6);
+        box-shadow: 0 0 40px rgba(0, 0, 0, .3), 0 0 30px rgba(0, 0, 0, .1);
       }
 
       .container::before {
-        content: "";
+        content: '';
         position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        background: rgba(0, 0, 0, .1);
-        transition: background .3s ease;
+        top: -2px;
+        left: -2px;
+        right: -2px;
+        bottom: -2px;
+        border-radius: 24px;
+        background: linear-gradient(90deg, #ffffff03, #ffffff0f, #ffffff03);
+        background-size: 200% 100%;
+        animation: borderFlow 3s linear infinite;
         z-index: -1;
       }
 
-      .container:hover::before {
-        background: rgba(0, 0, 0, .3);
-      }
-
       h2 {
-        font-size: 50px;
-        margin-top: 70px;
-        margin-bottom: 80px;
-        color: #fff;
-        text-shadow: 0 0 90px rgba(255, 255, 255, .8), 0 0 35px rgba(255, 255, 255, .8);
+        font-size: 3em;
+        color: rgba(255, 255, 255, 0.95);
+        margin-bottom: 1.5em;
+        text-align: center;
+        position: relative;
+        text-transform: uppercase;
+        letter-spacing: 3px;
+        text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+        animation: fadeIn 0.8s ease-out 0.2s backwards;
       }
 
-      input[type=text] {
-        padding: 12px 20px;
-        font-size: 16px;
-        border: none;
+      .input-group {
+        position: relative;
+        margin: 2em 0;
+        animation: fadeIn 0.8s ease-out 0.4s backwards;
+      }
+
+      input[type="text"] {
+        margin-top: 20px;
+        width: 100%;
+        padding: 15px 20px;
+        font-size: 1em;
+        background: rgba(255, 255, 255, 0.07);
+        border: 1px solid rgba(0, 0, 0, 0.1);
         border-radius: 12px;
-        background: rgba(255, 255, 255, 1);
-        color: #000;
-        margin-right: 10px;
-        margin-left: 10px;
-        outline: 0;
-        transition: all .3s ease;
+        color: rgba(0, 0, 0, 0.9);
+        outline: none;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
       }
 
-      input[type=text]:focus {
-        box-shadow: 0 0 25px rgba(255, 255, 255, .9);
+      input[type="text"]:hover {
+        background: rgba(255, 255, 255, 0.09);
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
       }
 
-      input[type=text]:active {
-        background-color: rgba(255, 255, 255, .9);
-        color: #fff;
+      input[type="text"]:focus {
+        border-color: rgba(0, 0, 0, 0.3);
+        background: rgba(255, 255, 255, 0.11);
+        box-shadow: 0 0 25px rgba(0, 0, 0, 0.2);
       }
 
-      input[type=text]:hover {
-        margin-right: 15px;
-        margin-left: 15px;
-        transform: scale(1.05);
-        box-shadow: 0 0 15px rgba(255, 255, 255, .8), 0 0 20px rgba(255, 255, 255, .6);
+      .button-group {
+        display: flex;
+        gap: 1.5em;
+        justify-content: center;
+        margin-top: 2em;
+        animation: fadeIn 0.8s ease-out 0.6s backwards;
       }
 
       button {
-        background-color: rgba(255, 255, 255, 1);
-        color: #000;
-        padding: 12px 25px;
-        font-size: 16px;
+        padding: 12px 30px;
         border: none;
-        margin-top: 30px;
         border-radius: 12px;
-        margin-right: 10px;
-        margin-left: 10px;
+        background: rgba(255, 255, 255, 0.1);
+        color: rgba(255, 255, 255, 0.9);
+        font-size: 1em;
         cursor: pointer;
-        transition: all .3s ease;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        backdrop-filter: blur(5px);
+        border: 1px solid rgba(0, 0, 0, 0.1);
+        position: relative;
+        margin-top: 40px;
+        overflow: hidden;
+      }
+
+      button::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(90deg,
+            transparent,
+            rgba(255, 255, 255, 0.2),
+            transparent);
+        transition: 0.5s;
       }
 
       button:hover {
-        margin-right: 15px;
-        margin-left: 15px;
-        transform: scale(1.05);
-        box-shadow: 0 0 15px rgba(255, 255, 255, .8), 0 0 20px rgba(255, 255, 255, .6);
+        background: rgba(255, 255, 255, 0.15);
+        box-shadow: 0 0px 15px rgba(0, 0, 0, 0.3);
       }
 
-      button:active {
-        box-shadow: 0 0 25px rgba(255, 255, 255, .9);
+      button:hover::before {
+        left: 100%;
+      }
+
+      button i {
+        margin-right: 8px;
+        transition: transform 0.3s ease;
+      }
+
+      button:hover i {
+        transform: scale(1.2);
       }
 
       .alert {
-        color: #fff;
-        font-size: 15px;
-        margin-top: 40px;
-        margin-bottom: 20px;
+        margin-top: 1.5em;
+        padding: 15px;
+        border-radius: 12px;
+        background: rgba(255, 59, 48, 0.15);
+        color: rgba(255, 255, 255, 0.9);
+        text-align: center;
         opacity: 0;
-        transform: translateY(10px);
-        transition: opacity .3s ease, transform .3s ease;
+        transform: translateY(-10px);
+        max-height: 0;
+        overflow: hidden;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        backdrop-filter: blur(5px);
       }
 
       .alert.show {
         opacity: 1;
         transform: translateY(0);
+        max-height: 100px;
       }
 
-      iframe {
-        display: none;
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100vw;
-        height: 100vh;
-        border: none;
-        z-index: 9999;
+      @keyframes shake {
+
+        0%,
+        100% {
+          transform: translateX(0);
+        }
+
+        25% {
+          transform: translateX(-10px);
+        }
+
+        75% {
+          transform: translateX(10px);
+        }
       }
 
-      @media only screen and (max-width: 768px) {
-        .container {
-          height: 380px;
-          width: 365px;
-          text-align: center;
-          margin: 0 auto;
-        }
-
-        h2 {
-          font-size: 38px;
-        }
-
-        input[type=text] {
-          font-size: 14px;
-          padding: 10px 20px;
-          margin-right: 5px;
-          margin-left: 5px;
-          margin-bottom: 15px;
-        }
-
-        button {
-          font-size: 14px;
-          margin-top: 10px;
-          text-align: center;
-          display: inline-block;
-          padding: 10px 20px;
-          width: auto;
-          margin-bottom: 0;
-          margin-right: 5px;
-          margin-left: 5px;
-        }
+      .shake {
+        animation: shake 0.5s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
       }
     </style>
   </head>
   <body>
+    <div class="glass-overlay"></div>
     <div class="container" id="login-container">
-      <h2>Key System</h2>
-      <input type="text" id="key" placeholder="Enter key">
-      <button onclick="checkKey()">Submit</button>
-      <div id="alert" class="alert"></div>
-      <button onclick="openDiscord()">Get Key</button>
+      <div class="content-wrapper">
+        <h2>Key System</h2>
+        <div class="input-group">
+          <input type="text" id="key" placeholder="Enter your access key">
+        </div>
+        <div class="button-group">
+          <button onclick="checkKey()">
+            <i class="fas fa-key"></i>Submit </button>
+          <button onclick="openDiscord()">
+            <i class="fab fa-discord"></i>Get Key </button>
+        </div>
+        <div id="alert" class="alert"></div>
+      </div>
     </div>
-
     <script>
-      const container = document.querySelector('.container');
-      container.addEventListener('mousemove', function(e) {
-        const {
-          offsetWidth: width,
-          offsetHeight: height
-        } = container;
-        const rect = container.getBoundingClientRect();
-        const offsetX = e.clientX - rect.left;
-        const offsetY = e.clientY - rect.top;
-        const x = (offsetX / width) * 2 - 1;
-        const y = (offsetY / height) * 2 - 1;
-        container.style.transform = `perspective(1000px) scale(1.03) rotateX(${y * -5}deg) rotateY(${x * 5}deg)`;
-      });
-      container.addEventListener('mouseleave', function() {
-        container.style.transform = `perspective(1000px) scale(1) rotateX(0deg) rotateY(0deg)`;
-      });
       async function checkKey() {
         const key = document.getElementById("key").value.trim();
         const alertElement = document.getElementById("alert");
-        const validKeys = await fetchValidKeys();
-        if (validKeys.includes(key)) {
-          localStorage.setItem("loggedIn", "true");
-          localStorage.setItem("loggedInKey", key);
-          window.location.href = "/home.html";
-        } else {
-          alertElement.textContent = "Incorrect key!";
+        const container = document.getElementById("login-container");
+        const submitButton = document.querySelector('button');
+        submitButton.style.pointerEvents = 'none';
+        submitButton.style.opacity = '0.7';
+        try {
+          const validKeys = await fetchValidKeys();
+          if (validKeys.includes(key)) {
+            alertElement.style.background = 'rgba(48, 209, 88, 0.15)';
+            alertElement.textContent = "Success! Redirecting...";
+            alertElement.classList.add("show");
+            container.style.height = 'auto';
+            setTimeout(() => {
+              localStorage.setItem("loggedIn", "true");
+              localStorage.setItem("loggedInKey", key);
+              window.location.href = "/home.html";
+            }, 1500);
+          } else {
+            alertElement.style.background = 'rgba(255, 59, 48, 0.15)';
+            alertElement.textContent = "Invalid key! Please try again or get a new key.";
+            alertElement.classList.add("show");
+            container.style.height = 'auto';
+            container.classList.add('shake');
+            setTimeout(() => container.classList.remove('shake'), 500);
+          }
+        } catch (error) {
+          alertElement.style.background = 'rgba(255, 59, 48, 0.15)';
+          alertElement.textContent = "Error validating key. Please try again.";
           alertElement.classList.add("show");
+          container.style.height = 'auto';
+        } finally {
+          submitButton.style.pointerEvents = 'auto';
+          submitButton.style.opacity = '1';
         }
       }
-
       async function fetchValidKeys() {
         const response = await fetch('keys.json');
         const data = await response.json();
         return data.validKeys;
       }
 
-      window.onload = async function() {
+      function openDiscord() {
+        window.open('https://discord.gg/Eg2EWXwYcn', '_blank');
+      }
+      document.getElementById('key').addEventListener('keypress', (e) => {
+        if (e.key === 'Enter') {
+          checkKey();
+        }
+      });
+      window.onload = () => {
         const loggedIn = localStorage.getItem("loggedIn");
         const savedKey = localStorage.getItem("loggedInKey");
         const alertElement = document.getElementById("alert");
         if (loggedIn === "true") {
-          const validKeys = await fetchValidKeys();
-          if (validKeys.includes(savedKey)) {
-            window.location.href = "/home.html";
-          } else {
-            localStorage.removeItem("loggedIn");
-            localStorage.removeItem("loggedInKey");
-            alertElement.textContent = "Key expired. Please enter a new key to proceed!";
-            alertElement.classList.add("show");
-          }
+          fetchValidKeys().then(validKeys => {
+            if (validKeys.includes(savedKey)) {
+              window.location.href = "/home.html";
+            } else {
+              localStorage.removeItem("loggedIn");
+              localStorage.removeItem("loggedInKey");
+              alertElement.textContent = "Session expired. Please enter a new key.";
+              alertElement.classList.add("show");
+            }
+          });
         }
       };
-
-      document.addEventListener('contextmenu', function(e) {
-        e.preventDefault();
-      });
-
-      document.addEventListener('keydown', function(e) {
-        if (e.ctrlKey && !(e.key === 'a' || e.key === 'v')) {
-          e.preventDefault();
-        }
-        if (e.keyCode === 123) {
+      document.addEventListener('contextmenu', e => e.preventDefault());
+      document.addEventListener('keydown', e => {
+        if ((e.ctrlKey && !['a', 'v'].includes(e.key)) || e.keyCode === 123) {
           e.preventDefault();
         }
       });
-
-      function openDiscord() {
-        window.open('https://discord.gg/Eg2EWXwYcn', '_blank');
-      }
     </script>
   </body>
 </html>
