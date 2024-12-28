@@ -13,7 +13,7 @@
       body {
         font-family: Lato, Arial, sans-serif !important;
         background-image: url(https://www.transparenttextures.com/patterns/cartographer.png);
-        background-color: rgb(0, 0, 0, 1);
+        background-color: rgb(0, 0, 0, 0.1);
         color: #fff;
         display: flex;
         justify-content: center;
@@ -80,7 +80,7 @@
         margin-bottom: 20px;
         height: 50px;
         width: 600px;
-        background-color: rgba(0, 0, 0, 1);
+        background-color: rgba(255, 255, 255, 0.1);
         border-radius: 100px;
         font-size: 1.1rem;
         margin-left: auto;
@@ -175,20 +175,6 @@
     </div>
   </body>
   <script>
-        async function checkAuth() {
-          try {
-            const response = await fetch('keys.json');
-            const data = await response.json();
-            const savedKey = localStorage.getItem('loggedInKey');
-            if (!localStorage.getItem('loggedIn') || !data.validKeys.includes(savedKey)) {
-              window.location.href = '/index.html';
-            }
-          } catch (error) {
-            console.error('Auth check failed:', error);
-            window.location.href = '/index.html';
-          }
-        }
-        checkAuth();
     const containers = document.querySelectorAll('.container');
     containers.forEach((container) => {
       let animationFrameId;
@@ -212,5 +198,19 @@
         container.style.transform = 'perspective(1000px) scale(1) rotateX(0deg) rotateY(0deg)';
       });
     });
+        async function checkAuth() {
+          try {
+            const response = await fetch('keys.json');
+            const data = await response.json();
+            const savedKey = localStorage.getItem('loggedInKey');
+            if (!localStorage.getItem('loggedIn') || !data.validKeys.includes(savedKey)) {
+              window.location.href = '/index.html';
+            }
+          } catch (error) {
+            console.error('Auth check failed:', error);
+            window.location.href = '/index.html';
+          }
+        }
+        checkAuth();
   </script>
 </html>
