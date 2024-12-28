@@ -529,68 +529,11 @@
       <a href="/versions.html" class="footer-link">‎ ‎ ‎ Version History</a>
     </footer>
     <script>
-      document.addEventListener('DOMContentLoaded', () => {
-        const header = document.querySelector('header');
-        const getStartedBtn = document.getElementById('get-started-btn');
-        let lastScrollY = window.scrollY;
-        window.addEventListener('scroll', () => {
-          const currentScrollY = window.scrollY;
-          header.classList.toggle('visible', currentScrollY > 50);
-          lastScrollY = currentScrollY;
-        });
-        getStartedBtn.addEventListener('click', () => {
-          document.querySelector('#roblox').scrollIntoView({
-            behavior: 'smooth',
-            block: 'start'
-          });
-          header.classList.add('visible');
-        });
-        const observer = new IntersectionObserver(
-          (entries) => {
-            entries.forEach(entry => {
-              if (entry.isIntersecting) {
-                entry.target.classList.add('visible');
-              }
-            });
-          }, {
-            threshold: 0.1
-          });
-        document.querySelectorAll('.section').forEach(section => {
-          observer.observe(section);
-        });
-      });
-      async function checkAuth() {
-        try {
-          const response = await fetch('keys.json');
-          const data = await response.json();
-          const savedKey = localStorage.getItem('loggedInKey');
-          if (!localStorage.getItem('loggedIn') || !data.validKeys.includes(savedKey)) {
-            window.location.href = '/index.html';
-          }
-        } catch (error) {
-          console.error('Auth check failed:', error);
-          window.location.href = '/index.html';
-        }
-      }
-      window.onload = checkAuth;
-      const sections = document.querySelectorAll(".section");
-      const observerOptions = {
-        threshold: 0.1
-      };
-      const observer = new IntersectionObserver((entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add("visible");
-            observer.unobserve(entry.target);
-          }
-        });
-      }, observerOptions);
-      document.getElementById('get-started-btn').addEventListener('click', () => {
-        document.body.style.overflowY = 'visible';
-      });
-      document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', () => {
     const header = document.querySelector('header');
     const getStartedBtn = document.getElementById('get-started-btn');
+    const welcomeSection = document.getElementById('welcome'); // Assuming the welcome screen has id 'welcome'
+    
     let lastScrollY = window.scrollY;
 
     // Smooth scroll for all header links
@@ -627,26 +570,57 @@
     });
 
     // IntersectionObserver for visibility animations on scroll
-    const observer = new IntersectionObserver(
-        (entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
-                }
-            });
-        }, {
-            threshold: 0.1
+    const observerOptions = {
+        threshold: 0.1
+    };
+    
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add("visible");
+                observer.unobserve(entry.target);  // Optionally unobserve after it becomes visible
+            }
         });
-
+    }, observerOptions);
+    
     document.querySelectorAll('.section').forEach(section => {
         observer.observe(section);
     });
-});
 
-// Reset scroll position to top on page load
-window.onload = function () {
-    window.scrollTo(0, 0);
-};
+    // Ensure the page scrolls to the welcome section on load (if not already there)
+    window.addEventListener('load', () => {
+        if (window.location.hash !== "#welcome" && !document.querySelector('#welcome').classList.contains('visible')) {
+            window.scrollTo(0, 0); // Scroll to the top first
+            welcomeSection.scrollIntoView({
+                behavior: 'smooth',
+                block: 'start'
+            });
+        }
+    });
+
+    // Auth check function
+    async function checkAuth() {
+        try {
+            const response = await fetch('keys.json');
+            const data = await response.json();
+            const savedKey = localStorage.getItem('loggedInKey');
+            if (!localStorage.getItem('loggedIn') || !data.validKeys.includes(savedKey)) {
+                window.location.href = '/index.html';
+            }
+        } catch (error) {
+            console.error('Auth check failed:', error);
+            window.location.href = '/index.html';
+        }
+    }
+
+    // Perform auth check on page load
+    checkAuth();
+
+    // Scroll to welcome section on page load or refresh (if not already there)
+    window.addEventListener('beforeunload', function () {
+        sessionStorage.setItem('lastScrollY', window.scrollY);
+    });
+});
 
     </script>
   </body>
