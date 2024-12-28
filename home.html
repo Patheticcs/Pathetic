@@ -23,7 +23,7 @@
 
       body {
         font-family: 'Inter', sans-serif;
-        background-image: url(https://www.transparenttextures.com/patterns/cartographer.png);
+        background-image: url("https://www.transparenttextures.com/patterns/cartographer.png");
         background-color: #000;
         color: #fff;
         align-items: center;
@@ -529,112 +529,88 @@
       <a href="/versions.html" class="footer-link">‎ ‎ ‎ Version History</a>
     </footer>
     <script>
-document.addEventListener('DOMContentLoaded', () => {
-    const header = document.querySelector('header');
-    const getStartedBtn = document.getElementById('get-started-btn');
-    const welcomeSection = document.getElementById('welcome'); // Assuming the welcome screen has id 'welcome'
-    
-    let lastScrollY = window.scrollY;
-
-    // Smooth scroll for all header links
-    const links = document.querySelectorAll('header nav ul li a');
-    links.forEach(link => {
-        link.addEventListener('click', (event) => {
-            event.preventDefault(); // Prevent default behavior
-            const targetId = link.getAttribute('href').substring(1); // Remove '#' from href
+      document.addEventListener('DOMContentLoaded', () => {
+        const header = document.querySelector('header');
+        const getStartedBtn = document.getElementById('get-started-btn');
+        const welcomeSection = document.getElementById('welcome');
+        let lastScrollY = window.scrollY;
+        const links = document.querySelectorAll('header nav ul li a');
+        links.forEach(link => {
+          link.addEventListener('click', (event) => {
+            event.preventDefault();
+            const targetId = link.getAttribute('href').substring(1);
             const targetSection = document.getElementById(targetId);
-            
             if (targetSection) {
-                targetSection.scrollIntoView({
-                    behavior: 'smooth',
-                    block: 'start'
-                });
-            }
-        });
-    });
-
-    // Header visibility toggle on scroll
-    window.addEventListener('scroll', () => {
-        const currentScrollY = window.scrollY;
-        header.classList.toggle('visible', currentScrollY > 50);
-        lastScrollY = currentScrollY;
-    });
-
-    // Get Started button click handler
-    getStartedBtn.addEventListener('click', () => {
-        document.querySelector('#roblox').scrollIntoView({
-            behavior: 'smooth',
-            block: 'start'
-        });
-        header.classList.add('visible');
-    });
-
-    // IntersectionObserver for visibility animations on scroll
-    const observerOptions = {
-        threshold: 0.1
-    };
-    
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach((entry) => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add("visible");
-                observer.unobserve(entry.target);  // Optionally unobserve after it becomes visible
-            }
-        });
-    }, observerOptions);
-    
-    document.querySelectorAll('.section').forEach(section => {
-        observer.observe(section);
-    });
-
-    // Ensure the page scrolls to the welcome section on load (if not already there)
-    window.addEventListener('load', () => {
-        if (window.location.hash !== "#welcome" && !document.querySelector('#welcome').classList.contains('visible')) {
-            window.scrollTo(0, 0); // Scroll to the top first
-            welcomeSection.scrollIntoView({
+              targetSection.scrollIntoView({
                 behavior: 'smooth',
                 block: 'start'
+              });
+            }
+          });
+        });
+        window.addEventListener('scroll', () => {
+          const currentScrollY = window.scrollY;
+          header.classList.toggle('visible', currentScrollY > 50);
+          lastScrollY = currentScrollY;
+        });
+        getStartedBtn.addEventListener('click', () => {
+          document.querySelector('#roblox').scrollIntoView({
+            behavior: 'smooth',
+            block: 'start'
+          });
+          header.classList.add('visible');
+        });
+        const observerOptions = {
+          threshold: 0.1
+        };
+        const observer = new IntersectionObserver((entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add("visible");
+              observer.unobserve(entry.target);
+            }
+          });
+        }, observerOptions);
+        document.querySelectorAll('.section').forEach(section => {
+          observer.observe(section);
+        });
+        window.addEventListener('load', () => {
+          if (window.location.hash !== "#welcome" && !document.querySelector('#welcome').classList.contains('visible')) {
+            window.scrollTo(0, 0);
+            welcomeSection.scrollIntoView({
+              behavior: 'smooth',
+              block: 'start'
             });
-        }
-    });
-
-    // Auth check function
-    async function checkAuth() {
-        try {
+          }
+        });
+        async function checkAuth() {
+          try {
             const response = await fetch('keys.json');
             const data = await response.json();
             const savedKey = localStorage.getItem('loggedInKey');
             if (!localStorage.getItem('loggedIn') || !data.validKeys.includes(savedKey)) {
-                window.location.href = '/index.html';
+              window.location.href = '/index.html';
             }
-        } catch (error) {
+          } catch (error) {
             console.error('Auth check failed:', error);
             window.location.href = '/index.html';
+          }
         }
-    }
-
-    // Perform auth check on page load
-    checkAuth();
-
-    // Scroll to welcome section on page load or refresh (if not already there)
-    window.addEventListener('beforeunload', function () {
-        sessionStorage.setItem('lastScrollY', window.scrollY);
-    });
-});
-      
-window.addEventListener('load', () => {
-    // Check if the page is already on the "welcome" section
-    if (window.location.hash !== "#welcome" && !document.querySelector('#welcome').classList.contains('visible')) {
-        window.scrollTo(0, 0);
-    } else {
-        welcomeSection.scrollIntoView({
-            behavior: 'smooth',
-            block: 'start'
+        checkAuth();
+        window.addEventListener('beforeunload', () => {
+          document.documentElement.style.scrollBehavior = 'auto';
+          window.scrollTo(0, 0);
         });
-    }
-});
-
-
+        window.addEventListener('load', () => {
+          setTimeout(() => {
+            document.documentElement.style.scrollBehavior = 'smooth';
+            window.scrollTo({
+              top: 0,
+              behavior: 'smooth'
+            });
+          }, 0);
+        });
+      });
     </script>
   </body>
 </html>
