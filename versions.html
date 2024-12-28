@@ -175,6 +175,20 @@
     </div>
   </body>
   <script>
+        async function checkAuth() {
+          try {
+            const response = await fetch('keys.json');
+            const data = await response.json();
+            const savedKey = localStorage.getItem('loggedInKey');
+            if (!localStorage.getItem('loggedIn') || !data.validKeys.includes(savedKey)) {
+              window.location.href = '/index.html';
+            }
+          } catch (error) {
+            console.error('Auth check failed:', error);
+            window.location.href = '/index.html';
+          }
+        }
+        checkAuth();
     const containers = document.querySelectorAll('.container');
     containers.forEach((container) => {
       let animationFrameId;
