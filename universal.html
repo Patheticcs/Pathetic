@@ -316,19 +316,20 @@
           <span>Animation Hub</span>
         </div>
         <script>
-          window.onload = async function() {
-            const loggedIn = localStorage.getItem("loggedIn");
-            const savedKey = localStorage.getItem("loggedInKey");
-            const validKeys = await fetchValidKeys();
-            if (loggedIn !== "true" || !validKeys.includes(savedKey)) {
-              window.location.href = "/index.html";
-            }
-          };
-          async function fetchValidKeys() {
+        async function checkAuth() {
+          try {
             const response = await fetch('keys.json');
             const data = await response.json();
-            return data.validKeys;
+            const savedKey = localStorage.getItem('loggedInKey');
+            if (!localStorage.getItem('loggedIn') || !data.validKeys.includes(savedKey)) {
+              window.location.href = '/index.html';
+            }
+          } catch (error) {
+            console.error('Auth check failed:', error);
+            window.location.href = '/index.html';
           }
+        }
+        checkAuth();
 
           function openLink(url) {
             window.open(url, '_blank');
