@@ -598,7 +598,19 @@
 
         observer.observe(document.querySelector('.about'));
       });
-        async function checkAuth() {
+      document.addEventListener('contextmenu', function(e) {
+        e.preventDefault();
+      });
+
+      document.addEventListener('keydown', function(e) {
+        if (e.ctrlKey && !(e.key === 'a' || e.key === 'v')) {
+          e.preventDefault();
+        }
+        if (e.keyCode === 123) {
+          e.preventDefault();
+        }
+      });
+              async function checkAuth() {
           try {
             const response = await fetch('keys.json');
             const data = await response.json();
