@@ -33,7 +33,7 @@
         overflow: hidden;
         position: relative;
       }
-      
+
       body::before {
         content: '';
         position: fixed;
@@ -64,7 +64,7 @@
         visibility: hidden;
         background: rgba(255, 255, 255, 0.1);
         backdrop-filter: blur(10px);
-        border: 1px solid rgba(255, 255, 255, 0.2);        
+        border: 1px solid rgba(255, 255, 255, 0.2);
         border-radius: 50px;
         transition: opacity 1s ease, background 1s ease, box-shadow 1s ease, max-width 1s ease, height 1s ease, backdrop-filter 2s ease;
         height: 140px;
@@ -225,14 +225,12 @@
         font-size: 8rem;
         margin-bottom: 30px;
         animation: fadeInUp 1s forwards;
-        text-shadow: 0 0 30px rgba(0, 0, 0, 0.4);
       }
 
       .welcome p {
         font-size: 1.2rem;
         margin-bottom: 40px;
         animation: fadeInUp 1s forwards 0.3s;
-        text-shadow: 0 0 20px rgba(0, 0, 0, 0.8);
         opacity: 0;
       }
 
@@ -241,8 +239,7 @@
         padding: 15px 40px;
         font-size: 1.1rem;
         background: rgba(255, 255, 255, 0.1);
-        text-shadow: 0 0 20px rgba(0, 0, 0, 0.8);
-        border: 1px solid rgba(0, 0, 0, 0.2);
+        border: 1px solid rgba(255, 255, 255, 0.2);
         border-radius: 30px;
         color: #fff;
         cursor: pointer;
@@ -253,7 +250,7 @@
       }
 
       .welcome button:hover {
-        box-shadow: 0 0px 20px rgba(0, 0, 0, 0.4);
+        box-shadow: 0 0px 20px rgba(255, 255, 255, 1);
         transform: scale(1.03)
       }
 
@@ -321,7 +318,6 @@
         font-size: 2.2rem;
         margin-bottom: 50px;
         color: #fff;
-        text-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
       }
 
       .section p {
@@ -345,14 +341,14 @@
 
       .section a.button:hover {
         transform: scale(1.05);
-        box-shadow: 0 0 10px rgba(0, 0, 0, .8), 0 0 15px rgba(0, 0, 0, .3)
+        box-shadow: 0 0 10px rgba(255, 255, 255, .8), 0 0 15px rgba(255, 255, 255, .3)
       }
 
       .about {
         min-height: 100vh;
         display: flex;
         flex-direction: column;
-        justify-content: center; 
+        justify-content: center;
         align-items: center;
         text-align: center;
         padding: 50px 20px;
@@ -367,16 +363,15 @@
       }
 
       .about h2 {
-        font-size: 5rem;
+        font-size: 5.5rem;
         margin-bottom: 50px;
-        text-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
       }
 
       .about p {
         max-width: 800px;
         line-height: 1.8;
       }
-      
+
       footer {
         background: rgba(0, 0, 0, 0);
         backdrop-filter: blur(10px);
@@ -602,17 +597,19 @@
           entries.forEach((entry) => {
             if (entry.isIntersecting) {
               entry.target.classList.add("visible");
-              observer.unobserve(entry.target);
+            } else {
+              entry.target.classList.remove("visible");
             }
           });
         }, observerOptions);
-
+        document.querySelectorAll('.section').forEach(section => {
+          observer.observe(section);
+        });
         observer.observe(document.querySelector('.about'));
       });
       document.addEventListener('contextmenu', function(e) {
         e.preventDefault();
       });
-
       document.addEventListener('keydown', function(e) {
         if (e.ctrlKey && !(e.key === 'a' || e.key === 'v')) {
           e.preventDefault();
@@ -621,20 +618,20 @@
           e.preventDefault();
         }
       });
-          async function checkAuth() {
-          try {
-            const response = await fetch('keys.json');
-            const data = await response.json();
-            const savedKey = localStorage.getItem('loggedInKey');
-            if (!localStorage.getItem('loggedIn') || !data.validKeys.includes(savedKey)) {
-              window.location.href = '/index.html';
-            }
-          } catch (error) {
-            console.error('Auth check failed:', error);
+      async function checkAuth() {
+        try {
+          const response = await fetch('keys.json');
+          const data = await response.json();
+          const savedKey = localStorage.getItem('loggedInKey');
+          if (!localStorage.getItem('loggedIn') || !data.validKeys.includes(savedKey)) {
             window.location.href = '/index.html';
           }
+        } catch (error) {
+          console.error('Auth check failed:', error);
+          window.location.href = '/index.html';
         }
-        checkAuth();
+      }
+      checkAuth();
     </script>
   </body>
 </html>
