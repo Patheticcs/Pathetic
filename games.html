@@ -1,231 +1,206 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <title>Games</title>
-    <link rel="icon" type="image/x-icon" href="/favicon">
-    <style>
-      * {
-        outline: none;
-      }
+<head>
+  <title>Games</title>
+  <link rel="icon" type="image/x-icon" href="/favicon">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Inter', sans-serif;
+    }
 
-      button,
-      input,
-      textarea,
-      select {
-        outline: none;
-      }
-
-      body {
-        margin: 0;
+       body {
+        font-family: 'Inter', sans-serif;
+        min-height: 100vh;
+        background-size: 400% 400%;
+        animation: gradientMove 15s ease infinite;
         display: flex;
-        flex-direction: column;
+        justify-content: center;
         align-items: center;
-        font-family: 'Lato', sans-serif;
-        background-image: url(https://www.transparenttextures.com/patterns/cartographer.png);
-        background-color: black;
-        font-weight: bold;
-        text-align: center;
-        overflow-x: hidden;
-        overflow-y: auto;
-        height: 100%;
+        margin: 0;
+        overflow: hidden;
+        position: relative;
       }
 
-      .background-container {
+      body::before {
+        content: '';
         position: fixed;
         top: 0;
         left: 0;
         width: 100%;
         height: 100%;
-        z-index: -1;
-        overflow: hidden;
+        background: url("https://www.transparenttextures.com/patterns/cartographer.png");
+        opacity: 0.9;
+        z-index: 0;
       }
 
-      #background-image {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-      }
-
-      header {
-        width: 100%;
-        display: flex;
-        justify-content: center;
-        padding: 20px;
-        box-sizing: border-box;
+      .glass-overlay {
         position: fixed;
-        top: 0;
+        top: -50%;
+        left: -50%;
+        width: 200%;
+        height: 200%;
+        background: radial-gradient(circle at center, transparent 0%, rgba(0, 0, 0, 0.4) 100%);
+        pointer-events: none;
         z-index: 1;
       }
 
-      .back-button-container {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        gap: 20px;
-        width: 100%;
+    header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      padding: 20px;
+      background: rgba(255, 255, 255, 0);
+      z-index: 1000;
+      animation: fadeIn 0.5s ease-out;
+    }
+
+    .back-search-container {
+      max-width: 800px;
+      margin: 0 auto;
+      display: flex;
+      gap: 20px;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .back-button {
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      padding: 10px 30px;
+      border-radius: 100px;
+      color: white;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      backdrop-filter: blur(10px);
+    }
+
+    .back-button:hover {
+      background: rgba(255, 255, 255, 0.2);
+    }
+
+    #searchInput {
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      padding: 10px 20px;
+      border-radius: 100px;
+      color: white;
+      width: 300px;
+      transition: all 0.3s ease;
+      backdrop-filter: blur(10px);
+    }
+
+    #searchInput::placeholder {
+      color: rgba(255, 255, 255, 0.7);
+    }
+
+    #searchInput:focus {
+      color: white;
+      outline: none;
+    }
+
+    .button-container {
+      margin-top: 100px;
+      padding: 20px;
+      display: flex;
+      justify-content: center;
+      width: 100%;
+    }
+
+    .buttons-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      max-width: 1200px;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    .button {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 10px;
+      padding: 20px;
+      width: 200px;
+      height: 70px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      text-align: center;
+      animation: fadeIn 0.5s ease-out backwards;
+      box-sizing: border-box;
+      color: #fff;
+    }
+
+    .button:hover {
+      background: rgba(255, 255, 255, 0.15);
+      border-color: rgba(255, 255, 255, 0.3);
+      box-shadow: 0 0 10px rgba(0, 0, 0, .1);
+      transform: scale(1.01);
+    }
+
+    .button span {
+      font-weight: 400;
+      letter-spacing: 0.5px;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(10px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @media (max-width: 768px) {
+      .back-search-container {
+        flex-direction: column;
       }
 
       #searchInput {
-        padding: 10px;
-        font-size: 16px;
-        border-radius: 30px;
-        background-color: rgba(0, 0, 0, .5);
-        box-shadow: 0 0px 20px rgba(255, 255, 255, 1);
-        color: white;
-        transition: box-shadow 0.5s ease, transform 0.5s ease, margin 0.5s ease;
-        backdrop-filter: blur(3px);
-        border: none;
-      }
-
-      #searchInput:focus {
-        color: white;
-        outline: none;
-      }
-
-      #searchInput:hover {
-        box-shadow: 0 0px 25px rgba(255, 255, 255, 1);
-        text-shadow: 0 0 20px rgba(255, 255, 255, 0.5), 0 0 50px rgba(255, 255, 255, 0.3);
-        transform: scale(1.03);
-        margin-left: 5px;
-        margin-right: 5px;
-      }
-
-      .button-container {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
         width: 100%;
-        min-height: 100vh;
-        padding-top: 80px;
-        box-sizing: border-box;
-        overflow-y: auto;
-      }
-
-      .buttons-grid {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: center;
-        gap: 25px;
-        width: 100%;
-        max-width: 1000px;
-        padding: 0 20px;
-        margin-top: 100px;
-        margin-bottom: 100px;
       }
 
       .button {
-        width: 100px;
-        height: 40px;
-        padding: 15px 40px;
-        font-size: 1rem;
-        background-color: rgba(0, 0, 0, .5);
-        box-shadow: 0 0px 15px rgba(255, 255, 255, 1);
-        color: white;
-        border-radius: 30px;
-        cursor: pointer;
-        transition: all 0.4s ease-out;
-        backdrop-filter: blur(3px);
-        display: inline-flex;
-        justify-content: center;
-        align-items: center;
-        text-align: center;
-        text-decoration: none;
+        padding: 15px;
       }
+    }
 
-      .button:hover {
-        transform: scale(1.03);
-        box-shadow: 0 0px 20px rgba(255, 255, 255, 1);
-        text-shadow: 0 0 20px rgba(255, 255, 255, 0.5), 0 0 50px rgba(255, 255, 255, 0.3);
-      }
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
 
-      .back-button {
-        background-color: rgba(0, 0, 0, .5);
-        box-shadow: 0 0px 20px rgba(255, 255, 255, 1);
-        color: white;
-        height: 40px;
-        width: 100px;
-        text-align: center;
-        cursor: pointer;
-        margin-right: 20px;
-        border-radius: 30px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        transition: transform 0.3s ease, box-shadow 0.3s ease, margin-left 0.3s ease, margin-right 0.3s ease;
-        backdrop-filter: blur(2px);
-        border: none;
-        outline: none;
-      }
+    ::-webkit-scrollbar-track {
+      background: rgba(255, 255, 255, 0.1);
+    }
 
-      .back-button:hover {
-        color: white;
-        box-shadow: 0 0px 25px rgba(255, 255, 255, 1);
-        text-shadow: 0 0 20px rgba(255, 255, 255, 0.5), 0 0 50px rgba(255, 255, 255, 0.3);
-        transform: scale(1.03);
-        margin-right: 25px;
-        margin-left: 5px;
-        backdrop-filter: blur(2px);
-      }
+    ::-webkit-scrollbar-thumb {
+      background: rgba(255, 255, 255, 0.2);
+      border-radius: 4px;
+    }
 
-      .back-search-container {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        gap: 10px;
-        width: 100%;
-        padding: 10px;
-      }
-
-      @media (max-width: 768px) {
-        .button-container {
-          padding-top: 10px;
-        }
-
-        .button {
-          font-size: 12px;
-          height: 30px;
-          width: 90px;
-          margin: 5px 0;
-          user-select: none;
-          pointer-events: auto;
-        }
-
-        .button:hover {
-          text-shadow: 0 0 0px rgba(0, 0, 0, .3), 0 0 40px rgba(0, 0, 0, .5);
-          box-shadow: 0 4px 25px rgba(0, 0, 0, 0.6);
-          background-color: white;
-          font-size: 12px;
-          height: 30px;
-          width: 90px;
-          color: black;
-        }
-
-        ::-webkit-scrollbar {
-          width: 8px;
-        }
-
-        ::-webkit-scrollbar-thumb {
-          background: rgba(0, 0, 0, 0.5);
-          border-radius: 10px;
-        }
-
-        ::-webkit-scrollbar-track {
-          background: rgba(0, 0, 0, 0.1);
-          border-radius: 10px;
-        }
-      }
-    </style>
-  </head>
-  <body>
-    <div class="background-container">
+    ::-webkit-scrollbar-thumb:hover {
+      background: rgba(255, 255, 255, 0.3);
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="back-search-container">
+      <button class="back-button" onclick="navigateTo('/scripts.html')">Back</button>
+      <input type="text" id="searchInput" placeholder="Search games..." oninput="filterButtons()">
     </div>
-    <header>
-      <div class="back-search-container">
-        <button class="back-button" onclick="navigateTo('/scripts.html')" aria-label="Navigate Back">Back</button>
-        <input type="text" id="searchInput" placeholder="Search..." oninput="filterButtons()" />
-      </div>
-    </header>
+  </header>
+
     <div class="button-container">
       <div class="buttons-grid" id="gamesButtons">
         <div class="button" onclick="openLink('https://pastebin.com/raw/K0hmtmnh')" role="button" aria-label="Open Rivals">
@@ -360,92 +335,62 @@
         <div class="button" onclick="openLink('https://raw.githubusercontent.com/Butterisgood/Butter/main/Root2.lua')" role="button" aria-label="Open Bloxfruits">
           <span>Lumber Tycoon 2</span>
         </div>
-        <script>
-        async function checkAuth() {
-          try {
-            const response = await fetch('keys.json');
-            const data = await response.json();
-            const savedKey = localStorage.getItem('loggedInKey');
-            if (!localStorage.getItem('loggedIn') || !data.validKeys.includes(savedKey)) {
-              window.location.href = '/index.html';
-            }
-          } catch (error) {
-            console.error('Auth check failed:', error);
+  <script>
+    function initializeButtons() {
+      const buttons = document.querySelectorAll('.button');
+      buttons.forEach((button, index) => {
+        button.style.animationDelay = `${index * 0.05}s`;
+      });
+    }
+
+    function filterButtons() {
+      const input = document.getElementById('searchInput');
+      const filter = input.value.toLowerCase();
+      const buttons = document.querySelectorAll('.button');
+      
+      buttons.forEach(button => {
+        const text = button.textContent || button.innerText;
+        const shouldShow = text.toLowerCase().includes(filter);
+        
+        if(shouldShow) {
+          button.style.display = '';
+          button.style.animation = 'fadeIn 0.3s ease-out forwards';
+        } else {
+          button.style.display = 'none';
+        }
+      });
+    }
+
+    function navigateTo(path) {
+      window.location.href = path;
+    }
+
+    function openLink(url) {
+      window.open(url, '_blank');
+    }
+
+    document.addEventListener('DOMContentLoaded', initializeButtons);
+
+      document.addEventListener('contextmenu', e => e.preventDefault());
+      document.addEventListener('keydown', e => {
+        if ((e.ctrlKey && !['a', 'v'].includes(e.key)) || e.keyCode === 123) {
+          e.preventDefault();
+        }
+      });
+      async function checkAuth() {
+        try {
+          const response = await fetch('keys.json');
+          const data = await response.json();
+          const savedKey = localStorage.getItem('loggedInKey');
+          if (!localStorage.getItem('loggedIn') || !data.validKeys.includes(savedKey)) {
             window.location.href = '/index.html';
           }
+        } catch (error) {
+          console.error('Auth check failed:', error);
+          window.location.href = '/index.html';
         }
-        checkAuth();
-
-          function openLink(url) {
-            window.open(url, '_blank');
-          }
-
-          function filterButtons() {
-            const input = document.getElementById('searchInput');
-            const filter = input.value.toLowerCase();
-            const buttons = document.querySelectorAll('.button');
-            buttons.forEach(function(button) {
-              const text = button.textContent || button.innerText;
-              if (text.toLowerCase().indexOf(filter) > -1) {
-                button.style.display = '';
-              } else {
-                button.style.display = 'none';
-              }
-            });
-          }
-
-          function navigateTo(path) {
-            window.location.href = path;
-          }
-          document.addEventListener('contextmenu', function(e) {
-            e.preventDefault();
-          });
-          document.addEventListener('mousedown', function(e) {
-            if (e.target.tagName === 'A' || e.target.tagName === 'BUTTON') {
-              e.preventDefault();
-            }
-          });
-          document.addEventListener('touchstart', function(e) {
-            if (e.target.tagName === 'A' || e.target.tagName === 'BUTTON') {
-              e.preventDefault();
-            }
-          });
-          document.addEventListener("DOMContentLoaded", () => {
-            const links = document.querySelectorAll("a");
-            links.forEach(link => {
-              link.addEventListener("contextmenu", (event) => {
-                event.preventDefault();
-              });
-            });
-          });
-          document.querySelectorAll('header nav ul li a').forEach(anchor => {
-            anchor.addEventListener('click', function(e) {
-              e.preventDefault();
-              const targetId = this.getAttribute('href').substring(1);
-              const targetElement = document.getElementById(targetId);
-              targetElement.scrollIntoView({
-                behavior: 'smooth',
-                block: 'start'
-              });
-              setTimeout(() => {
-                document.querySelector('header').classList.add('visible');
-              }, 500);
-            });
-          });
-          document.addEventListener("keydown", function(event) {
-            if (event.ctrlKey) {
-              event.preventDefault();
-            }
-            if (event.keyCode == 123) {
-              event.preventDefault();
-            }
-          });
-          document.querySelector('.down-button').addEventListener('click', function() {
-            window.scrollBy({
-              top: window.innerHeight,
-              behavior: 'smooth'
-            });
-          });
-        </script>
-  </body>
+      }
+      checkAuth();
+  </script>
+</body>
 </html>
