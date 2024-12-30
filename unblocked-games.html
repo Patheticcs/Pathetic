@@ -4,167 +4,176 @@
     <title>Unblocked Games</title>
     <link rel="icon" type="image/x-icon" href="/favicon">
     <style>
-      body {
-        font-family: Lato, Arial, sans-serif !important;
-        background-image: url(https://www.transparenttextures.com/patterns/cartographer.png);
-        background-color: #000;
-        color: #fff;
-        overflow-x: hidden;
-        overflow-y: auto;
-        font-size: 16px
+       body {
+        font-family: 'Inter', sans-serif;
+        min-height: 100vh;
+        background-size: 400% 400%;
+        animation: gradientMove 15s ease infinite;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: 0;
+        overflow: hidden;
+        position: relative;
       }
 
-      body::-webkit-scrollbar {
-        display: none
+      body::before {
+        content: '';
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: url("https://www.transparenttextures.com/patterns/cartographer.png");
+        opacity: 0.9;
+        z-index: 0;
+      }
+
+      .glass-overlay {
+        position: fixed;
+        top: -50%;
+        left: -50%;
+        width: 200%;
+        height: 200%;
+        background: radial-gradient(circle at center, transparent 0%, rgba(0, 0, 0, 0.4) 100%);
+        pointer-events: none;
+        z-index: 1;
       }
 
       #section1 {
         min-height: 100vh;
+        width: 100%;
+        max-width: 1200px;
         display: flex;
         flex-direction: column;
         justify-content: center;
         align-items: center;
         padding: 20px;
         position: relative;
-        overflow-y: auto;
-        overflow-x: hidden;
-        scroll-behavior: smooth
+        z-index: 1;
+        margin: 0 auto;
       }
 
       .services-container {
-        display: grid;
-        gap: 20px;
-        padding: 0 40px;
-        justify-items: center;
+        display: flex;
+        gap: 30px;
+        justify-content: center;
         align-items: center;
-        grid-template-columns: repeat(auto-fill, minmax(1000px, 1fr));
-        box-sizing: border-box
+        width: 100%;
+        padding: 0 20px;
+        box-sizing: border-box;
       }
 
       .section {
-        color: #fff;
-        border-radius: 35px;
-        box-shadow: 0 0 15px rgba(255, 255, 255, .3);
-        padding: 15px;
-        background-color: rgba(0, 0, 0, .2);
-        width: 100%;
+        color: #2d3436;
+        border-radius: 24px;
+        padding: 30px;
+        background: rgba(255, 255, 255, 0.2);
+        border: 1px solid rgba(255, 255, 255, 0.3);
+        width: 300px;
+        height: 300px;
         display: flex;
         flex-direction: column;
         justify-content: center;
         align-items: center;
         text-align: center;
-        transition: transform .4s ease-out, box-shadow .3s ease, background-color .3s ease, backdrop-filter .3s ease, height .3s ease;
-        backdrop-filter: blur(2px);
-        height: 300px;
-        overflow: hidden;
-        box-sizing: border-box
-      }
-
-      .section-back {
-        height: 100px
-      }
-
-      .section-back h3 {
-        font-size: 1.5rem
+        transition: all 0.4s ease;
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.15);
       }
 
       .section:hover {
-        box-shadow: 0 0 25px rgba(255, 255, 255, .7);
-        transform: scale(1.03);
-        background-color: rgba(0, 0, 0, .2);
-        backdrop-filter: blur(6px)
+        transform: translateY(-10px);
+        box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.25);
+        background: rgba(255, 255, 255, 0.25);
       }
 
       .section h3 {
-        margin-top: 20px;
-        font-size: 3.5rem;
-        margin-bottom: 30px;
-        text-shadow: 0 0 30px rgba(255, 255, 255, 1), 0 0 40px rgba(255, 255, 255, 1)
+        margin: 0 0 30px 0;
+        font-size: 2.5rem;
+        color: #2d3436;
+        font-weight: bold;
       }
 
       .section a.button {
-        padding: 10px 20px;
-        background-color: rgba(0, 0, 0, .3);
-        color: #fff;
-        font-size: .9rem;
-        font-weight: 700;
+        padding: 12px 30px;
+        background: rgba(255, 255, 255, 0.25);
+        color: #2d3436;
+        margin-top: 30px;
+        font-size: 1rem;
+        font-weight: 600;
         border-radius: 100px;
         cursor: pointer;
         text-decoration: none;
-        width: 200px;
-        height: 30px;
+        width: 160px;
+        height: 20px;
         backdrop-filter: blur(10px);
-        transition: transform .5s ease, box-shadow .5s ease;
-        text-align: center;
+        -webkit-backdrop-filter: blur(10px);
+        transition: all 0.3s ease;
         display: flex;
         align-items: center;
         justify-content: center;
-        margin-top: 30px
+        border: 1px solid rgba(255, 255, 255, 0.3);
+        box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.1);
       }
 
       .section a.button:hover {
-        transform: scale(1.03);
-        box-shadow: 0 0 50px rgba(255, 255, 255, .4), 0 0 15px rgba(255, 255, 255, .5)
+        transform: scale(1.05);
+        background: rgba(255, 255, 255, 0.35);
+        box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.2);
       }
 
       .home-button {
-        padding: 10px 20px;
-        background-color: rgba(0, 0, 0, .5);
-        color: #fff;
-        font-size: .9rem;
-        font-weight: 700;
+        margin-top: 130px;
+        padding: 12px 30px;
+        background: rgba(255, 255, 255, 0.2);
+        color: #2d3436;
+        font-size: 1rem;
+        font-weight: 600;
         border-radius: 100px;
         cursor: pointer;
         text-decoration: none;
-        width: 200px;
-        box-shadow: 0 0 50px rgba(255, 255, 255, .6);
+        width: 160px;
         height: 50px;
         backdrop-filter: blur(10px);
-        transition: transform .5s ease, box-shadow .5s ease;
-        text-align: center;
+        -webkit-backdrop-filter: blur(10px);
+        transition: all 0.3s ease;
         display: flex;
         align-items: center;
         justify-content: center;
-        margin-top: 30px;
-        border: none
+        border: 1px solid rgba(255, 255, 255, 0.3);
+        box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.15);
       }
 
       .home-button:hover {
         transform: scale(1.05);
-        box-shadow: 0 0 50px rgba(255, 255, 255, 1)
+        background: rgba(255, 255, 255, 0.3);
+        box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.25);
       }
 
-      footer {
-        background: rgba(0, 0, 0, .85);
-        color: var(--white);
-        text-align: center;
-        height: 60px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        flex-direction: column
-      }
-
-      footer p {
-        font-size: 1rem
-      }
-
-      footer a {
-        text-decoration: none;
-        color: var(--highlight);
-        font-weight: 700
-      }
-
-      @media (max-width:768px) {
-        .welcome h2 {
-          font-size: 3.5rem;
-          margin-bottom: 55px
+      @keyframes float {
+        0%, 100% {
+          transform: translateY(0) rotate(0deg);
         }
+        50% {
+          transform: translateY(100px) rotate(180deg);
+        }
+      }
 
-        .welcome button {
-          margin-top: 80px;
-          font-size: 1rem;
-          padding: 12px 30px
+      @media (max-width: 768px) {
+        .services-container {
+          flex-direction: column;
+          padding: 0 20px;
+        }
+        
+        .section {
+          width: 100%;
+          max-width: 300px;
+        }
+        
+        .section h3 {
+          font-size: 2rem;
         }
       }
     </style>
@@ -184,6 +193,61 @@
       <button class="home-button" onclick='window.location.href="home.html"'>Home</button>
     </section>
     <script>
+      document.addEventListener('DOMContentLoaded', () => {
+        const sections = document.querySelectorAll('.section');
+        const PERSPECTIVE = '1000px';
+        const SCALE = 1.02;
+        const ROTATION_MULTIPLIER = 5;
+        
+        sections.forEach((section) => {
+          section.style.transition = 'transform 0.4s ease-out';
+          
+          section.addEventListener('mousemove', (e) => {
+            const { offsetWidth: width, offsetHeight: height } = section;
+            const rect = section.getBoundingClientRect();
+            const offsetX = e.clientX - rect.left;
+            const offsetY = e.clientY - rect.top;
+            const x = (offsetX / width) * 2 - 1;
+            const y = (offsetY / height) * 2 - 1;
+            
+            section.style.transform = `
+              perspective(${PERSPECTIVE})
+              scale(${SCALE})
+              rotateX(${y * -ROTATION_MULTIPLIER}deg)
+              rotateY(${x * ROTATION_MULTIPLIER}deg)
+            `;
+          });
+          
+          section.addEventListener('mouseleave', () => {
+            section.style.transform = `
+              perspective(${PERSPECTIVE})
+              scale(1)
+              rotateX(0deg)
+              rotateY(0deg)
+            `;
+          });
+        });
+      });
+
+      function loadGameIframe(game) {
+        let iframeSrc = '';
+        if (game === 'roblox') {
+          iframeSrc = 'https://pathetic-roblox-main.vercel.app';
+        } else if (game === 'minecraft') {
+          iframeSrc = 'https://pathetic-minecraft.vercel.app';
+        }
+        
+        const iframe = document.createElement('iframe');
+        iframe.src = iframeSrc;
+        iframe.style.width = '100%';
+        iframe.style.height = '100%';
+        iframe.style.border = 'none';
+        iframe.style.position = 'fixed';
+        iframe.style.top = '0';
+        iframe.style.left = '0';
+        iframe.style.zIndex = '9999';
+        document.body.appendChild(iframe);
+      }
         async function checkAuth() {
           try {
             const response = await fetch('keys.json');
@@ -198,55 +262,6 @@
           }
         }
         checkAuth();
-      document.addEventListener('DOMContentLoaded', () => {
-        const sections = document.querySelectorAll('.section');
-        const PERSPECTIVE = '1000px';
-        const SCALE = 1.03;
-        const ROTATION_MULTIPLIER = 4;
-        sections.forEach((section) => {
-          section.style.transition = 'transform 0.5s ease-out';
-          section.addEventListener('mousemove', (e) => {
-            const {
-              offsetWidth: width,
-              offsetHeight: height
-            } = section;
-            const rect = section.getBoundingClientRect();
-            const offsetX = e.clientX - rect.left;
-            const offsetY = e.clientY - rect.top;
-            const x = (offsetX / width) * 2 - 1;
-            const y = (offsetY / height) * 2 - 1;
-            section.style.transform = ` perspective(${PERSPECTIVE}) scale(${SCALE}) rotateX(${y * -ROTATION_MULTIPLIER}deg) rotateY(${x * ROTATION_MULTIPLIER}deg) `;
-          });
-          section.addEventListener('mouseleave', () => {
-            section.style.transform = ` perspective(${PERSPECTIVE}) scale(1) rotateX(0deg) rotateY(0deg) `;
-          });
-        });
-      });
-
-      function scrollToSection1() {
-        document.getElementById('section1').scrollIntoView({
-          behavior: 'smooth'
-        });
-      }
-
-      function loadGameIframe(game) {
-        let iframeSrc = '';
-        if (game === 'roblox') {
-          iframeSrc = 'https://pathetic-roblox-main.vercel.app';
-        } else if (game === 'minecraft') {
-          iframeSrc = 'https://pathetic-minecraft.vercel.app';
-        }
-        const iframe = document.createElement('iframe');
-        iframe.src = iframeSrc;
-        iframe.style.width = '100%';
-        iframe.style.height = '100%';
-        iframe.style.border = 'none';
-        iframe.style.position = 'fixed';
-        iframe.style.top = '0';
-        iframe.style.left = '0';
-        iframe.style.zIndex = '9999';
-        document.body.appendChild(iframe);
-      }
     </script>
   </body>
 </html>
