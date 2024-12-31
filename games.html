@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Games</title>
+    <link rel="icon" type="image/x-icon" href="/favicon">
+    <style>      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+        background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+        min-height: 100vh;
+        overflow-x: hidden;
+        position: relative;
+      }
+
+      .glass-overlay {
+        position: fixed;
+        top: -50%;
+        left: -50%;
+        width: 200%;
+        height: 200%;
+        background: radial-gradient(circle at center, transparent 0%, rgba(0, 0, 0, 0.4) 100%);
+        pointer-events: none;
+        z-index: 1;
+      }
+
+    header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      padding: 20px;
+      background: rgba(255, 255, 255, 0);
+      z-index: 1000;
+      animation: fadeIn 0.5s ease-out;
+    }
+
+    .back-search-container {
+      max-width: 800px;
+      margin: 0 auto;
+      display: flex;
+      gap: 20px;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .back-button {
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(0, 0, 0, 0.2);
+      padding: 10px 30px;
+      border-radius: 100px;
+      color: black;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      backdrop-filter: blur(10px);
+    }
+
+    .back-button:hover {
+      background: rgba(255, 255, 255, 0.2);
+    }
+
+    #searchInput {
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(0, 0, 0, 0.2);
+      padding: 10px 20px;
+      border-radius: 100px;
+      color: black;
+      width: 300px;
+      transition: all 0.3s ease;
+      backdrop-filter: blur(10px);
+    }
+
+    #searchInput::placeholder {
+      color: rgba(0, 0, 0, 0.7);
+    }
+
+    #searchInput:focus {
+      color: black;
+      outline: none;
+    }
+
+    .button-container {
+      margin-top: 100px;
+      padding: 20px;
+      display: flex;
+      justify-content: center;
+      width: 100%;
+    }
+
+    .buttons-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      max-width: 1200px;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    .button {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(10px);
+      box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.15);
+      border-radius: 20px;
+      padding: 20px;
+      width: 200px;
+      height: 70px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      text-align: center;
+      animation: fadeIn 0.5s ease-out backwards;
+      box-sizing: border-box;
+      color: black;
+    }
+
+      .button:hover {
+        transform: translateY(-5px);
+        background: rgba(255, 255, 255, 0.3);
+        box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.2);
+      }
+
+    .button span {
+      font-weight: 400;
+      letter-spacing: 0.5px;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(10px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @media (max-width: 768px) {
+      .back-search-container {
+        flex-direction: column;
+      }
+
+      #searchInput {
+        width: 100%;
+      }
+
+      .button {
+        padding: 15px;
+      }
+    }
+
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: rgba(255, 255, 255, 0.1);
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: rgba(255, 255, 255, 0.2);
+      border-radius: 4px;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+      background: rgba(255, 255, 255, 0.3);
+    }</style>
+</head>
+<body>
+  <header>
+    <div class="back-search-container">
+      <button class="back-button" onclick="navigateTo('/scripts')">Back</button>
+      <input type="text" id="searchInput" placeholder="Search games..." oninput="filterButtons()">
+    </div>
+  </header>
+    <div class="button-container">
+      <div class="buttons-grid" id="gamesButtons">
+        <div class="button" onclick="openLink('https://pastebin.com/raw/K0hmtmnh')" role="button" aria-label="Open Rivals">
+          <span>Rivals</span>
+        </div>
+        <div class="button" onclick="openLink('https://pastebin.com/raw/dXWLKiHr')" role="button" aria-label="Open Arsenal">
+          <span>Arsenal</span>
+        </div>
+        <div class="button" onclick="openLink('https://pastebin.com/raw/zKPuu46z')" role="button" aria-label="Murderer VS Sheriff Duels">
+          <span>Murderer VS Sheriff Duels</span>
+        </div>
+        <div class="button" onclick="openLink('https://raw.githubusercontent.com/Dekos-lgbty/dahood/main/starhook')" role="button" aria-label="Open Da Hood">
+          <span>Da Hood</span>
+        </div>
+        <div class="button" onclick="openLink('https://pastebin.com/raw/jxsu3X2g')" role="button" aria-label="Open Blade Ball">
+          <span>Blade Ball</span>
+        </div>
+        <div class="button" onclick="openLink('https://pastebin.com/raw/G4v1wbuD')" role="button" aria-label="Open Murder Mystery 2">
+          <span>Murder Mystery 2</span>
+        </div>
+        <div class="button" onclick="openLink('https://pastebin.com/raw/X2H9E2sK')" role="button" aria-label="Open Bedwars">
+          <span>Bedwars</span>
+        </div>
+        <div class="button" onclick="openLink('https://raw.githubusercontent.com/elliexmln/PrizzLife/main/pladmin.lua')" role="button" aria-label="Open Prison Life">
+          <span>Prison Life</span>
+        </div>
+        <div class="button" onclick="openLink('https://pastebin.com/raw/TA8iRBnh')" role="button" aria-label="Open Doors FLOOR 2">
+          <span>Doors</span>
+        </div>
+        <div class="button" onclick="openLink('https://rawscripts.net/raw/Destruction-Simulator-*OP*-GUI-1858')" role="button" aria-label="Open Destruction Simulator">
+          <span>Destruction Simulator</span>
+        </div>
+        <div class="button" onclick="openLink('https://raw.githubusercontent.com/scripter1cursed1rade/BelugaWare-1.4/main/belugaware.lua')" role="button" aria-label="Open KAT">
+          <span>KAT</span>
+        </div>
+        <div class="button" onclick="openLink('https://pastebin.com/raw/s22K9ctU')" role="button" aria-label="Open Dandy's World">
+          <span>Dandy's World</span>
+        </div>
+        <div class="button" onclick="openLink('https://raw.githubusercontent.com/hellohellohell012321/rate-my-avatar-gui/main/main.lua')" role="button" aria-label="Open Rate My Avatar">
+          <span>Rate My Avatar</span>
+        </div>
+        <div class="button" onclick="openLink('https://raw.githubusercontent.com/TrollGuiMaker/f0rtuit0us-hub/refs/heads/main/old')" role="button" aria-label="Open Brookhaven">
+          <span>Brookhaven</span>
+        </div>
+        <div class="button" onclick="openLink('https://pastebin.com/raw/nwuU0dV5')" role="button" aria-label="Open Legends of Speed">
+          <span>Legends of Speed</span>
+        </div>
+        <div class="button" onclick="openLink('https://raw.githubusercontent.com/kingkaynex11/strucid-script-Undetected-2024/refs/heads/main/strucid%20script%20by%20znx')" role="button" aria-label="Open Strucid">
+          <span>Strucid</span>
+        </div>
+        <div class="button" onclick="openLink('https://pastebin.com/raw/1DJh7UQ7')" role="button" aria-label="Open Zombie Attack">
+          <span>Zombie Attack</span>
+        </div>
+        <div class="button" onclick="openLink('https://rawscripts.net/raw/Piggy-open-source-15390')" role="button" aria-label="Open Piggy">
+          <span>Piggy</span>
+        </div>
+        <div class="button" onclick="openLink('https://raw.githubusercontent.com/antisocialb2/SPIMINE-FLEETHEFACILITY/main/script.lua')" role="button" aria-label="Open Flee The Facility">
+          <span>Flee The Facility</span>
+        </div>
+        <div class="button" onclick="openLink('https://raw.githubusercontent.com/PerdHub/Blosfruitscript/main/PerdLoader')" role="button" aria-label="Open Bloxfruits">
+          <span>Bloxfruits</span>
+        </div>
+        <div class="button" onclick="openLink('https://raw.githubusercontent.com/wannagrindlikepablo/Linux-Hub/refs/heads/main/Linux%20Hub')" role="button" aria-label="Open Bloxfruits">
+          <span>Snow Plow Simulator</span>
+        </div>
+        <div class="button" onclick="openLink('https://raw.githubusercontent.com/railme37509124/komaruhubabilitywars/main/script.lua')" role="button" aria-label="Open Bloxfruits">
+          <span>Ability Wars</span>
+        </div>
+        <div class="button" onclick="openLink('https://pastebin.com/raw/F8PTSEDw')" role="button" aria-label="Open Bloxfruits">
+          <span>Gun Grounds FFA</span>
+        </div>
+        <div class="button" onclick="openLink('https://raw.githubusercontent.com/shlexware/Orion/main/source')" role="button" aria-label="Open Bloxfruits">
+          <span>Plinko RNG</span>
+        </div>
+        <div class="button" onclick="openLink('https://raw.githubusercontent.com/H20CalibreYT/SystemBroken/main/script')" role="button" aria-label="Open Bloxfruits">
+          <span>Ragdoll Engine</span>
+        </div>
+        <div class="button" onclick="openLink('https://raw.githubusercontent.com/JinxTheCatto/Neptune/main/NeptuneHub.lua')" role="button" aria-label="Open Bloxfruits">
+          <span>War Tycoon</span>
+        </div>
+        <div class="button" onclick="openLink('https://raw.githubusercontent.com/Waza80/scripts-new/main/Frontlines.lua')" role="button" aria-label="Open Bloxfruits">
+          <span>Frontlines</span>
+        </div>
+        <div class="button" onclick="openLink('https://rscripts.net/raw/op-gui-script_1729254511881_9gp5IsF4sf.txt')" role="button" aria-label="Open Bloxfruits">
+          <span>City Defense</span>
+        </div>
+        <div class="button" onclick="openLink('https://pastebin.com/raw/Fa62wsXP')" role="button" aria-label="Open Bloxfruits">
+          <span>Fisch</span>
+        </div>
+        <div class="button" onclick="openLink('https://pastebin.com/raw/ziYUdiUx')" role="button" aria-label="Open Bloxfruits">
+          <span>Build a Boat for Treasure</span>
+        </div>
+        <div class="button" onclick="openLink('https://pastebin.com/raw/dcyuEgyK')" role="button" aria-label="Open Bloxfruits">
+          <span>Funky Friday</span>
+        </div>
+        <div class="button" onclick="openLink('https://raw.githubusercontent.com/shuttle-r/crap/main/Main.txt')" role="button" aria-label="Open Bloxfruits">
+          <span>Red Light, Green Light</span>
+        </div>
+        <div class="button" onclick="openLink('https://raw.githubusercontent.com/Zepsyy2/asd/main/Ninja%20Legends.lua')" role="button" aria-label="Open Bloxfruits">
+          <span>Ninja Legends</span>
+        </div>
+        <div class="button" onclick="openLink('https://pastebin.com/raw/vTfyHTim')" role="button" aria-label="Open Bloxfruits">
+          <span>Aimblox</span>
+        </div>
+        <div class="button" onclick="openLink('http://scripts.projectauto.xyz/AutoRobV5')" role="button" aria-label="Open Bloxfruits">
+          <span>Jailbreak</span>
+        </div>
+        <div class="button" onclick="openLink('https://raw.githubusercontent.com/Bac0nHck/Scripts/main/BeNpcOrDie')" role="button" aria-label="Open Bloxfruits">
+          <span>Be NPC or DIE</span>
+        </div>
+        <div class="button" onclick="openLink('https://raw.githubusercontent.com/PorryDepTrai/exploit/main/DashBoostSolora.lua')" role="button" aria-label="Open Bloxfruits">
+          <span>Ro-Ghoul</span>
+        </div>
+        <div class="button" onclick="openLink('https://raw.githubusercontent.com/9ur98wh8fjkerbngo12ikontgg/fortnite/main/locky%20blocks12nyhubf87yh189j98ihuygrweyugf12ou8r')" role="button" aria-label="Open Bloxfruits">
+          <span>Lucky Blocks</span>
+        </div>
+        <div class="button" onclick="openLink('https://raw.githubusercontent.com/venoxcc/universalscripts/refs/heads/main/prestinehubv3')" role="button" aria-label="Open Bloxfruits">
+          <span>Pets Go</span>
+        </div>
+        <div class="button" onclick="openLink('https://raw.githubusercontent.com/fgdergewrgegr/SVH/main/VHSV4')" role="button" aria-label="Open Bloxfruits">
+          <span>Fling Things and People</span>
+        </div>
+        <div class="button" onclick="openLink('https://raw.githubusercontent.com/Marwanleprodu91670/lite-hub-ml/refs/heads/main/README.md')" role="button" aria-label="Open Bloxfruits">
+          <span>Muscle Legends</span>
+        </div>
+        <div class="button" onclick="openLink('https://raw.githubusercontent.com/Spooksmn/Tww-Stuff/main/EternalXcracked.lua')" role="button" aria-label="Open Bloxfruits">
+          <span>The Wild West</span>
+        </div>
+        <div class="button" onclick="openLink('https://getessence.xyz/load.lua')" role="button" aria-label="Open Bloxfruits">
+          <span>The Bronx 2</span>
+        </div>
+        <div class="button" onclick="openLink('https://raw.githubusercontent.com/Butterisgood/Butter/main/Root2.lua')" role="button" aria-label="Open Bloxfruits">
+          <span>Lumber Tycoon 2</span>
+        </div>
+  </body>
+  <script>    function initializeButtons() {
+      const buttons = document.querySelectorAll('.button');
+      buttons.forEach((button, index) => {
+        button.style.animationDelay = `${index * 0.05}s`;
+      });
+    }
+
+    function filterButtons() {
+      const input = document.getElementById('searchInput');
+      const filter = input.value.toLowerCase();
+      const buttons = document.querySelectorAll('.button');
+      
+      buttons.forEach(button => {
+        const text = button.textContent || button.innerText;
+        const shouldShow = text.toLowerCase().includes(filter);
+        
+        if(shouldShow) {
+          button.style.display = '';
+          button.style.animation = 'fadeIn 0.3s ease-out forwards';
+        } else {
+          button.style.display = 'none';
+        }
+      });
+    }
+
+    function navigateTo(path) {
+      window.location.href = path;
+    }
+
+    function openLink(url) {
+      window.open(url, '_blank');
+    }
+
+    document.addEventListener('DOMContentLoaded', initializeButtons);
+
+      document.addEventListener('contextmenu', e => e.preventDefault());
+      document.addEventListener('keydown', e => {
+        if ((e.ctrlKey && !['a', 'v'].includes(e.key)) || e.keyCode === 123) {
+          e.preventDefault();
+        }
+      });
+      async function checkAuth() {
+        try {
+          const response = await fetch('keys.json');
+          const data = await response.json();
+          const savedKey = localStorage.getItem('loggedInKey');
+          if (!localStorage.getItem('loggedIn') || !data.validKeys.includes(savedKey)) {
+            window.location.href = '/';
+          }
+        } catch (error) {
+          console.error('Auth check failed:', error);
+          window.location.href = '/';
+        }
+      }
+      checkAuth();</script>
+</html>
