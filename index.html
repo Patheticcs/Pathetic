@@ -286,31 +286,36 @@
     </div>
     <script>
 async function checkAuth() {
-        const loggedIn = localStorage.getItem("loggedIn");
-        const savedKey = localStorage.getItem("loggedInKey");
+    const loggedIn = localStorage.getItem("loggedIn");
+    const savedKey = localStorage.getItem("loggedInKey");
 
-        // Only proceed if user is logged in
-        if (loggedIn === "true" && savedKey) {
-          try {
+    // Only proceed if user is logged in
+    if (loggedIn === "true" && savedKey) {
+        try {
             const validKeys = await fetchValidKeys();
             if (validKeys.includes(savedKey)) {
-              return; // Do nothing, user is valid
+                // User is valid, proceed to home/index.html
+                if (window.location.pathname !== '/home/index.html') {
+                    window.location.href = "/home/index.html"; // Redirect to /home/index.html if not already there
+                }
+                return; // User is authenticated, do nothing
             } else {
-              // If the key is invalid, log out
-              localStorage.removeItem("loggedIn");
-              localStorage.removeItem("loggedInKey");
-              window.location.href = "/"; // Redirect to login
+                // If the key is invalid, log out
+                localStorage.removeItem("loggedIn");
+                localStorage.removeItem("loggedInKey");
+                window.location.href = "/"; // Redirect to login page
             }
-          } catch (error) {
+        } catch (error) {
             console.error('Auth check failed:', error);
             localStorage.removeItem("loggedIn");
             localStorage.removeItem("loggedInKey");
-            window.location.href = "/"; // Redirect on error
-          }
-        } else {
-          window.location.href = "/"; // Redirect to login if not logged in
+            window.location.href = "/"; // Redirect to login on error
         }
-      }
+    } else {
+        window.location.href = "/"; // Redirect to login if not logged in
+    }
+}
+
 
       async function checkKey() {
         const key = document.getElementById("key").value.trim();
