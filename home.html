@@ -73,7 +73,7 @@
         }
       }
 
-     body {
+      body {
         font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
         background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
         color: #2d3436;
@@ -430,8 +430,7 @@
 
       .section p {
         margin-bottom: 25px;
-        color: rgba(255, 255, 255, .8)
-        color: #000
+        color: rgba(255, 255, 255, .8) color: #000
       }
 
       .section a.button {
@@ -521,7 +520,7 @@
           transform: translateY(0)
         }
       }
-</style>
+    </style>
     </style>
   </head>
   <body>
@@ -631,7 +630,8 @@
       <p>2024 Pathetic. All Rights Reserved.</p>
       <a href="/versions" class="footer-link">‎ ‎ ‎ Version History</a>
     </footer>
-  <script>      document.addEventListener('DOMContentLoaded', () => {
+    <script>
+      document.addEventListener('DOMContentLoaded', () => {
         const header = document.querySelector('header');
         const getStartedBtn = document.getElementById('get-started-btn');
         const welcomeSection = document.getElementById('welcome');
@@ -730,20 +730,21 @@
         if (e.keyCode === 123) {
           e.preventDefault();
         }
-      });       
-     async function checkAuth() {
-          try {
-            const response = await fetch('keys.json');
-            const data = await response.json();
-            const savedKey = localStorage.getItem('loggedInKey');
-            if (!localStorage.getItem('loggedIn') || !data.validKeys.includes(savedKey)) {
-              window.location.href = '/';
-            }
-          } catch (error) {
-            console.error('Auth check failed:', error);
+      });
+      async function checkAuth() {
+        try {
+          const response = await fetch('keys.json');
+          const data = await response.json();
+          const savedKey = localStorage.getItem('loggedInKey');
+          if (!localStorage.getItem('loggedIn') || !data.validKeys.includes(savedKey)) {
             window.location.href = '/';
           }
+        } catch (error) {
+          console.error('Auth check failed:', error);
+          window.location.href = '/';
         }
-        checkAuth();</script>
+      }
+      checkAuth();
+    </script>
   </body>
 </html>
