@@ -569,12 +569,12 @@
         <div class="section">
           <h3>SCRIPTS</h3>
           <p>Free Scripts, all working.</p>
-          <a href="scripts.html" class="button">Enter</a>
+          <a href="scripts" class="button">Enter</a>
         </div>
         <div class="section">
           <h3>EXECUTORS</h3>
           <p>Free Windows Executors</p>
-          <a href="executors.html" class="button">Enter</a>
+          <a href="executors" class="button">Enter</a>
         </div>
         <div class="section">
           <h3>VOXLIS</h3>
@@ -598,17 +598,17 @@
         <div class="section">
           <h3>PROXIES</h3>
           <p>Browse any website anonymously.</p>
-          <a href="proxies.html" class="button">Enter</a>
+          <a href="proxies" class="button">Enter</a>
         </div>
         <div class="section">
           <h3>BYPASS</h3>
           <p>Bypass AD Links.</p>
-          <a href="bypass.html" class="button">Enter</a>
+          <a href="bypass" class="button">Enter</a>
         </div>
         <div class="section">
           <h3>FREE MOVIES</h3>
           <p>Stream, Download, Torrent Videos</p>
-          <a href="movies.html" class="button">Enter</a>
+          <a href="movies" class="button">Enter</a>
         </div>
         <div class="section">
           <h3>FMHY</h3>
@@ -618,7 +618,7 @@
         <div class="section">
           <h3>GAMES</h3>
           <p>Play Roblox and Minecraft UNBLOCKED!</p>
-          <a href="unblocked-games.html" class="button">Enter</a>
+          <a href="unblocked-games" class="button">Enter</a>
         </div>
       </div>
     </section>
@@ -628,7 +628,7 @@
     </section>
     <footer>
       <p>2024 Pathetic. All Rights Reserved.</p>
-      <a href="/versions.html" class="footer-link">‎ ‎ ‎ Version History</a>
+      <a href="/versions" class="footer-link">‎ ‎ ‎ Version History</a>
     </footer>
     <script>
       document.addEventListener('DOMContentLoaded', () => {
@@ -737,14 +737,16 @@
           const data = await response.json();
           const savedKey = localStorage.getItem('loggedInKey');
           if (!localStorage.getItem('loggedIn') || !data.validKeys.includes(savedKey)) {
-            window.location.href = '/index.html';
+            window.location.href = '/';
           }
         } catch (error) {
           console.error('Auth check failed:', error);
-          window.location.href = '/index.html';
+          window.location.href = '/';
         }
       }
       checkAuth();
     </script>
   </body>
 </html>
+
+
