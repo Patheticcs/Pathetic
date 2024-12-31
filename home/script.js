@@ -98,24 +98,3 @@
           e.preventDefault();
         }
       });
-async function checkAuth() {
-  try {
-    const response = await fetch('keys.json');
-    if (!response.ok) {
-      throw new Error('Failed to fetch keys');
-    }
-
-    const data = await response.json();
-    const savedKey = localStorage.getItem('loggedInKey');
-    const loggedIn = localStorage.getItem('loggedIn');
-
-    if (!loggedIn || !savedKey || !data.validKeys.includes(savedKey)) {
-      window.location.href = '/';
-    }
-  } catch (error) {
-    console.error('Auth check failed:', error);
-    window.location.href = '/';
-  }
-}
-
-checkAuth();
