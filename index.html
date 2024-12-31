@@ -286,96 +286,98 @@
     </div>
     <script>
 async function checkAuth() {
-  const loggedIn = localStorage.getItem("loggedIn");
-  const savedKey = localStorage.getItem("loggedInKey");
+        const loggedIn = localStorage.getItem("loggedIn");
+        const savedKey = localStorage.getItem("loggedInKey");
 
-  // Only check if the user is logged in
-  if (loggedIn === "true" && savedKey) {
-    try {
-      const validKeys = await fetchValidKeys();
-      if (validKeys.includes(savedKey)) {
-        return; // Do nothing, already valid
-      } else {
-        // Session expired or invalid key
-        localStorage.removeItem("loggedIn");
-        localStorage.removeItem("loggedInKey");
-        window.location.href = "/"; // Redirect to login
+        // Only proceed if user is logged in
+        if (loggedIn === "true" && savedKey) {
+          try {
+            const validKeys = await fetchValidKeys();
+            if (validKeys.includes(savedKey)) {
+              return; // Do nothing, user is valid
+            } else {
+              // If the key is invalid, log out
+              localStorage.removeItem("loggedIn");
+              localStorage.removeItem("loggedInKey");
+              window.location.href = "/"; // Redirect to login
+            }
+          } catch (error) {
+            console.error('Auth check failed:', error);
+            localStorage.removeItem("loggedIn");
+            localStorage.removeItem("loggedInKey");
+            window.location.href = "/"; // Redirect on error
+          }
+        } else {
+          window.location.href = "/"; // Redirect to login if not logged in
+        }
       }
-    } catch (error) {
-      console.error('Auth check failed:', error);
-      window.location.href = "/"; // Redirect on error
-    }
-  } else {
-    window.location.href = "/"; // Not logged in, redirect to login
-  }
-}
 
-async function checkKey() {
-  const key = document.getElementById("key").value.trim();
-  const alertElement = document.getElementById("alert");
-  const container = document.getElementById("login-container");
-  const submitButton = document.querySelector('button');
-  submitButton.style.pointerEvents = 'none';
-  submitButton.style.opacity = '0.7';
+      async function checkKey() {
+        const key = document.getElementById("key").value.trim();
+        const alertElement = document.getElementById("alert");
+        const container = document.getElementById("login-container");
+        const submitButton = document.querySelector('button');
+        submitButton.style.pointerEvents = 'none';
+        submitButton.style.opacity = '0.7';
 
-  try {
-    const validKeys = await fetchValidKeys();
-    if (validKeys.includes(key)) {
-      alertElement.style.background = 'rgba(48, 209, 88, 0.15)';
-      alertElement.textContent = "Success! Redirecting...";
-      alertElement.classList.add("show");
-      container.style.height = 'auto';
-      setTimeout(() => {
-        localStorage.setItem("loggedIn", "true");
-        localStorage.setItem("loggedInKey", key);
-        window.location.href = "/home.html";
-      }, 1500);
-    } else {
-      alertElement.style.background = 'rgba(255, 59, 48, 0.15)';
-      alertElement.textContent = "Invalid key! Please try again or get a new key.";
-      alertElement.classList.add("show");
-      container.style.height = 'auto';
-      container.classList.add('shake');
-      setTimeout(() => container.classList.remove('shake'), 500);
-    }
-  } catch (error) {
-    alertElement.style.background = 'rgba(255, 59, 48, 0.15)';
-    alertElement.textContent = "Error validating key. Please try again.";
-    alertElement.classList.add("show");
-    container.style.height = 'auto';
-  } finally {
-    submitButton.style.pointerEvents = 'auto';
-    submitButton.style.opacity = '1';
-  }
-}
+        try {
+          const validKeys = await fetchValidKeys();
+          if (validKeys.includes(key)) {
+            alertElement.style.background = 'rgba(48, 209, 88, 0.15)';
+            alertElement.textContent = "Success! Redirecting...";
+            alertElement.classList.add("show");
+            container.style.height = 'auto';
+            setTimeout(() => {
+              // Set the values in localStorage after successful login
+              localStorage.setItem("loggedIn", "true");
+              localStorage.setItem("loggedInKey", key);
+              window.location.href = "/home.html"; // Redirect to home after login
+            }, 1500);
+          } else {
+            alertElement.style.background = 'rgba(255, 59, 48, 0.15)';
+            alertElement.textContent = "Invalid key! Please try again or get a new key.";
+            alertElement.classList.add("show");
+            container.style.height = 'auto';
+            container.classList.add('shake');
+            setTimeout(() => container.classList.remove('shake'), 500);
+          }
+        } catch (error) {
+          alertElement.style.background = 'rgba(255, 59, 48, 0.15)';
+          alertElement.textContent = "Error validating key. Please try again.";
+          alertElement.classList.add("show");
+          container.style.height = 'auto';
+        } finally {
+          submitButton.style.pointerEvents = 'auto';
+          submitButton.style.opacity = '1';
+        }
+      }
 
-async function fetchValidKeys() {
-  const response = await fetch('keys.json');
-  const data = await response.json();
-  return data.validKeys;
-}
+      async function fetchValidKeys() {
+        const response = await fetch('keys.json');
+        const data = await response.json();
+        return data.validKeys;
+      }
 
-function openDiscord() {
-  window.open('https://discord.gg/Eg2EWXwYcn', '_blank');
-}
+      function openDiscord() {
+        window.open('https://discord.gg/Eg2EWXwYcn', '_blank');
+      }
 
-document.getElementById('key').addEventListener('keypress', (e) => {
-  if (e.key === 'Enter') {
-    checkKey();
-  }
-});
+      document.getElementById('key').addEventListener('keypress', (e) => {
+        if (e.key === 'Enter') {
+          checkKey();
+        }
+      });
 
-window.onload = () => {
-  checkAuth(); // Check auth on page load
-};
+      window.onload = () => {
+        checkAuth(); // Check authentication on page load
+      };
 
-document.addEventListener('contextmenu', e => e.preventDefault());
-document.addEventListener('keydown', e => {
-  if ((e.ctrlKey && !['a', 'v'].includes(e.key)) || e.keyCode === 123) {
-    e.preventDefault();
-  }
-});
-
+      document.addEventListener('contextmenu', e => e.preventDefault());
+      document.addEventListener('keydown', e => {
+        if ((e.ctrlKey && !['a', 'v'].includes(e.key)) || e.keyCode === 123) {
+          e.preventDefault();
+        }
+      });
     </script>
   </body>
 </html>
