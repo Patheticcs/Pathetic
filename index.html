@@ -343,7 +343,7 @@
         if (loggedIn === "true") {
           fetchValidKeys().then(validKeys => {
             if (validKeys.includes(savedKey)) {
-              window.location.href = "/home.html";
+              window.location.href = "/home";
             } else {
               localStorage.removeItem("loggedIn");
               localStorage.removeItem("loggedInKey");
