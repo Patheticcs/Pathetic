@@ -75,7 +75,7 @@
 
       body {
         font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-        background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+        background: linear-gradient(000, #000 0%, #000 100%);
         color: #2d3436;
         min-height: 100vh;
         overflow: hidden;
@@ -93,14 +93,12 @@
         z-index: 0
       }
 
-      header {
-        margin-top: 10px;
+     header {
         position: fixed;
         top: 0;
         left: 50%;
         transform: translateX(-50%);
         width: 100%;
-        max-width: 1000px;
         display: flex;
         justify-content: center;
         align-items: center;
@@ -109,11 +107,14 @@
         z-index: 1000;
         opacity: 0;
         visibility: hidden;
-        background: rgba(255, 255, 255, 0.1);
+        background: rgba(255, 255, 255, 0.15);
         backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
         border: 1px solid rgba(255, 255, 255, 0.2);
         border-radius: 50px;
-        transition: opacity 1s ease, background 1s ease, box-shadow 1s ease, max-width 1s ease, height 1s ease, backdrop-filter 2s ease;
+        transition: all 0.3s ease;
+        margin-top: 10px;
+        width: 1000px;
         height: 140px;
       }
 
@@ -175,7 +176,7 @@
 
       nav ul li a {
         text-decoration: none;
-        color: #000;
+        color: #fff;
         font-size: 16px;
         transition: color .3s ease
       }
@@ -198,7 +199,7 @@
         box-shadow: 0 0 5px rgba(255, 255, 255, .9), 0 0 0 rgba(255, 255, 255, .9);
         font-size: 13px;
         border: none;
-        color: #000;
+        color: #fff;
         border-radius: 100px;
         cursor: pointer;
         transition: width .3s ease, height .3s ease, box-shadow .3s ease, backdrop-filter .3s ease;
@@ -224,7 +225,7 @@
         transform: translate(-35%, -50%);
         opacity: 0;
         font-size: 13px;
-        color: #000;
+        color: #fff;
         pointer-events: none;
         transition: opacity .4s ease
       }
@@ -290,6 +291,7 @@
 
       .welcome h2 {
         font-size: 8rem;
+        color: white;
         margin-bottom: 30px;
         animation: fadeInUp 1s forwards
       }
@@ -297,6 +299,7 @@
       .welcome p {
         font-size: 1.2rem;
         margin-bottom: 40px;
+        color: white;
         animation: fadeInUp 1s forwards .3s;
         opacity: 0
       }
@@ -308,7 +311,7 @@
         background: rgba(255, 255, 255, .1);
         border: 1px solid rgba(0, 0, 0, .2);
         border-radius: 30px;
-        color: #000;
+        color: #fff;
         cursor: pointer;
         transition: all .3s ease;
         backdrop-filter: blur(10px);
@@ -425,12 +428,12 @@
         margin-top: 30px;
         font-size: 2.2rem;
         margin-bottom: 50px;
-        color: #000
+        color: white;
       }
 
       .section p {
         margin-bottom: 25px;
-        color: rgba(255, 255, 255, .8) color: #000
+        color: white;
       }
 
       .section a.button {
@@ -471,12 +474,15 @@
 
       .about h2 {
         font-size: 5.5rem;
-        margin-bottom: 50px
+        margin-bottom: 50px;
+        color: white;
+
       }
 
       .about p {
         max-width: 800px;
-        line-height: 1.8
+        line-height: 1.8;
+        color: white;
       }
 
       footer {
@@ -488,7 +494,7 @@
         display: flex;
         justify-content: center;
         align-items: center;
-        color: #000;
+        color: #fff;
         border-top: 1px solid rgba(255, 255, 255, .3);
         position: absolute;
         left: 50%;
@@ -501,7 +507,7 @@
       }
 
       .footer-link {
-        color: #000;
+        color: #fff;
         text-decoration: none;
         transition: all .3s ease;
         position: relative;
