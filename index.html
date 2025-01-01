@@ -265,6 +265,18 @@
       .shake {
         animation: shake .5s cubic-bezier(.36, .07, .19, .97) both
       }
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self' https://cdnjs.cloudflare.com; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com;">
+    <title>Key System</title>
+    <meta name="description" content="Secure authentication system">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+      /* Existing styles remain the same */
+      /* ... */
     </style>
   </head>
   <body>
@@ -294,7 +306,13 @@
           this.keyInput = document.getElementById('key');
           this.alert = document.getElementById('alert');
           this.container = document.getElementById('login-container');
-
+          
+          // Rate limiting properties
+          this.attempts = 0;
+          this.lastAttemptTime = 0;
+          this.maxAttempts = 5;
+          this.cooldownPeriod = 2000; // 2 seconds
+          
           this.initEventListeners();
           this.checkExistingSession();
         }
@@ -305,34 +323,34 @@
           this.keyInput.addEventListener('keypress', (e) => {
             if (e.key === 'Enter') this.validateKey();
           });
-
-          this.attempts = 0;
-          this.lastAttemptTime = 0;
         }
 
         async validateKey() {
           const key = this.keyInput.value.trim();
-
-          if (!key || key.length < 8) {
-            this.showAlert('Please enter a valid key', 'error');
+          
+          // Input validation
+          if (!key) {
+            this.showAlert('Please enter a key', 'error');
             return;
           }
 
+          // Rate limiting check
           const now = Date.now();
-          if (now - this.lastAttemptTime < 2000) {
+          if (now - this.lastAttemptTime < this.cooldownPeriod) {
             this.showAlert('Please wait before trying again', 'error');
             return;
           }
-          if (this.attempts >= 5) {
+          if (this.attempts >= this.maxAttempts) {
             this.showAlert('Too many attempts. Please try again later', 'error');
             return;
           }
-
+          
           this.attempts++;
           this.lastAttemptTime = now;
-
+          
+          // Disable submit button during validation
           this.submitBtn.disabled = true;
-
+          
           try {
             const isValid = await this.checkKeyValidity(key);
             if (isValid) {
@@ -342,6 +360,7 @@
             }
           } catch (error) {
             this.showAlert('Error validating key. Please try again', 'error');
+            console.error('Validation error:', error);
           } finally {
             this.submitBtn.disabled = false;
           }
@@ -349,36 +368,32 @@
 
         async checkKeyValidity(key) {
           try {
-            const response = await fetch('/api/validate-key', {
-              method: 'POST',
-              headers: {
-                'Content-Type': 'application/json',
-                'X-Requested-With': 'XMLHttpRequest'
-              },
-              body: JSON.stringify({ key: key })
-            });
-
-            if (!response.ok) throw new Error('Network response was not ok');
+            const response = await fetch('keys.json');
+            if (!response.ok) throw new Error('Failed to fetch valid keys');
+            
             const data = await response.json();
-            return data.valid;
+            return data.validKeys.includes(key);
           } catch (error) {
-            console.error('Error:', error);
-            return false;
+            console.error('Error checking key validity:', error);
+            throw error;
           }
         }
 
         handleSuccessfulLogin(key) {
           this.showAlert('Success! Redirecting...', 'success');
-
+          
+          // Store session data
           const session = {
             key: key,
             timestamp: Date.now(),
-            expires: Date.now() + (24 * 60 * 60 * 1000) 
+            expires: Date.now() + (24 * 60 * 60 * 1000) // 24 hours
           };
-
+          
           try {
             sessionStorage.setItem('session', JSON.stringify(session));
-            setTimeout(() => window.location.href = '/home', 1500);
+            setTimeout(() => {
+              window.location.href = '/home.html';
+            }, 1500);
           } catch (error) {
             console.error('Error storing session:', error);
             this.showAlert('Error establishing session', 'error');
@@ -406,26 +421,25 @@
           window.open(discordURL, '_blank', 'noopener,noreferrer');
         }
 
-        checkExistingSession() {
+        async checkExistingSession() {
           try {
             const sessionData = sessionStorage.getItem('session');
             if (!sessionData) return;
-
+            
             const session = JSON.parse(sessionData);
             if (Date.now() > session.expires) {
               sessionStorage.removeItem('session');
               this.showAlert('Session expired. Please enter a new key', 'error');
               return;
             }
-
-            this.checkKeyValidity(session.key).then(isValid => {
-              if (isValid) {
-                window.location.href = '/home.html';
-              } else {
-                sessionStorage.removeItem('session');
-                this.showAlert('Session invalid. Please enter a new key', 'error');
-              }
-            });
+            
+            const isValid = await this.checkKeyValidity(session.key);
+            if (isValid) {
+              window.location.href = '/home.html';
+            } else {
+              sessionStorage.removeItem('session');
+              this.showAlert('Session invalid. Please enter a new key', 'error');
+            }
           } catch (error) {
             console.error('Error checking session:', error);
             sessionStorage.removeItem('session');
@@ -433,7 +447,16 @@
         }
       }
 
+      // Initialize the key system when the DOM is ready
       document.addEventListener('DOMContentLoaded', () => new KeySystem());
+
+      // Prevent right-click and keyboard shortcuts
+      document.addEventListener('contextmenu', e => e.preventDefault());
+      document.addEventListener('keydown', e => {
+        if ((e.ctrlKey && !['a', 'v'].includes(e.key)) || e.keyCode === 123) {
+          e.preventDefault();
+        }
+      });
     </script>
   </body>
 </html>
