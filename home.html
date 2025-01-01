@@ -87,6 +87,9 @@
       }
 
       header {
+        background: rgba(255, 255, 255, .25);
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, .3);
         position: fixed;
         top: 0;
         left: 50%;
@@ -100,12 +103,9 @@
         z-index: 1000;
         opacity: 0;
         visibility: hidden;
-        background: rgba(255, 255, 255, 0.15);
-        backdrop-filter: blur(10px);
         -webkit-backdrop-filter: blur(10px);
-        border: 1px solid rgba(255, 255, 255, 0.2);
         border-radius: 50px;
-        transition: all 0.3s ease;
+        transition: all 0.6s ease;
         margin-top: 10px;
         width: 1000px;
         height: 140px;
@@ -125,7 +125,6 @@
         height: 200%;
         background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.4), transparent);
         transform: translateX(-100%);
-        transition: transform 0.6s ease;
       }
 
       .header:hover::before {
@@ -142,10 +141,11 @@
       }
 
       header:hover {
-        height: 145px;
         max-width: 1030px;
         box-shadow: 0 0 15px rgba(0, 0, 0, .2), 0 0 50px rgba(0, 0, 0, .3);
         backdrop-filter: blur(5px)
+        width: 1050px;
+        height: 145px;
       }
 
       header h1 {
@@ -169,13 +169,13 @@
 
       nav ul li a {
         text-decoration: none;
-        color: #fff;
+        color: #000;
         font-size: 16px;
         transition: color .3s ease
       }
 
       nav ul li a:hover {
-        color: rgba(255, 255, 255, .5)
+        color: rgba(33, 33, 33, .5)
       }
 
       .button-container {
@@ -445,7 +445,7 @@
 
       .section a.button:hover {
         transform: scale(1.05);
-        box-shadow: 0 0 10px rgba(255, 255, 255, .8), 0 0 15px rgba(255, 255, 255, .3)
+        box-shadow: 0 0px 32px 0 rgba(0, 0, 0, 0.2);
       }
 
       .about {
@@ -486,7 +486,7 @@
         display: flex;
         justify-content: center;
         align-items: center;
-        color: #fff;
+        color: #000;
         border-top: 1px solid rgba(255, 255, 255, .3);
         position: absolute;
         left: 50%;
@@ -499,7 +499,7 @@
       }
 
       .footer-link {
-        color: #fff;
+        color: #000;
         text-decoration: none;
         transition: all .3s ease;
         position: relative;
@@ -629,7 +629,7 @@
       <a href="/versions.html" class="footer-link">‎ ‎ ‎ Version History</a>
     </footer>
     <script>
-      async function checkAuth() {
+        async function checkAuth() {
         try {
           const loggedIn = localStorage.getItem('loggedIn');
           const savedKey = localStorage.getItem('loggedInKey');
