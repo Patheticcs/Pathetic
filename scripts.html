@@ -3,7 +3,8 @@
   <head>
     <title>Scripts</title>
     <link rel="icon" type="image/x-icon" href="/favicon">
-<style>     * {
+    <style>
+      * {
         margin: 0;
         padding: 0;
         box-sizing: border-box;
@@ -65,9 +66,12 @@
       }
 
       @keyframes float {
-        0%, 100% {
+
+        0%,
+        100% {
           transform: translateY(0) rotate(0deg);
         }
+
         50% {
           transform: translateY(100px) rotate(180deg);
         }
@@ -78,6 +82,7 @@
           opacity: 0;
           transform: translateY(20px);
         }
+
         to {
           opacity: 1;
           transform: translateY(0);
@@ -88,18 +93,29 @@
         animation: fadeIn 0.5s ease-out backwards;
       }
 
-      .button:nth-child(1) { animation-delay: 0.1s; }
-      .button:nth-child(2) { animation-delay: 0.2s; }
-      .button:nth-child(3) { animation-delay: 0.2s; }
-      .text:nth-child(4) { animation-delay: 0.5s; }
-      
+      .button:nth-child(1) {
+        animation-delay: 0.1s;
+      }
+
+      .button:nth-child(2) {
+        animation-delay: 0.2s;
+      }
+
+      .button:nth-child(3) {
+        animation-delay: 0.2s;
+      }
+
+      .text:nth-child(4) {
+        animation-delay: 0.5s;
+      }
+
       .text {
         display: flex;
         align-items: center;
         margin-top: 50px;
         animation: fadeIn 0.5s ease-out backwards;
       }
-      
+
       @media (max-width: 480px) {
         .button {
           width: 180px;
@@ -107,7 +123,7 @@
           font-size: 1rem;
         }
       }
-</style>  
+    </style>
   </head>
   <body>
     <div class="background-container">
@@ -118,24 +134,24 @@
         <span class="text">We don't own these scripts, all credits go to the rightful owner.</span>
       </section>
     </div>
-  <script>      
-    function navigateTo(url) {
+    <script>
+      function navigateTo(url) {
         window.location.href = url;
       }
-        async function checkAuth() {
-          try {
-            const response = await fetch('keys.json');
-            const data = await response.json();
-            const savedKey = localStorage.getItem('loggedInKey');
-            if (!localStorage.getItem('loggedIn') || !data.validKeys.includes(savedKey)) {
-              window.location.href = '/';
-            }
-          } catch (error) {
-            console.error('Auth check failed:', error);
+      async function checkAuth() {
+        try {
+          const response = await fetch('keys.json');
+          const data = await response.json();
+          const savedKey = localStorage.getItem('loggedInKey');
+          if (!localStorage.getItem('loggedIn') || !data.validKeys.includes(savedKey)) {
             window.location.href = '/';
           }
+        } catch (error) {
+          console.error('Auth check failed:', error);
+          window.location.href = '/';
         }
-        checkAuth();
+      }
+      checkAuth();
       const buttons = document.querySelectorAll('.button');
       buttons.forEach(button => {
         button.addEventListener('mousemove', (e) => {
@@ -159,6 +175,7 @@
         if (e.ctrlKey || e.keyCode === 123) {
           e.preventDefault();
         }
-      });</script>
+      });
+    </script>
   </body>
 </html>
