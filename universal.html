@@ -3,7 +3,8 @@
   <head>
     <title>Universal</title>
     <link rel="icon" type="image/x-icon" href="/favicon">
-<style>      * {
+    <style>
+      * {
         margin: 0;
         padding: 0;
         box-sizing: border-box;
@@ -28,96 +29,96 @@
         z-index: 1;
       }
 
-    header {
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      padding: 20px;
-      background: rgba(255, 255, 255, 0);
-      z-index: 1000;
-      animation: fadeIn 0.5s ease-out;
-    }
+      header {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        padding: 20px;
+        background: rgba(255, 255, 255, 0);
+        z-index: 1000;
+        animation: fadeIn 0.5s ease-out;
+      }
 
-    .back-search-container {
-      max-width: 800px;
-      margin: 0 auto;
-      display: flex;
-      gap: 20px;
-      align-items: center;
-      justify-content: center;
-    }
+      .back-search-container {
+        max-width: 800px;
+        margin: 0 auto;
+        display: flex;
+        gap: 20px;
+        align-items: center;
+        justify-content: center;
+      }
 
-    .back-button {
-      background: rgba(255, 255, 255, 0.1);
-      border: 1px solid rgba(0, 0, 0, 0.2);
-      padding: 10px 30px;
-      border-radius: 100px;
-      color: black;
-      cursor: pointer;
-      transition: all 0.3s ease;
-      backdrop-filter: blur(10px);
-    }
+      .back-button {
+        background: rgba(255, 255, 255, 0.1);
+        border: 1px solid rgba(0, 0, 0, 0.2);
+        padding: 10px 30px;
+        border-radius: 100px;
+        color: black;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        backdrop-filter: blur(10px);
+      }
 
-    .back-button:hover {
-      background: rgba(255, 255, 255, 0.2);
-    }
+      .back-button:hover {
+        background: rgba(255, 255, 255, 0.2);
+      }
 
-    #searchInput {
-      background: rgba(255, 255, 255, 0.1);
-      border: 1px solid rgba(0, 0, 0, 0.2);
-      padding: 10px 20px;
-      border-radius: 100px;
-      color: black;
-      width: 300px;
-      transition: all 0.3s ease;
-      backdrop-filter: blur(10px);
-    }
+      #searchInput {
+        background: rgba(255, 255, 255, 0.1);
+        border: 1px solid rgba(0, 0, 0, 0.2);
+        padding: 10px 20px;
+        border-radius: 100px;
+        color: black;
+        width: 300px;
+        transition: all 0.3s ease;
+        backdrop-filter: blur(10px);
+      }
 
-    #searchInput::placeholder {
-      color: rgba(0, 0, 0, 0.7);
-    }
+      #searchInput::placeholder {
+        color: rgba(0, 0, 0, 0.7);
+      }
 
-    #searchInput:focus {
-      color: black;
-      outline: none;
-    }
+      #searchInput:focus {
+        color: black;
+        outline: none;
+      }
 
-    .button-container {
-      margin-top: 100px;
-      padding: 20px;
-      display: flex;
-      justify-content: center;
-      width: 100%;
-    }
+      .button-container {
+        margin-top: 100px;
+        padding: 20px;
+        display: flex;
+        justify-content: center;
+        width: 100%;
+      }
 
-    .buttons-grid {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 20px;
-      max-width: 1200px;
-      justify-content: center;
-      padding: 20px;
-    }
+      .buttons-grid {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 20px;
+        max-width: 1200px;
+        justify-content: center;
+        padding: 20px;
+      }
 
-    .button {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      background: rgba(255, 255, 255, 0.1);
-      backdrop-filter: blur(10px);
-      box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.15);
-      border-radius: 20px;
-      padding: 20px;
-      width: 200px;
-      height: 70px;
-      cursor: pointer;
-      transition: all 0.3s ease;
-      text-align: center;
-      animation: fadeIn 0.5s ease-out backwards;
-      box-sizing: border-box;
-      color: black;
-    }
+      .button {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background: rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(10px);
+        box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.15);
+        border-radius: 20px;
+        padding: 20px;
+        width: 200px;
+        height: 70px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        text-align: center;
+        animation: fadeIn 0.5s ease-out backwards;
+        box-sizing: border-box;
+        color: black;
+      }
 
       .button:hover {
         transform: translateY(-5px);
@@ -125,62 +126,62 @@
         box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.2);
       }
 
-    .button span {
-      font-weight: 400;
-      letter-spacing: 0.5px;
-    }
-
-    @keyframes fadeIn {
-      from {
-        opacity: 0;
-        transform: translateY(10px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
-    @media (max-width: 768px) {
-      .back-search-container {
-        flex-direction: column;
+      .button span {
+        font-weight: 400;
+        letter-spacing: 0.5px;
       }
 
-      #searchInput {
-        width: 100%;
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(10px);
+        }
+
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
       }
 
-      .button {
-        padding: 15px;
+      @media (max-width: 768px) {
+        .back-search-container {
+          flex-direction: column;
+        }
+
+        #searchInput {
+          width: 100%;
+        }
+
+        .button {
+          padding: 15px;
+        }
       }
-    }
 
-    ::-webkit-scrollbar {
-      width: 8px;
-    }
-
-    ::-webkit-scrollbar-track {
-      background: rgba(255, 255, 255, 0.1);
-    }
-
-    ::-webkit-scrollbar-thumb {
-      background: rgba(255, 255, 255, 0.2);
-      border-radius: 4px;
-    }
-
-    ::-webkit-scrollbar-thumb:hover {
-      background: rgba(255, 255, 255, 0.3);
+      ::-webkit-scrollbar {
+        width: 8px;
       }
-</style>
+
+      ::-webkit-scrollbar-track {
+        background: rgba(255, 255, 255, 0.1);
+      }
+
+      ::-webkit-scrollbar-thumb {
+        background: rgba(255, 255, 255, 0.2);
+        border-radius: 4px;
+      }
+
+      ::-webkit-scrollbar-thumb:hover {
+        background: rgba(255, 255, 255, 0.3);
+      }
+    </style>
   </head>
-<body>
-  <header>
-    <div class="back-search-container">
-      <button class="back-button" onclick="navigateTo('/scripts.html')">Back</button>
-      <input type="text" id="searchInput" placeholder="Search games..." oninput="filterButtons()">
-    </div>
-  </header>
-
+  <body>
+    <header>
+      <div class="back-search-container">
+        <button class="back-button" onclick="navigateTo('/scripts.html')">Back</button>
+        <input type="text" id="searchInput" placeholder="Search games..." oninput="filterButtons()">
+      </div>
+    </header>
     <div class="button-container">
       <div class="buttons-grid" id="universalButtons">
         <div class="button" onclick="openLink('https://raw.githubusercontent.com/edgeiy/infiniteyield/master/source')" role="button" aria-label="Open Infinite Yield">
@@ -271,7 +272,8 @@
           <span>Animation Hub</span>
         </div>
   </body>
-<script>    function initializeButtons() {
+  <script>
+    function initializeButtons() {
       const buttons = document.querySelectorAll('.button');
       buttons.forEach((button, index) => {
         button.style.animationDelay = `${index * 0.05}s`;
@@ -282,12 +284,10 @@
       const input = document.getElementById('searchInput');
       const filter = input.value.toLowerCase();
       const buttons = document.querySelectorAll('.button');
-      
       buttons.forEach(button => {
         const text = button.textContent || button.innerText;
         const shouldShow = text.toLowerCase().includes(filter);
-        
-        if(shouldShow) {
+        if (shouldShow) {
           button.style.display = '';
           button.style.animation = 'fadeIn 0.3s ease-out forwards';
         } else {
@@ -303,27 +303,26 @@
     function openLink(url) {
       window.open(url, '_blank');
     }
-
     document.addEventListener('DOMContentLoaded', initializeButtons);
-
-      document.addEventListener('contextmenu', e => e.preventDefault());
-      document.addEventListener('keydown', e => {
-        if ((e.ctrlKey && !['a', 'v'].includes(e.key)) || e.keyCode === 123) {
-          e.preventDefault();
-        }
-      });
-      async function checkAuth() {
-        try {
-          const response = await fetch('keys.json');
-          const data = await response.json();
-          const savedKey = localStorage.getItem('loggedInKey');
-          if (!localStorage.getItem('loggedIn') || !data.validKeys.includes(savedKey)) {
-            window.location.href = '/';
-          }
-        } catch (error) {
-          console.error('Auth check failed:', error);
+    document.addEventListener('contextmenu', e => e.preventDefault());
+    document.addEventListener('keydown', e => {
+      if ((e.ctrlKey && !['a', 'v'].includes(e.key)) || e.keyCode === 123) {
+        e.preventDefault();
+      }
+    });
+    async function checkAuth() {
+      try {
+        const response = await fetch('keys.json');
+        const data = await response.json();
+        const savedKey = localStorage.getItem('loggedInKey');
+        if (!localStorage.getItem('loggedIn') || !data.validKeys.includes(savedKey)) {
           window.location.href = '/';
         }
+      } catch (error) {
+        console.error('Auth check failed:', error);
+        window.location.href = '/';
       }
-      checkAuth();
-</script></html>
+    }
+    checkAuth();
+  </script>
+</html>
