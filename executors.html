@@ -3,7 +3,8 @@
   <head>
     <title>Executors</title>
     <link rel="icon" type="image/x-icon" href="/favicon">
-<style>      * {
+    <style>
+      * {
         margin: 0;
         padding: 0;
         box-sizing: border-box;
@@ -72,7 +73,7 @@
         }
       }
 
-     body {
+      body {
         font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
         background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
         color: #2d3436;
@@ -139,9 +140,12 @@
       }
 
       @keyframes float {
-        0%, 100% {
+
+        0%,
+        100% {
           transform: translateY(0) rotate(0deg);
         }
+
         50% {
           transform: translateY(100px) rotate(180deg);
         }
@@ -152,6 +156,7 @@
           opacity: 0;
           transform: translateY(20px);
         }
+
         to {
           opacity: 1;
           transform: translateY(0);
@@ -162,16 +167,41 @@
         animation: fadeIn 0.5s ease-out backwards;
       }
 
-      .button:nth-child(1) { animation-delay: 0.1s; }
-      .button:nth-child(2) { animation-delay: 0.2s; }
-      .button:nth-child(3) { animation-delay: 0.3s; }
-      .button:nth-child(4) { animation-delay: 0.4s; }
-      .button:nth-child(5) { animation-delay: 0.5s; }
-      .button:nth-child(6) { animation-delay: 0.6s }
-      .button:nth-child(7) { animation-delay: 0.7s }
-      .button:nth-child(8) { animation-delay: 0.8s }
-      .button:nth-child(9) { animation-delay: 0.9s }
+      .button:nth-child(1) {
+        animation-delay: 0.1s;
+      }
 
+      .button:nth-child(2) {
+        animation-delay: 0.2s;
+      }
+
+      .button:nth-child(3) {
+        animation-delay: 0.3s;
+      }
+
+      .button:nth-child(4) {
+        animation-delay: 0.4s;
+      }
+
+      .button:nth-child(5) {
+        animation-delay: 0.5s;
+      }
+
+      .button:nth-child(6) {
+        animation-delay: 0.6s
+      }
+
+      .button:nth-child(7) {
+        animation-delay: 0.7s
+      }
+
+      .button:nth-child(8) {
+        animation-delay: 0.8s
+      }
+
+      .button:nth-child(9) {
+        animation-delay: 0.9s
+      }
 
       @media (max-width: 480px) {
         .button {
@@ -179,7 +209,8 @@
           height: 55px;
           font-size: 1rem;
         }
-      }</style>
+      }
+    </style>
   </head>
   <body>
     <div class="background-container">
@@ -195,7 +226,8 @@
         <button class="button back" onclick="window.location.href='home.html'">Home</button>
       </section>
     </div>
-  <script>      const buttons = document.querySelectorAll('.button');
+    <script>
+      const buttons = document.querySelectorAll('.button');
       buttons.forEach(button => {
         button.addEventListener('mousemove', (e) => {
           const {
@@ -219,22 +251,24 @@
           e.preventDefault();
         }
       });
-        function navigateTo(url) {
-          window.location.href = url;
-        }
-        async function checkAuth() {
-          try {
-            const response = await fetch('keys.json');
-            const data = await response.json();
-            const savedKey = localStorage.getItem('loggedInKey');
-            if (!localStorage.getItem('loggedIn') || !data.validKeys.includes(savedKey)) {
-              window.location.href = '/';
-            }
-          } catch (error) {
-            console.error('Auth check failed:', error);
+
+      function navigateTo(url) {
+        window.location.href = url;
+      }
+      async function checkAuth() {
+        try {
+          const response = await fetch('keys.json');
+          const data = await response.json();
+          const savedKey = localStorage.getItem('loggedInKey');
+          if (!localStorage.getItem('loggedIn') || !data.validKeys.includes(savedKey)) {
             window.location.href = '/';
           }
+        } catch (error) {
+          console.error('Auth check failed:', error);
+          window.location.href = '/';
         }
-        checkAuth();</script>
+      }
+      checkAuth();
+    </script>
   </body>
 </html>
