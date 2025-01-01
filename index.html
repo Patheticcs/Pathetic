@@ -273,92 +273,167 @@
       <div class="content-wrapper">
         <h2>Key System</h2>
         <div class="input-group">
-          <input type="text" id="key" placeholder="Enter your access key">
+          <input type="text" id="key" placeholder="Enter your access key" autocomplete="off">
         </div>
         <div class="button-group">
-          <button onclick="checkKey()">
-            <i class="fas fa-key"></i>Submit </button>
-          <button onclick="openDiscord()">
-            <i class="fab fa-discord"></i>Get Key </button>
+          <button id="submitBtn" type="button">
+            <i class="fas fa-key"></i>Submit
+          </button>
+          <button id="discordBtn" type="button">
+            <i class="fab fa-discord"></i>Get Key
+          </button>
         </div>
         <div id="alert" class="alert"></div>
       </div>
     </div>
     <script>
-      async function checkKey() {
-        const key = document.getElementById("key").value.trim();
-        const alertElement = document.getElementById("alert");
-        const container = document.getElementById("login-container");
-        const submitButton = document.querySelector('button');
-        submitButton.style.pointerEvents = 'none';
-        submitButton.style.opacity = '0.7';
-        try {
-          const validKeys = await fetchValidKeys();
-          if (validKeys.includes(key)) {
-            alertElement.style.background = 'rgba(48, 209, 88, 0.15)';
-            alertElement.textContent = "Success! Redirecting...";
-            alertElement.classList.add("show");
-            container.style.height = 'auto';
-            setTimeout(() => {
-              localStorage.setItem("loggedIn", "true");
-              localStorage.setItem("loggedInKey", key);
-              window.location.href = "/home.html";
-            }, 1500);
-          } else {
-            alertElement.style.background = 'rgba(255, 59, 48, 0.15)';
-            alertElement.textContent = "Invalid key! Please try again or get a new key.";
-            alertElement.classList.add("show");
-            container.style.height = 'auto';
-            container.classList.add('shake');
-            setTimeout(() => container.classList.remove('shake'), 500);
-          }
-        } catch (error) {
-          alertElement.style.background = 'rgba(255, 59, 48, 0.15)';
-          alertElement.textContent = "Error validating key. Please try again.";
-          alertElement.classList.add("show");
-          container.style.height = 'auto';
-        } finally {
-          submitButton.style.pointerEvents = 'auto';
-          submitButton.style.opacity = '1';
+      class KeySystem {
+        constructor() {
+          this.submitBtn = document.getElementById('submitBtn');
+          this.discordBtn = document.getElementById('discordBtn');
+          this.keyInput = document.getElementById('key');
+          this.alert = document.getElementById('alert');
+          this.container = document.getElementById('login-container');
+
+          this.initEventListeners();
+          this.checkExistingSession();
         }
-      }
-      async function fetchValidKeys() {
-        const response = await fetch('keys.json');
-        const data = await response.json();
-        return data.validKeys;
+
+        initEventListeners() {
+          this.submitBtn.addEventListener('click', () => this.validateKey());
+          this.discordBtn.addEventListener('click', () => this.openDiscord());
+          this.keyInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') this.validateKey();
+          });
+
+          this.attempts = 0;
+          this.lastAttemptTime = 0;
+        }
+
+        async validateKey() {
+          const key = this.keyInput.value.trim();
+
+          if (!key || key.length < 8) {
+            this.showAlert('Please enter a valid key', 'error');
+            return;
+          }
+
+          const now = Date.now();
+          if (now - this.lastAttemptTime < 2000) {
+            this.showAlert('Please wait before trying again', 'error');
+            return;
+          }
+          if (this.attempts >= 5) {
+            this.showAlert('Too many attempts. Please try again later', 'error');
+            return;
+          }
+
+          this.attempts++;
+          this.lastAttemptTime = now;
+
+          this.submitBtn.disabled = true;
+
+          try {
+            const isValid = await this.checkKeyValidity(key);
+            if (isValid) {
+              this.handleSuccessfulLogin(key);
+            } else {
+              this.handleFailedLogin();
+            }
+          } catch (error) {
+            this.showAlert('Error validating key. Please try again', 'error');
+          } finally {
+            this.submitBtn.disabled = false;
+          }
+        }
+
+        async checkKeyValidity(key) {
+          try {
+            const response = await fetch('/api/validate-key', {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+                'X-Requested-With': 'XMLHttpRequest'
+              },
+              body: JSON.stringify({ key: key })
+            });
+
+            if (!response.ok) throw new Error('Network response was not ok');
+            const data = await response.json();
+            return data.valid;
+          } catch (error) {
+            console.error('Error:', error);
+            return false;
+          }
+        }
+
+        handleSuccessfulLogin(key) {
+          this.showAlert('Success! Redirecting...', 'success');
+
+          const session = {
+            key: key,
+            timestamp: Date.now(),
+            expires: Date.now() + (24 * 60 * 60 * 1000) 
+          };
+
+          try {
+            sessionStorage.setItem('session', JSON.stringify(session));
+            setTimeout(() => window.location.href = '/home', 1500);
+          } catch (error) {
+            console.error('Error storing session:', error);
+            this.showAlert('Error establishing session', 'error');
+          }
+        }
+
+        handleFailedLogin() {
+          this.showAlert('Invalid key! Please try again or get a new key', 'error');
+          this.container.classList.add('shake');
+          setTimeout(() => this.container.classList.remove('shake'), 500);
+          this.keyInput.value = '';
+        }
+
+        showAlert(message, type) {
+          this.alert.textContent = message;
+          this.alert.style.background = type === 'success' ? 
+            'rgba(48, 209, 88, 0.15)' : 
+            'rgba(255, 59, 48, 0.15)';
+          this.alert.classList.add('show');
+          this.container.style.height = 'auto';
+        }
+
+        openDiscord() {
+          const discordURL = 'https://discord.gg/Eg2EWXwYcn';
+          window.open(discordURL, '_blank', 'noopener,noreferrer');
+        }
+
+        checkExistingSession() {
+          try {
+            const sessionData = sessionStorage.getItem('session');
+            if (!sessionData) return;
+
+            const session = JSON.parse(sessionData);
+            if (Date.now() > session.expires) {
+              sessionStorage.removeItem('session');
+              this.showAlert('Session expired. Please enter a new key', 'error');
+              return;
+            }
+
+            this.checkKeyValidity(session.key).then(isValid => {
+              if (isValid) {
+                window.location.href = '/home.html';
+              } else {
+                sessionStorage.removeItem('session');
+                this.showAlert('Session invalid. Please enter a new key', 'error');
+              }
+            });
+          } catch (error) {
+            console.error('Error checking session:', error);
+            sessionStorage.removeItem('session');
+          }
+        }
       }
 
-      function openDiscord() {
-        window.open('https://discord.gg/Eg2EWXwYcn', '_blank');
-      }
-      document.getElementById('key').addEventListener('keypress', (e) => {
-        if (e.key === 'Enter') {
-          checkKey();
-        }
-      });
-      window.onload = () => {
-        const loggedIn = localStorage.getItem("loggedIn");
-        const savedKey = localStorage.getItem("loggedInKey");
-        const alertElement = document.getElementById("alert");
-        if (loggedIn === "true") {
-          fetchValidKeys().then(validKeys => {
-            if (validKeys.includes(savedKey)) {
-              window.location.href = "/home.html";
-            } else {
-              localStorage.removeItem("loggedIn");
-              localStorage.removeItem("loggedInKey");
-              alertElement.textContent = "Session expired. Please enter a new key.";
-              alertElement.classList.add("show");
-            }
-          });
-        }
-      };
-      document.addEventListener('contextmenu', e => e.preventDefault());
-      document.addEventListener('keydown', e => {
-        if ((e.ctrlKey && !['a', 'v'].includes(e.key)) || e.keyCode === 123) {
-          e.preventDefault();
-        }
-      });
+      document.addEventListener('DOMContentLoaded', () => new KeySystem());
     </script>
   </body>
 </html>
