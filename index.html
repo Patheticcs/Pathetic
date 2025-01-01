@@ -3,9 +3,15 @@
   <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self' https://cdnjs.cloudflare.com; style-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com; script-src 'self' 'unsafe-inline';">
     <title>Key System</title>
     <meta name="description" content="We're a passionate team focused on creating reliable, effective tools to enhance your gaming and online experiences. We prioritize quality and ease of use, ensuring every solution we offer meets the highest standards to help you get the most out of your online activities.">
+    <meta property="og:title" content="Pathetic">
+    <meta property="og:description" content="Discover effective tools that enhance your gaming and online experiences. Prioritizing quality and ease of use, we deliver solutions that empower your digital journey.">
+    <meta property="og:image" content="/favicon">
+    <meta property="og:url" content="https://pathetic.one">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Pathetic">
+    <meta property="og:locale" content="en_US">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <style>
       @keyframes fadeIn {
@@ -209,11 +215,7 @@
       }
 
       button:hover i {
-        transform: scale(1.03)
-      }
-      
-      button:hover {
-        transform: scale(1.03)
+        transform: scale(1.2)
       }
 
       .alert {
@@ -266,128 +268,95 @@
     </style>
   </head>
   <body>
+    <div class="glass-overlay"></div>
     <div class="container" id="login-container">
-      <form id="keyForm" onsubmit="handleSubmit(event)">
+      <div class="content-wrapper">
         <h2>Key System</h2>
         <div class="input-group">
-          <input 
-            type="text" 
-            id="key" 
-            name="key"
-            placeholder="Enter your access key"
-            autocomplete="off"
-            maxlength="50"
-            pattern="[A-Za-z0-9-_]+"
-            required
-          >
+          <input type="text" id="key" placeholder="Enter your access key">
         </div>
         <div class="button-group">
-          <button type="submit" id="submitBtn">
-            <i class="fas fa-key"></i>
-            Submit
-          </button>
-          <button type="button" onclick="handleDiscord()" id="discordBtn">
-            <i class="fab fa-discord"></i>
-            Get Key
-          </button>
+          <button onclick="checkKey()">
+            <i class="fas fa-key"></i>Submit </button>
+          <button onclick="openDiscord()">
+            <i class="fab fa-discord"></i>Get Key </button>
         </div>
-      </form>
-      <div id="alert" class="alert" role="alert"></div>
+        <div id="alert" class="alert"></div>
+      </div>
     </div>
-
     <script>
-      function sanitizeInput(input) {
-        return input.replace(/[^A-Za-z0-9-_]/g, '');
-      }
-
-      async function validateKey(key) {
+      async function checkKey() {
+        const key = document.getElementById("key").value.trim();
+        const alertElement = document.getElementById("alert");
+        const container = document.getElementById("login-container");
+        const submitButton = document.querySelector('button');
+        submitButton.style.pointerEvents = 'none';
+        submitButton.style.opacity = '0.7';
         try {
-          const response = await fetch('/api/validate-key', {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-              'X-CSRF-Token': document.querySelector('meta[name="csrf-token"]')?.content
-            },
-            body: JSON.stringify({ key: sanitizeInput(key) })
-          });
-          
-          if (!response.ok) throw new Error('Network response was not ok');
-          return await response.json();
-        } catch (error) {
-          console.error('Error:', error);
-          throw new Error('Failed to validate key');
-        }
-      }
-
-      async function handleSubmit(event) {
-        event.preventDefault();
-        
-        const keyInput = document.getElementById('key');
-        const submitBtn = document.getElementById('submitBtn');
-        const alertEl = document.getElementById('alert');
-        const container = document.getElementById('login-container');
-        
-        // Disable form while processing
-        submitBtn.disabled = true;
-        keyInput.disabled = true;
-        
-        try {
-          const sanitizedKey = sanitizeInput(keyInput.value.trim());
-          if (!sanitizedKey) {
-            throw new Error('Please enter a valid key');
-          }
-
-          const result = await validateKey(sanitizedKey);
-          
-          if (result.valid) {
-            showAlert('Success! Redirecting...', true);
-            sessionStorage.setItem('authToken', result.token);
+          const validKeys = await fetchValidKeys();
+          if (validKeys.includes(key)) {
+            alertElement.style.background = 'rgba(48, 209, 88, 0.15)';
+            alertElement.textContent = "Success! Redirecting...";
+            alertElement.classList.add("show");
+            container.style.height = 'auto';
             setTimeout(() => {
-              window.location.href = '/dashboard';
+              localStorage.setItem("loggedIn", "true");
+              localStorage.setItem("loggedInKey", key);
+              window.location.href = "/home.html";
             }, 1500);
           } else {
-            throw new Error('Invalid key');
+            alertElement.style.background = 'rgba(255, 59, 48, 0.15)';
+            alertElement.textContent = "Invalid key! Please try again or get a new key.";
+            alertElement.classList.add("show");
+            container.style.height = 'auto';
+            container.classList.add('shake');
+            setTimeout(() => container.classList.remove('shake'), 500);
           }
         } catch (error) {
-          showAlert(error.message || 'An error occurred. Please try again.');
-          container.classList.add('shake');
-          setTimeout(() => container.classList.remove('shake'), 500);
+          alertElement.style.background = 'rgba(255, 59, 48, 0.15)';
+          alertElement.textContent = "Error validating key. Please try again.";
+          alertElement.classList.add("show");
+          container.style.height = 'auto';
         } finally {
-          submitBtn.disabled = false;
-          keyInput.disabled = false;
-          keyInput.focus();
+          submitButton.style.pointerEvents = 'auto';
+          submitButton.style.opacity = '1';
         }
       }
-
-      function showAlert(message, isSuccess = false) {
-        const alertEl = document.getElementById('alert');
-        alertEl.textContent = message;
-        alertEl.classList.toggle('success', isSuccess);
-        alertEl.classList.add('show');
+      async function fetchValidKeys() {
+        const response = await fetch('keys.json');
+        const data = await response.json();
+        return data.validKeys;
       }
 
-      function handleDiscord() {
-        const discordUrl = 'https://discord.gg/Eg2EWXwYcn';
-        window.open(discordUrl, '_blank', 'noopener,noreferrer');
+      function openDiscord() {
+        window.open('https://discord.gg/Eg2EWXwYcn', '_blank');
       }
-
-      // Check auth state on page load
-      document.addEventListener('DOMContentLoaded', () => {
-        const authToken = sessionStorage.getItem('authToken');
-        if (authToken) {
-          fetch('/api/verify-token', {
-            headers: { 'Authorization': `Bearer ${authToken}` }
-          })
-          .then(response => {
-            if (response.ok) {
-              window.location.href = '/dashboard';
+      document.getElementById('key').addEventListener('keypress', (e) => {
+        if (e.key === 'Enter') {
+          checkKey();
+        }
+      });
+      window.onload = () => {
+        const loggedIn = localStorage.getItem("loggedIn");
+        const savedKey = localStorage.getItem("loggedInKey");
+        const alertElement = document.getElementById("alert");
+        if (loggedIn === "true") {
+          fetchValidKeys().then(validKeys => {
+            if (validKeys.includes(savedKey)) {
+              window.location.href = "/home.html";
             } else {
-              sessionStorage.removeItem('authToken');
+              localStorage.removeItem("loggedIn");
+              localStorage.removeItem("loggedInKey");
+              alertElement.textContent = "Session expired. Please enter a new key.";
+              alertElement.classList.add("show");
             }
-          })
-          .catch(() => {
-            sessionStorage.removeItem('authToken');
           });
+        }
+      };
+      document.addEventListener('contextmenu', e => e.preventDefault());
+      document.addEventListener('keydown', e => {
+        if ((e.ctrlKey && !['a', 'v'].includes(e.key)) || e.keyCode === 123) {
+          e.preventDefault();
         }
       });
     </script>
