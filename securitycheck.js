@@ -15,7 +15,7 @@ async function checkAuth() {
       return;
     }
 try {
-  const response = await fetch('0xbe.json');
+  const response = await fetch('oxbe.json');
   if (!response.ok) {
     throw new Error('Network response was not ok');
   }
