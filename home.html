@@ -143,8 +143,7 @@
       header:hover {
         max-width: 1030px;
         box-shadow: 0 0 15px rgba(0, 0, 0, .2), 0 0 50px rgba(0, 0, 0, .3);
-        backdrop-filter: blur(5px)
-        width: 1050px;
+        backdrop-filter: blur(5px) width: 1050px;
         height: 145px;
       }
 
@@ -629,100 +628,93 @@
       <a href="/versions.html" class="footer-link">‎ ‎ ‎ Version History</a>
     </footer>
     <script>
-document.addEventListener('DOMContentLoaded', () => {
-  const header = document.querySelector('header');
-  const getStartedBtn = document.getElementById('get-started-btn');
-  const welcomeSection = document.getElementById('welcome');
-  let lastScrollY = window.scrollY;
-  const links = document.querySelectorAll('header nav ul li a');
-  
-  // Smooth scroll to sections when navigation links are clicked
-  links.forEach(link => {
-    link.addEventListener('click', (event) => {
-      event.preventDefault();
-      const targetId = link.getAttribute('href').substring(1);
-      const targetSection = document.getElementById(targetId);
-      if (targetSection) {
-        targetSection.scrollIntoView({
-          behavior: 'smooth',
-          block: 'start'
+      document.addEventListener('DOMContentLoaded', () => {
+        const header = document.querySelector('header');
+        const getStartedBtn = document.getElementById('get-started-btn');
+        const welcomeSection = document.getElementById('welcome');
+        let lastScrollY = window.scrollY;
+        const links = document.querySelectorAll('header nav ul li a');
+
+        links.forEach(link => {
+          link.addEventListener('click', (event) => {
+            event.preventDefault();
+            const targetId = link.getAttribute('href').substring(1);
+            const targetSection = document.getElementById(targetId);
+            if (targetSection) {
+              targetSection.scrollIntoView({
+                behavior: 'smooth',
+                block: 'start'
+              });
+            }
+          });
         });
-      }
-    });
-  });
-  
-  // Header visibility on scroll
-  window.addEventListener('scroll', () => {
-    const currentScrollY = window.scrollY;
-    header.classList.toggle('visible', currentScrollY > 50);
-    lastScrollY = currentScrollY;
-  });
 
-  // Get started button functionality
-  getStartedBtn.addEventListener('click', () => {
-    document.querySelector('#roblox').scrollIntoView({
-      behavior: 'smooth',
-      block: 'start'
-    });
-    header.classList.add('visible');
-    document.documentElement.style.overflow = 'auto';
-  });
+        window.addEventListener('scroll', () => {
+          const currentScrollY = window.scrollY;
+          header.classList.toggle('visible', currentScrollY > 50);
+          lastScrollY = currentScrollY;
+        });
 
-  // Intersection Observer for section visibility
-  const observerOptions = { threshold: 0.1 };
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach((entry) => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add("visible");
-      } else {
-        entry.target.classList.remove("visible");
-      }
-    });
-  }, observerOptions);
-  document.querySelectorAll('.section').forEach(section => {
-    observer.observe(section);
-  });
+        getStartedBtn.addEventListener('click', () => {
+          document.querySelector('#roblox').scrollIntoView({
+            behavior: 'smooth',
+            block: 'start'
+          });
+          header.classList.add('visible');
+          document.documentElement.style.overflow = 'auto';
+        });
 
-  observer.observe(document.querySelector('.about'));
+        const observerOptions = {
+          threshold: 0.1
+        };
+        const observer = new IntersectionObserver((entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add("visible");
+            } else {
+              entry.target.classList.remove("visible");
+            }
+          });
+        }, observerOptions);
+        document.querySelectorAll('.section').forEach(section => {
+          observer.observe(section);
+        });
+        observer.observe(document.querySelector('.about'));
 
-  // Handle scroll behavior on page load
-  window.addEventListener('load', () => {
-    if (window.location.hash !== "#welcome" && !welcomeSection.classList.contains('visible')) {
-      window.scrollTo(0, 0);
-      welcomeSection.scrollIntoView({
-        behavior: 'smooth',
-        block: 'start'
+        window.addEventListener('load', () => {
+          if (window.location.hash !== "#welcome" && !welcomeSection.classList.contains('visible')) {
+            window.scrollTo(0, 0);
+            welcomeSection.scrollIntoView({
+              behavior: 'smooth',
+              block: 'start'
+            });
+          }
+          setTimeout(() => {
+            document.documentElement.style.scrollBehavior = 'smooth';
+            window.scrollTo({
+              top: 0,
+              behavior: 'smooth'
+            });
+          }, 0);
+        });
+
+        document.addEventListener('contextmenu', function(e) {
+          e.preventDefault();
+        });
+        document.addEventListener('keydown', function(e) {
+          if (e.ctrlKey && !(e.key === 'a' || e.key === 'v')) {
+            e.preventDefault();
+          }
+          if (e.keyCode === 123) {
+            e.preventDefault();
+          }
+        });
+
+        window.addEventListener('beforeunload', () => {
+          document.documentElement.style.scrollBehavior = 'auto';
+          window.scrollTo(0, 0);
+        });
       });
-    }
-
-    setTimeout(() => {
-      document.documentElement.style.scrollBehavior = 'smooth';
-      window.scrollTo({
-        top: 0,
-        behavior: 'smooth'
-      });
-    }, 0);
-  });
-
-  // Prevent right-click and certain keypresses
-  document.addEventListener('contextmenu', function(e) {
-    e.preventDefault();
-  });
-  document.addEventListener('keydown', function(e) {
-    if (e.ctrlKey && !(e.key === 'a' || e.key === 'v')) {
-      e.preventDefault();
-    }
-    if (e.keyCode === 123) {
-      e.preventDefault();
-    }
-  });
-
-  // Reset scroll behavior before unloading
-  window.addEventListener('beforeunload', () => {
-    document.documentElement.style.scrollBehavior = 'auto';
-    window.scrollTo(0, 0);
-  });
-});
     </script>
     <script src="/securitycheck.js"></script>
   </body>
