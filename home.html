@@ -4,6 +4,21 @@
     <title>Home</title>
     <link rel="icon" type="image/x-icon" href="/favicon">
     <style>
+      
+    :root {
+      --primary-color: #2d3436;
+      --secondary-color: #636e72;
+      --accent-color: #0984e3;
+      --glass-bg: rgba(255, 255, 255, 0.15);
+      --glass-border: rgba(255, 255, 255, 0.3);
+      --glass-blur: 10px;
+      --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+      --gradient-color-1: #f5f7fa;
+      --gradient-color-2: #c3cfe2;
+      --gradient-color-3: #e0eafc;
+      --gradient-color-4: #cfdef3;
+      --font-primary: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    }
       * {
         margin: 0;
         padding: 0;
@@ -67,13 +82,20 @@
         }
       }
 
-      body {
-        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-        color: #2d3436;
-        min-height: 100vh;
-        overflow: hidden;
-        position: relative;
-      }
+    body {
+      font-family: var(--font-primary);
+      min-height: 100vh;
+      color: var(--primary-color);
+      background: linear-gradient(-45deg, 
+        var(--gradient-color-1),
+        var(--gradient-color-2),
+        var(--gradient-color-3),
+        var(--gradient-color-4)
+      );
+      background-size: 400% 400%;
+      animation: gradientBG 15s ease infinite;
+      overflow-x: hidden;
+    }
 
       body::before {
         background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
@@ -86,188 +108,123 @@
         z-index: 0
       }
 
+      .glass {
+        background: var(--glass-bg);
+        backdrop-filter: blur(var(--glass-blur));
+        -webkit-backdrop-filter: blur(var(--glass-blur));
+        border: 1px solid var(--glass-border);
+        box-shadow: var(--glass-shadow);
+      }
+
+      .container {
+        max-width: var(--container-width);
+        margin: 0 auto;
+        padding: 0 var(--section-padding);
+      }
+
+      .full-page {
+        min-height: 100vh;
+        scroll-snap-align: start;
+        scroll-snap-stop: always;
+        position: relative;
+        overflow: hidden;
+      }
+
       header {
-        background: rgba(255, 255, 255, .25);
-        backdrop-filter: blur(10px);
-        border: 1px solid rgba(255, 255, 255, .3);
         position: fixed;
         top: 0;
         left: 50%;
         transform: translateX(-50%);
-        width: 100%;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        flex-direction: column;
-        padding: 20px 30px;
-        z-index: 1000;
+        width: min(95%, 1400px);
+        height: 80px;
+        margin-top: 1rem;
+        padding: 1rem 2rem;
+        border-radius: 2rem;
+        z-index: 100;
         opacity: 0;
         visibility: hidden;
-        -webkit-backdrop-filter: blur(10px);
-        border-radius: 50px;
-        transition: all 0.6s ease;
-        margin-top: 10px;
-        width: 1000px;
-        height: 140px;
+        transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
       }
 
       header.visible {
         opacity: 1;
+        background: rgba(255, 255, 255, .25);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, .3);
         visibility: visible;
       }
 
-      .header::before {
-        content: '';
-        position: absolute;
-        top: -50%;
-        left: -50%;
-        width: 200%;
-        height: 200%;
-        background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.4), transparent);
-        transform: translateX(-100%);
-      }
-
-      .header:hover::before {
-        transform: translateX(100%);
-      }
-
-      header.visible {
-        opacity: 1;
-        visibility: visible
-      }
-
-      body.no-scroll {
-        overflow: hidden
-      }
-
-      header:hover {
-        max-width: 1030px;
-        box-shadow: 0 0 15px rgba(0, 0, 0, .2), 0 0 50px rgba(0, 0, 0, .3);
-        backdrop-filter: blur(5px) width: 1050px;
-        height: 145px;
-      }
-
-      header h1 {
-        margin-top: 20px;
-        font-size: 1.1rem;
-        font-weight: 700;
-        text-shadow: 0 0 8px var(--highlight);
-        width: 100%;
-        text-align: center
-      }
-
-      nav ul {
-        list-style: none;
-        font-size: .6rem;
+      nav {
+        height: 100%;
         display: flex;
-        gap: 20px;
-        flex-wrap: wrap;
-        justify-content: center;
-        margin-top: 50px
-      }
-
-      nav ul li a {
-        text-decoration: none;
-        color: #000;
-        font-size: 16px;
-        transition: color .3s ease
-      }
-
-      nav ul li a:hover {
-        color: rgba(33, 33, 33, .5)
-      }
-
-      .button-container {
-        display: flex;
-        gap: 15px
-      }
-
-      .button {
-        margin-top: 25px;
-        margin-bottom: 25px;
-        width: 35px;
-        height: 35px;
-        background-color: rgba(255, 255, 255, 1);
-        box-shadow: 0 0 5px rgba(255, 255, 255, .9), 0 0 0 rgba(255, 255, 255, .9);
-        font-size: 13px;
-        border: none;
-        color: #fff;
-        border-radius: 100px;
-        cursor: pointer;
-        transition: width .3s ease, height .3s ease, box-shadow .3s ease, backdrop-filter .3s ease;
-        backdrop-filter: blur(15px);
-        display: flex;
-        justify-content: center;
+        justify-content: space-between;
         align-items: center;
+      }
+
+      .nav-links {
+        display: flex;
+        gap: 2rem;
+        list-style: none;
+      }
+
+      .nav-link {
+        color: #2d3436;
+        text-decoration: none;
+        font-weight: 500;
+        position: relative;
+        padding: 0.5rem 0;
+        transition: color 0.3s;
+      }
+
+      .nav-link:hover::after {
+        width: 100%;
+      }
+
+      .social-buttons {
+        display: flex;
+        gap: 1rem;
+      }
+
+      .social-btn {
+        width: 40px;
+        height: 40px;
+        border-radius: 9999px;
+        border: none;
+        cursor: pointer;
+        transition: all 0.4s;
+        display: flex;
+        align-items: center;
+        justify-content: center;
         overflow: hidden;
-        position: relative
+        position: relative;
       }
 
-      .button img {
-        width: 17px;
-        height: 17px;
+      .social-btn:hover {
+        width: 120px;
+      }
+
+      .social-btn img {
+        width: 20px;
+        height: 20px;
+        transition: transform 0.4s;
         object-fit: contain;
-        transition: transform .4s ease, width .7s ease, height .7s ease
       }
 
-      .button .button-text {
+      .social-btn:hover img {
+        transform: translateX(-30px);
+      }
+
+      .social-btn span {
         position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-35%, -50%);
+        right: 1rem;
         opacity: 0;
-        font-size: 13px;
-        color: #fff;
-        pointer-events: none;
-        transition: opacity .4s ease
+        transition: opacity 0.4s;
+        color: #2d3436;
       }
 
-      .discord-button:hover {
-        box-shadow: 0 0 15px rgba(255, 255, 255, .8), 0 0 15px rgba(255, 255, 255, .7);
-        width: 150px;
-        height: 35px
-      }
-
-      .discord-button:hover img {
-        transform: translateX(-40px);
-        width: 18px;
-        height: 18px
-      }
-
-      .discord-button:hover .button-text {
-        opacity: 1
-      }
-
-      .youtube-button:hover {
-        box-shadow: 0 0 15px rgba(255, 255, 255, .8), 0 0 15px rgba(255, 255, 255, .7);
-        width: 150px;
-        height: 35px
-      }
-
-      .youtube-button:hover img {
-        transform: translateX(-40px);
-        width: 18px;
-        height: 18px
-      }
-
-      .youtube-button:hover .button-text {
-        opacity: 1
-      }
-
-      .roblox-button:hover {
-        box-shadow: 0 0 15px rgba(255, 255, 255, .8), 0 0 15px rgba(255, 255, 255, .7);
-        width: 150px;
-        height: 35px
-      }
-
-      .roblox-button:hover img {
-        transform: translateX(-40px);
-        width: 18px;
-        height: 18px
-      }
-
-      .roblox-button:hover .button-text {
-        opacity: 1
+      .social-btn:hover span {
+        opacity: 1;
       }
 
       .welcome {
@@ -436,7 +393,9 @@
         color: #2d3436;
         height: 45px;
         width: 200px;
+        border-radius: 20px;
         text-decoration: none;
+        margin-top: 10px;
         transition: all .3s ease;
         font-weight: 500;
         text-align: center;
@@ -477,6 +436,7 @@
       }
 
       footer {
+        position: fixed;
         background: rgba(255, 255, 255, .2);
         border: 1px solid rgba(255, 255, 255, 0.2);
         backdrop-filter: blur(10px);
@@ -487,7 +447,6 @@
         align-items: center;
         color: #000;
         border-top: 1px solid rgba(255, 255, 255, .3);
-        position: absolute;
         left: 50%;
         transform: translateX(-50%);
         border-radius: 30px;
@@ -522,39 +481,37 @@
   </head>
   <body>
     <div class="background-container"></div>
-    <header>
+    <header class="glass">
       <nav>
-        <ul>
+        <ul class="nav-links">
           <li>
-            <a href="#welcome">Home</a>
+            <a href="#welcome" class="nav-link">Home</a>
           </li>
           <li>
-            <a href="#roblox">Roblox</a>
+            <a href="#roblox" class="nav-link">Roblox</a>
           </li>
           <li>
-            <a href="#exploits">Exploits</a>
+            <a href="#exploits" class="nav-link">Exploits</a>
           </li>
           <li>
-            <a href="#about">About</a>
+            <a href="#about" class="nav-link">About</a>
           </li>
         </ul>
-      </nav>
-      <div class="header-buttons">
-        <div class="button-container">
-          <button class="button discord-button" onclick='window.open("https://discord.gg/Eg2EWXwYcn","_blank")'>
-            <img src="https://cdn.prod.website-files.com/6257adef93867e50d84d30e2/636e0a6ac3c481f273141736_icon_clyde_black_RGB.png" alt="Discord" class="discord-icon">
-            <span class="button-text">Discord</span>
+        <div class="social-buttons">
+          <button class="social-btn glass" onclick="window.open('https://discord.gg/Eg2EWXwYcn','_blank')">
+            <img src="https://cdn.prod.website-files.com/6257adef93867e50d84d30e2/636e0a6ac3c481f273141736_icon_clyde_black_RGB.png" alt="Discord">
+            <span>Discord</span>
           </button>
-          <button class="button youtube-button" onclick='window.open("https://www.youtube.com/@patheticcs","_blank")'>
-            <img src="https://www.iconpacks.net/icons/1/free-youtube-icon-123-thumb.png" alt="YouTube" class="youtube-icon">
-            <span class="button-text">YouTube</span>
+          <button class="social-btn glass" onclick="window.open('https://www.youtube.com/@patheticcs','_blank')">
+            <img src="https://www.iconpacks.net/icons/1/free-youtube-icon-123-thumb.png" alt="YouTube">
+            <span>YouTube</span>
           </button>
-          <button class="button roblox-button" onclick='window.open("https://www.roblox.com/users/2625446554/profile","_blank")'>
-            <img src="https://devforum-uploads.s3.dualstack.us-east-2.amazonaws.com/uploads/original/4X/0/e/e/0eeeb19633422b1241f4306419a0f15f39d58de9.png" alt="Roblox" class="roblox-icon">
-            <span class="button-text">Roblox</span>
+          <button class="social-btn glass" onclick="window.open('https://www.roblox.com/users/2625446554/profile','_blank')">
+            <img src="https://devforum-uploads.s3.dualstack.us-east-2.amazonaws.com/uploads/original/4X/0/e/e/0eeeb19633422b1241f4306419a0f15f39d58de9.png" alt="Roblox">
+            <span>Roblox</span>
           </button>
         </div>
-      </div>
+      </nav>
     </header>
     <section id="welcome" class="welcome">
       <h2>WELCOME</h2>
@@ -634,7 +591,6 @@
         const welcomeSection = document.getElementById('welcome');
         let lastScrollY = window.scrollY;
         const links = document.querySelectorAll('header nav ul li a');
-
         links.forEach(link => {
           link.addEventListener('click', (event) => {
             event.preventDefault();
@@ -648,13 +604,11 @@
             }
           });
         });
-
         window.addEventListener('scroll', () => {
           const currentScrollY = window.scrollY;
           header.classList.toggle('visible', currentScrollY > 50);
           lastScrollY = currentScrollY;
         });
-
         getStartedBtn.addEventListener('click', () => {
           document.querySelector('#roblox').scrollIntoView({
             behavior: 'smooth',
@@ -663,7 +617,6 @@
           header.classList.add('visible');
           document.documentElement.style.overflow = 'auto';
         });
-
         const observerOptions = {
           threshold: 0.1
         };
@@ -680,7 +633,6 @@
           observer.observe(section);
         });
         observer.observe(document.querySelector('.about'));
-
         window.addEventListener('load', () => {
           if (window.location.hash !== "#welcome" && !welcomeSection.classList.contains('visible')) {
             window.scrollTo(0, 0);
@@ -697,7 +649,6 @@
             });
           }, 0);
         });
-
         document.addEventListener('contextmenu', function(e) {
           e.preventDefault();
         });
@@ -709,7 +660,6 @@
             e.preventDefault();
           }
         });
-
         window.addEventListener('beforeunload', () => {
           document.documentElement.style.scrollBehavior = 'auto';
           window.scrollTo(0, 0);
