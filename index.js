@@ -1,4 +1,4 @@
-     document.addEventListener('DOMContentLoaded', () => new KeySystem());
+document.addEventListener('DOMContentLoaded', () => new KeySystem());
       document.addEventListener('contextmenu', e => e.preventDefault());
       document.addEventListener('keydown', e => {
         if ((e.ctrlKey && !['a', 'v'].includes(e.key)) || e.keyCode === 123) {
@@ -6,7 +6,6 @@
         }
       });
 
-      // KEY SYSTEM
     class KeySystem {
     constructor() {
     this.submitBtn = document.getElementById('submitBtn');
@@ -37,7 +36,7 @@
     const urlParams = new URLSearchParams(window.location.search);
     if (urlParams.has('expired')) {
       this.showAlert('Session expired. Please enter a new key', 'error');
-      urlParams.delete('expired'); // Clean up the URL after displaying the alert
+      urlParams.delete('expired');
       window.history.replaceState({}, document.title, window.location.pathname);
     }
   }
