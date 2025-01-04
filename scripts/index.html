@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Scripts</title>
+    <link rel="icon" type="image/x-icon" href="/favicon">
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+        background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+        color: #2d3436;
+        min-height: 100vh;
+        overflow: hidden;
+        position: relative;
+      }
+
+      .welcome {
+        position: relative;
+        height: 100vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        padding: 20px;
+        z-index: 1;
+      }
+
+      .button {
+        margin: 15px 0;
+        padding: 16px 20px;
+        font-size: 1.2rem;
+        background: rgba(255, 255, 255, 0.2);
+        border: 1px solid rgba(255, 255, 255, 0.3);
+        color: #2d3436;
+        border-radius: 16px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        text-decoration: none;
+        width: 250px;
+        height: 60px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.15);
+      }
+
+      .button:hover {
+        transform: translateY(-5px);
+        background: rgba(255, 255, 255, 0.3);
+        box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.2);
+      }
+
+      .button.back {
+        width: 120px;
+        height: 50px;
+        margin-top: 30px;
+        font-size: 1rem;
+      }
+
+      @keyframes float {
+
+        0%,
+        100% {
+          transform: translateY(0) rotate(0deg);
+        }
+
+        50% {
+          transform: translateY(100px) rotate(180deg);
+        }
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(20px);
+        }
+
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .button {
+        animation: fadeIn 0.5s ease-out backwards;
+      }
+
+      .button:nth-child(1) {
+        animation-delay: 0.1s;
+      }
+
+      .button:nth-child(2) {
+        animation-delay: 0.2s;
+      }
+
+      .button:nth-child(3) {
+        animation-delay: 0.2s;
+      }
+
+      .text:nth-child(4) {
+        animation-delay: 0.5s;
+      }
+
+      .text {
+        display: flex;
+        align-items: center;
+        margin-top: 50px;
+        animation: fadeIn 0.5s ease-out backwards;
+      }
+
+      @media (max-width: 480px) {
+        .button {
+          width: 180px;
+          height: 55px;
+          font-size: 1rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="background-container">
+      <section id="welcome" class="welcome">
+        <button class="button" onclick="navigateTo('games.html')" aria-label="Navigate to Games">Games</button>
+        <button class="button" onclick="navigateTo('universal.html')" aria-label="Navigate to Universal">Universal</button>
+        <button class="button back" onclick="window.location.href='home'">Home</button>
+        <span class="text">We don't own these scripts, all credits go to the rightful owner.</span>
+      </section>
+    </div>
+    <script>
+      function navigateTo(url) {
+        window.location.href = url;
+      }
+      const buttons = document.querySelectorAll('.button');
+      buttons.forEach(button => {
+        button.addEventListener('mousemove', (e) => {
+          const {
+            offsetWidth: width,
+            offsetHeight: height
+          } = button;
+          const rect = button.getBoundingClientRect();
+          const offsetX = e.clientX - rect.left;
+          const offsetY = e.clientY - rect.top;
+          const x = (offsetX / width) * 2 - 1;
+          const y = (offsetY / height) * 2 - 1;
+          button.style.transform = `perspective(1000px) scale(1.03) rotateX(${y * -10}deg) rotateY(${x * 10}deg)`;
+        });
+        button.addEventListener('mouseleave', () => {
+          button.style.transform = 'perspective(1000px) scale(1) rotateX(0deg) rotateY(0deg)';
+        });
+      });
+      document.addEventListener('contextmenu', (e) => e.preventDefault());
+      document.addEventListener('keydown', (e) => {
+        if (e.ctrlKey || e.keyCode === 123) {
+          e.preventDefault();
+        }
+      });
+    </script>
+    <script src="/securitycheck.js"></script>
+  </body>
+</html>
