@@ -37,7 +37,7 @@
     const urlParams = new URLSearchParams(window.location.search);
     if (urlParams.has('expired')) {
       this.showAlert('Session expired. Please enter a new key', 'error');
-      urlParams.delete('expired'); // Clean up the URL after displaying the alert
+      urlParams.delete('expired');
       window.history.replaceState({}, document.title, window.location.pathname);
     }
   }
@@ -145,7 +145,7 @@
         this.showAlert('Session expired. Please enter a new key', 'error');
         return;
       }
-      window.location.href = '/home.html';
+      window.location.href = '/home';
     } catch (error) {
       console.error('Session check error:', error);
       this.clearSession();
