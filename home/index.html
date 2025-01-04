@@ -123,28 +123,15 @@
         overflow: hidden;
       }
 
-      .top-header {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 40px;
-        background-color: #000;
-        color: #fff;
-        text-align: center;
-        font-size: 0.6rem;
-        line-height: 40px;
-        z-index: 110;
-      }
-
       header {
         position: fixed;
         top: 0;
         left: 50%;
         transform: translateX(-50%);
-        width: min(95%, 1400px);
+        width: 1000px;
         height: 80px;
         margin-top: 1rem;
+        /* Remember to make it 1rem if top header is gone */
         padding: 1rem 2rem;
         border-radius: 2rem;
         z-index: 100;
@@ -155,10 +142,10 @@
 
       header.visible {
         opacity: 1;
-        background: rgba(255, 255, 255, .25);
+        background: rgba(255, 255, 255, 0.25);
         backdrop-filter: blur(10px);
         -webkit-backdrop-filter: blur(10px);
-        border: 1px solid rgba(255, 255, 255, .3);
+        border: 1px solid rgba(255, 255, 255, 0.3);
         visibility: visible;
       }
 
