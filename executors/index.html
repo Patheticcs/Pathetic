@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Executors</title>
+    <link rel="icon" type="image/x-icon" href="/favicon">
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        user-select: none
+      }
+
+      ::-webkit-scrollbar {
+        display: none
+      }
+
+      :root {
+        --glass-bg: rgba(255, 255, 255, 0.1);
+        --glass-border: rgba(255, 255, 255, 0.2);
+        --glass-shadow: rgba(255, 255, 255, 0.15)
+      }
+
+      @keyframes gradient {
+        0% {
+          background-position: 0 50%
+        }
+
+        50% {
+          background-position: 100% 50%
+        }
+
+        100% {
+          background-position: 0 50%
+        }
+      }
+
+      @keyframes float {
+        0% {
+          transform: translateY(0) rotate(0)
+        }
+
+        50% {
+          transform: translateY(-20px) rotate(5deg)
+        }
+
+        100% {
+          transform: translateY(0) rotate(0)
+        }
+      }
+
+      @keyframes shine {
+        0% {
+          background-position: -200% center
+        }
+
+        100% {
+          background-position: 200% center
+        }
+      }
+
+      @keyframes pulse {
+        0% {
+          box-shadow: 0 0 0 0 rgba(255, 255, 255, .7)
+        }
+
+        70% {
+          box-shadow: 0 0 0 20px rgba(255, 255, 255, 0)
+        }
+
+        100% {
+          box-shadow: 0 0 0 0 rgba(255, 255, 255, 0)
+        }
+      }
+
+      body {
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+        background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+        color: #2d3436;
+        min-height: 100vh;
+        overflow: hidden;
+        position: relative;
+      }
+
+      body::before {
+        content: '';
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        opacity: .9;
+        z-index: 0
+      }
+
+      .welcome {
+        position: relative;
+        height: 100vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        padding: 20px;
+        z-index: 1;
+      }
+
+      .button {
+        margin: 15px 0;
+        padding: 16px 20px;
+        font-size: 1.2rem;
+        background: rgba(255, 255, 255, 0.2);
+        border: 1px solid rgba(255, 255, 255, 0.3);
+        color: #2d3436;
+        border-radius: 16px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        text-decoration: none;
+        width: 300px;
+        height: 60px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 0px 32px 0 rgba(0, 0, 0, 0.15);
+      }
+
+      .button:hover {
+        background: rgba(255, 255, 255, 0.3);
+        box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.2);
+        transform: scale(1.01);
+      }
+
+      .button.back {
+        width: 120px;
+        height: 50px;
+        margin-top: 30px;
+        font-size: 1rem;
+      }
+
+      @keyframes float {
+
+        0%,
+        100% {
+          transform: translateY(0) rotate(0deg);
+        }
+
+        50% {
+          transform: translateY(100px) rotate(180deg);
+        }
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(20px);
+        }
+
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .button {
+        animation: fadeIn 0.5s ease-out backwards;
+      }
+
+      .button:nth-child(1) {
+        animation-delay: 0.1s;
+      }
+
+      .button:nth-child(2) {
+        animation-delay: 0.2s;
+      }
+
+      .button:nth-child(3) {
+        animation-delay: 0.3s;
+      }
+
+      .button:nth-child(4) {
+        animation-delay: 0.4s;
+      }
+
+      .button:nth-child(5) {
+        animation-delay: 0.5s;
+      }
+
+      .button:nth-child(6) {
+        animation-delay: 0.6s
+      }
+
+      .button:nth-child(7) {
+        animation-delay: 0.7s
+      }
+
+      .button:nth-child(8) {
+        animation-delay: 0.8s
+      }
+
+      .button:nth-child(9) {
+        animation-delay: 0.9s
+      }
+
+      @media (max-width: 480px) {
+        .button {
+          width: 180px;
+          height: 55px;
+          font-size: 1rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="background-container">
+      <section id="welcome" class="welcome">
+        <a class="button" href="https://getsolara.dev" target="_blank" rel="noopener noreferrer">Solara</a>
+        <a class="button" href="https://discord.com/invite/getxeno" target="_blank" rel="noopener noreferrer">Xeno</a>
+        <a class="button" href="https://discord.gg/getsalad" target="_blank" rel="noopener noreferrer">Salad</a>
+        <a class="button" href="https://discord.gg/fluxus" target="_blank" rel="noopener noreferrer">Fluxus</a>
+        <a class="button" href="https://discord.gg/getluna" target="_blank" rel="noopener noreferrer">Luna</a>
+        <a class="button" href="https://discord.gg/getcloudy" target="_blank" rel="noopener noreferrer">Cloudy</a>
+        <a class="button" href="https://discord.gg/SW5d8kgndS" target="_blank" rel="noopener noreferrer">Haze</a>
+        <a class="button" href="https://discord.gg/ApFZFGuYxh" target="_blank" rel="noopener noreferrer">Syphra Softworks</a>
+        <button class="button back" onclick="window.location.href='home'">Home</button>
+      </section>
+    </div>
+    <script>
+      const buttons = document.querySelectorAll('.button');
+      buttons.forEach(button => {
+        button.addEventListener('mousemove', (e) => {
+          const {
+            offsetWidth: width,
+            offsetHeight: height
+          } = button;
+          const rect = button.getBoundingClientRect();
+          const offsetX = e.clientX - rect.left;
+          const offsetY = e.clientY - rect.top;
+          const x = (offsetX / width) * 2 - 1;
+          const y = (offsetY / height) * 2 - 1;
+          button.style.transform = `perspective(1000px) scale(1.03) rotateX(${y * -10}deg) rotateY(${x * 10}deg)`;
+        });
+        button.addEventListener('mouseleave', () => {
+          button.style.transform = 'perspective(1000px) scale(1) rotateX(0deg) rotateY(0deg)';
+        });
+      });
+      document.addEventListener('contextmenu', (e) => e.preventDefault());
+      document.addEventListener('keydown', (e) => {
+        if (e.ctrlKey || e.keyCode === 123) {
+          e.preventDefault();
+        }
+      });
+
+      function navigateTo(url) {
+        window.location.href = url;
+      }
+    </script>
+    <script src="/securitycheck.js"></script>
+  </body>
+</html>
