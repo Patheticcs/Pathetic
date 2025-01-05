@@ -13,7 +13,7 @@
     <meta property="og:site_name" content="Pathetic">
     <meta property="og:locale" content="en_US">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
-<style>
+    <style>
       @keyframes fadeIn {
         from {
           opacity: 0;
@@ -264,7 +264,8 @@
       .shake {
         animation: shake .5s cubic-bezier(.36, .07, .19, .97) both
       }
-        @media (max-width: 768px) {
+
+      @media (max-width: 768px) {
         .container {
           width: 90%;
           border-radius: 20px;
@@ -301,8 +302,8 @@
           font-size: 0.9em;
         }
       }
-  </style>
-    </head>
+    </style>
+  </head>
   <body>
     <div class="glass-overlay"></div>
     <div class="container" id="login-container">
@@ -320,6 +321,11 @@
         <div id="alert" class="alert"></div>
       </div>
     </div>
-  <script src="/index.js"></script>
+    <script src="/index.js"></script>
+    <script>
+      if (window.top !== window.self) {
+        document.body.innerHTML = 'Blocked.';
+      }
+    </script>
   </body>
 </html>
