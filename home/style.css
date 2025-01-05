@@ -1,4 +1,4 @@
-      * {
+              * {
         margin: 0;
         padding: 0;
         box-sizing: border-box;
@@ -226,9 +226,9 @@
       }
 
       .welcome h2 {
-        font-size: 9rem;
+        font-size: 13rem;
         color: #2d3436;
-        margin-bottom: 30px;
+        margin-bottom: 50px;
         animation: fadeInUp 1s forwards
       }
 
@@ -241,7 +241,7 @@
       }
 
       .welcome button {
-        margin-top: 30px;
+        margin-top: 50px;
         padding: 15px 50px;
         font-size: 1.1rem;
         background: rgba(255, 255, 255, 0.2);
@@ -411,7 +411,7 @@
       }
 
       .about h2 {
-        font-size: 5.5rem;
+        font-size: 7rem;
         margin-bottom: 50px;
         color: #2d3436;
       }
