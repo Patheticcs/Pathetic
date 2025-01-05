@@ -12,6 +12,7 @@
     <meta property="og:site_name" content="Pathetic">
     <meta property="og:locale" content="en_US">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+Content-Security-Policy: frame-ancestors 'none';
 <style>
       @keyframes fadeIn {
         from {
@@ -283,5 +284,10 @@
       </div>
     </div>
   <script src="/index.js"></script>
+    <script>
+      if (window.top !== window.self) {
+        document.body.innerHTML = '<h1>Blocked.</h1>';
+      }
+    </script>
   </body>
 </html>
