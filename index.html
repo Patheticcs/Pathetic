@@ -7,7 +7,7 @@
     <meta name="description" content="We're a passionate team focused on creating reliable, effective tools to enhance your gaming and online experiences.">
     <meta property="og:title" content="Pathetic">
     <meta property="og:description" content="Discover effective tools that enhance your gaming and online experiences.">
-    <meta property="og:image" content="/favicon">
+    <meta property="og:image" content="/favicon.ico">
     <meta property="og:url" content="https://pathetic.one">
     <meta property="og:type" content="website">
     <meta property="og:site_name" content="Pathetic">
@@ -196,34 +196,33 @@
         }
       }
     </style>
-</head>
-<body>
-  <div class="container">
-    <h2>Key System</h2>
-    <div class="input-group">
-      <input 
-        type="text" 
-        id="key" 
-        placeholder="Enter your access key" 
-        autocomplete="off" 
-        aria-label="Access Key">
+  </head>
+  <body>
+    <div class="container">
+      <h2>Key System</h2>
+      <div class="input-group">
+        <input 
+          type="text" 
+          id="key" 
+          placeholder="Enter your access key" 
+          autocomplete="off" 
+          aria-label="Access Key">
+      </div>
+      <div class="button-group">
+        <button id="submitBtn" aria-label="Submit Key">
+          <i class="fas fa-key"></i> Submit
+        </button>
+        <button id="discordBtn" aria-label="Get Key via Discord">
+          <i class="fab fa-discord"></i> Get Key
+        </button>
+      </div>
+      <div id="alert" class="alert" role="alert"></div>
     </div>
-    <div class="button-group">
-      <button id="submitBtn" aria-label="Submit Key">
-        <i class="fas fa-key"></i> Submit
-      </button>
-      <button id="discordBtn" aria-label="Get Key via Discord">
-        <i class="fab fa-discord"></i> Get Key
-      </button>
-    </div>
-    <div id="alert" class="alert" role="alert"></div>
-  </div>
-  <script src="/index.js"></script>
-  <script>
-    // Block embedding within an iframe
-    if (window.top !== window.self) {
-      document.body.innerHTML = 'Blocked.';
-    }
-  </script>
-</body>
+    <script src="/index.js"></script>
+    <script>
+      if (window.top !== window.self) {
+        document.body.innerHTML = 'Blocked.';
+      }
+    </script>
+  </body>
 </html>
