@@ -2,6 +2,7 @@
 <html lang="en">
   <head>
     <title>Home</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" type="image/x-icon" href="/favicon">
     <style>
       * {
@@ -131,7 +132,6 @@
         width: 1000px;
         height: 80px;
         margin-top: 1rem;
-        /* Remember to make it 1rem if top header is gone */
         padding: 1rem 2rem;
         border-radius: 2rem;
         z-index: 100;
@@ -458,203 +458,425 @@
         padding: 5px 0;
         font-weight: 700
       }
+
+      @media screen and (max-width: 768px) {
+        .welcome h2 {
+          font-size: 4rem;
+        }
+
+        .welcome p {
+          font-size: 0.7rem;
+        }
+
+        .welcome button {
+          margin-top: 10px;
+          padding: 8px 20px;
+          font-size: 0.9rem;
+          background: rgba(255, 255, 255, 0.2);
+          border: 1px solid rgba(255, 255, 255, 0.3);
+          border-radius: 20px;
+          color: #2d3436;
+          cursor: pointer;
+          transition: all .3s ease;
+          backdrop-filter: blur(8px);
+          box-shadow: 0 0px 16px 0 rgba(0, 0, 0, 0.15);
+          animation: fadeInUp 1s forwards .6s;
+          opacity: 0;
+          position: relative;
+          overflow: hidden;
+        }
+
+        .services-container {
+          grid-template-columns: 1fr;
+          padding: 20px;
+          gap: 20px;
+        }
+
+        .section {
+          width: 100%;
+          max-width: 100%;
+          margin: 10px 0;
+          padding: 20px;
+        }
+
+        .section h3 {
+          font-size: 1.8rem;
+          margin-bottom: 30px;
+        }
+
+        header {
+          width: 95%;
+          height: auto;
+          padding: 0.5rem;
+          margin-top: 0.8rem;
+        }
+
+        nav {
+          flex-direction: column;
+          gap: 1rem;
+          padding: 10px 0;
+        }
+
+        .nav-links {
+          flex-direction: column;
+          gap: 1rem;
+          width: 100%;
+          text-align: center;
+        }
+
+        .social-buttons {
+          width: 100%;
+          justify-content: center;
+        }
+
+        .social-btn {
+          width: 40px;
+          height: 40px;
+        }
+
+        .social-btn:hover {
+          width: 40px;
+        }
+
+        .social-btn span {
+          display: none;
+        }
+
+        .social-btn:hover img {
+          transform: none;
+        }
+
+        footer {
+          width: 75%;
+          padding: 10px;
+          height: 30px;
+          font-size: 9px;
+          gap: 5px;
+        }
+
+        .about h2 {
+          font-size: 3rem;
+        }
+
+        .about p {
+          padding: 0 20px;
+          font-size: 0.9rem;
+        }
+
+        .mobile-menu-btn {
+          display: flex;
+          position: fixed;
+          top: 50px;
+          right: 50px;
+          z-index: 1000;
+          background: rgba(255, 255, 255, 0.2);
+          backdrop-filter: blur(10px);
+          border: 1px solid rgba(255, 255, 255, 0.3);
+          border-radius: 50%;
+          width: 50px;
+          height: 50px;
+          cursor: pointer;
+          padding: 10px;
+          box-sizing: border-box;
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
+        }
+
+        .mobile-menu-btn span {
+          display: block;
+          width: 25px;
+          height: 2px;
+          background: #2d3436;
+          margin: 3px 0;
+          transition: all 0.3s;
+        }
+
+        .mobile-menu-btn.active span:nth-child(1) {
+          transform: rotate(45deg) translate(5px, 5px);
+        }
+
+        .mobile-menu-btn.active span:nth-child(2) {
+          opacity: 0;
+        }
+
+        .mobile-menu-btn.active span:nth-child(3) {
+          transform: rotate(-45deg) translate(7px, -7px);
+        }
+
+        header.mobile-open {
+          transform: translateX(-50%) translateY(0);
+          visibility: visible;
+          opacity: 1;
+        }
+
+        header:not(.mobile-open) {
+          transform: translateX(-50%) translateY(-100%);
+        }
+
+        .mobile-menu-btn.active span:nth-child(1) {
+          transform: rotate(45deg) translate(5px, 5px);
+        }
+
+        .mobile-menu-btn.active span:nth-child(2) {
+          opacity: 0;
+        }
+
+        .mobile-menu-btn.active span:nth-child(3) {
+          transform: rotate(-45deg) translate(7px, -7px);
+        }
+      }
     </style>
   </head>
   <body>
-    <div class="top-header">
-      <p>988</p>
+    <div class="mobile-menu-btn">
+      <span></span>
+      <span></span>
+      <span></span>
     </div>
-    <div class="background-container"></div>
-    <header class="glass">
-      <nav>
-        <ul class="nav-links">
-          <li>
-            <a href="#welcome" class="nav-link">Home</a>
-          </li>
-          <li>
-            <a href="#roblox" class="nav-link">Roblox</a>
-          </li>
-          <li>
-            <a href="#exploits" class="nav-link">Exploits</a>
-          </li>
-          <li>
-            <a href="#about" class="nav-link">About</a>
-          </li>
-        </ul>
-        <div class="social-buttons">
-          <button class="social-btn glass" onclick="window.open('https://discord.gg/Eg2EWXwYcn','_blank')">
-            <img src="https://cdn.prod.website-files.com/6257adef93867e50d84d30e2/636e0a6ac3c481f273141736_icon_clyde_black_RGB.png" alt="Discord">
-            <span>Discord</span>
-          </button>
-          <button class="social-btn glass" onclick="window.open('https://www.youtube.com/@patheticcs','_blank')">
-            <img src="https://www.iconpacks.net/icons/1/free-youtube-icon-123-thumb.png" alt="YouTube">
-            <span>YouTube</span>
-          </button>
-          <button class="social-btn glass" onclick="window.open('https://www.roblox.com/users/2625446554/profile','_blank')">
-            <img src="https://devforum-uploads.s3.dualstack.us-east-2.amazonaws.com/uploads/original/4X/0/e/e/0eeeb19633422b1241f4306419a0f15f39d58de9.png" alt="Roblox">
-            <span>Roblox</span>
-          </button>
-        </div>
-      </nav>
-    </header>
-    <section id="welcome" class="welcome">
-      <h2>WELCOME</h2>
-      <p>We are here to offer the best services for you!</p>
-      <button id="get-started-btn">Get Started</button>
-    </section>
-    <section id="roblox">
-      <div class="services-container">
-        <div class="section">
-          <h3>SCRIPTS</h3>
-          <p>Free Scripts, all working.</p>
-          <a href="scripts" class="button">Enter</a>
-        </div>
-        <div class="section">
-          <h3>EXECUTORS</h3>
-          <p>Free Windows Executors</p>
-          <a href="executors" class="button">Enter</a>
-        </div>
-        <div class="section">
-          <h3>VOXLIS</h3>
-          <p>Ready to inject?</p>
-          <a href="https://voxlis.net/" class="button" target="_blank" rel="noopener noreferrer" aria-label="Visit VOXLIS website">Enter</a>
-        </div>
-        <div class="section">
-          <h3>WEAO</h3>
-          <p>The #1 Roblox exploit status tracker.</p>
-          <a href="https://weao.xyz/" class="button" target="_blank" rel="noopener noreferrer" aria-label="Visit EXPStatus website">Enter</a>
-        </div>
-        <div class="section">
-          <h3>RBXSERVERS</h3>
-          <p>The #1 site for finding ROBLOX VIP Servers</p>
-          <a href="https://rbxservers.xyz/" class="button" target="_blank" rel="noopener noreferrer" aria-label="Visit RBXSERVERS website">Enter</a>
-        </div>
+    <body>
+      <div class="top-header">
+        <p>988</p>
       </div>
-    </section>
-    <section id="exploits">
-      <div class="services-container">
-        <div class="section">
-          <h3>PROXIES</h3>
-          <p>Browse any website anonymously.</p>
-          <a href="proxies" class="button">Enter</a>
+      <div class="background-container"></div>
+      <header class="glass">
+        <nav>
+          <ul class="nav-links">
+            <li>
+              <a href="#welcome" class="nav-link">Home</a>
+            </li>
+            <li>
+              <a href="#roblox" class="nav-link">Roblox</a>
+            </li>
+            <li>
+              <a href="#exploits" class="nav-link">Exploits</a>
+            </li>
+            <li>
+              <a href="#about" class="nav-link">About</a>
+            </li>
+          </ul>
+          <div class="social-buttons">
+            <button class="social-btn glass" onclick="window.open('https://discord.gg/Eg2EWXwYcn','_blank')">
+              <img src="https://cdn.prod.website-files.com/6257adef93867e50d84d30e2/636e0a6ac3c481f273141736_icon_clyde_black_RGB.png" alt="Discord">
+              <span>Discord</span>
+            </button>
+            <button class="social-btn glass" onclick="window.open('https://www.youtube.com/@patheticcs','_blank')">
+              <img src="https://www.iconpacks.net/icons/1/free-youtube-icon-123-thumb.png" alt="YouTube">
+              <span>YouTube</span>
+            </button>
+            <button class="social-btn glass" onclick="window.open('https://www.roblox.com/users/2625446554/profile','_blank')">
+              <img src="https://devforum-uploads.s3.dualstack.us-east-2.amazonaws.com/uploads/original/4X/0/e/e/0eeeb19633422b1241f4306419a0f15f39d58de9.png" alt="Roblox">
+              <span>Roblox</span>
+            </button>
+          </div>
+        </nav>
+      </header>
+      <section id="welcome" class="welcome">
+        <h2>WELCOME</h2>
+        <p>We are here to offer the best services for you!</p>
+        <button id="get-started-btn">Get Started</button>
+      </section>
+      <section id="roblox">
+        <div class="services-container">
+          <div class="section">
+            <h3>SCRIPTS</h3>
+            <p>Free Scripts, all working.</p>
+            <a href="scripts" class="button">Enter</a>
+          </div>
+          <div class="section">
+            <h3>EXECUTORS</h3>
+            <p>Free Windows Executors</p>
+            <a href="executors" class="button">Enter</a>
+          </div>
+          <div class="section">
+            <h3>VOXLIS</h3>
+            <p>Ready to inject?</p>
+            <a href="https://voxlis.net/" class="button" target="_blank" rel="noopener noreferrer" aria-label="Visit VOXLIS website">Enter</a>
+          </div>
+          <div class="section">
+            <h3>WEAO</h3>
+            <p>The #1 Roblox exploit status tracker.</p>
+            <a href="https://weao.xyz/" class="button" target="_blank" rel="noopener noreferrer" aria-label="Visit EXPStatus website">Enter</a>
+          </div>
+          <div class="section">
+            <h3>RBXSERVERS</h3>
+            <p>The #1 site for finding ROBLOX VIP Servers</p>
+            <a href="https://rbxservers.xyz/" class="button" target="_blank" rel="noopener noreferrer" aria-label="Visit RBXSERVERS website">Enter</a>
+          </div>
         </div>
-        <div class="section">
-          <h3>BYPASS</h3>
-          <p>Bypass AD Links.</p>
-          <a href="bypass" class="button">Enter</a>
+      </section>
+      <section id="exploits">
+        <div class="services-container">
+          <div class="section">
+            <h3>PROXIES</h3>
+            <p>Browse any website anonymously.</p>
+            <a href="proxies" class="button">Enter</a>
+          </div>
+          <div class="section">
+            <h3>BYPASS</h3>
+            <p>Bypass AD Links.</p>
+            <a href="bypass" class="button">Enter</a>
+          </div>
+          <div class="section">
+            <h3>FREE MOVIES</h3>
+            <p>Stream, Download, Torrent Videos</p>
+            <a href="movies" class="button">Enter</a>
+          </div>
+          <div class="section">
+            <h3>FMHY</h3>
+            <p>Collection of free stuff on the internet!</p>
+            <a href="https://fmhy.net/" class="button" target="_blank" rel="noopener noreferrer" aria-label="Visit FMHY website">Enter</a>
+          </div>
+          <div class="section">
+            <h3>GAMES</h3>
+            <p>Play Roblox and Minecraft UNBLOCKED!</p>
+            <a href="unblocked-games" class="button">Enter</a>
+          </div>
         </div>
-        <div class="section">
-          <h3>FREE MOVIES</h3>
-          <p>Stream, Download, Torrent Videos</p>
-          <a href="movies" class="button">Enter</a>
-        </div>
-        <div class="section">
-          <h3>FMHY</h3>
-          <p>Collection of free stuff on the internet!</p>
-          <a href="https://fmhy.net/" class="button" target="_blank" rel="noopener noreferrer" aria-label="Visit FMHY website">Enter</a>
-        </div>
-        <div class="section">
-          <h3>GAMES</h3>
-          <p>Play Roblox and Minecraft UNBLOCKED!</p>
-          <a href="unblocked-games" class="button">Enter</a>
-        </div>
-      </div>
-    </section>
-    <section id="about" class="about">
-      <h2>ABOUT US</h2>
-      <p>We're a passionate team focused on creating reliable, effective tools to enhance your gaming and online experiences. We prioritize quality and ease of use, ensuring every solution we offer meets the highest standards to help you get the most out of your online activities.</p>
-    </section>
-    <footer>
-      <p>2024 Pathetic. All Rights Reserved.</p>
-      <a href="/versions" class="footer-link">‎ ‎ ‎ Version History</a>
-    </footer>
-    <script>
-      document.addEventListener('DOMContentLoaded', () => {
-        const header = document.querySelector('header');
-        const getStartedBtn = document.getElementById('get-started-btn');
-        const welcomeSection = document.getElementById('welcome');
-        let lastScrollY = window.scrollY;
-        const links = document.querySelectorAll('header nav ul li a');
-        links.forEach(link => {
-          link.addEventListener('click', (event) => {
-            event.preventDefault();
-            const targetId = link.getAttribute('href').substring(1);
-            const targetSection = document.getElementById(targetId);
-            if (targetSection) {
-              targetSection.scrollIntoView({
+      </section>
+      <section id="about" class="about">
+        <h2>ABOUT US</h2>
+        <p>We're a passionate team focused on creating reliable, effective tools to enhance your gaming and online experiences. We prioritize quality and ease of use, ensuring every solution we offer meets the highest standards to help you get the most out of your online activities.</p>
+      </section>
+      <footer>
+        <p>2024 Pathetic. All Rights Reserved.</p>
+        <a href="/versions" class="footer-link">‎ ‎ ‎ Version History</a>
+      </footer>
+      <script>
+        document.addEventListener('DOMContentLoaded', () => {
+          const header = document.querySelector('header');
+          const getStartedBtn = document.getElementById('get-started-btn');
+          const welcomeSection = document.getElementById('welcome');
+          const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+          const navLinks = document.querySelectorAll('.nav-links a');
+          let lastScrollY = window.scrollY;
+
+          function smoothScrollWithHeaderAnimation(targetElement) {
+            header.style.transition = 'opacity 0.5s ease';
+            header.style.opacity = '0';
+            targetElement.scrollIntoView({
+              behavior: 'smooth',
+              block: 'start'
+            });
+            setTimeout(() => {
+              header.classList.add('visible');
+              header.style.opacity = '1';
+            }, 800);
+          }
+          getStartedBtn.addEventListener('click', () => {
+            const robloxSection = document.querySelector('#roblox');
+            if (robloxSection) {
+              smoothScrollWithHeaderAnimation(robloxSection);
+              document.documentElement.style.overflow = 'auto';
+            }
+          });
+          navLinks.forEach(link => {
+            link.addEventListener('click', (event) => {
+              event.preventDefault();
+              const targetId = link.getAttribute('href').substring(1);
+              const targetSection = document.getElementById(targetId);
+              if (targetSection) {
+                smoothScrollWithHeaderAnimation(targetSection);
+                if (window.innerWidth <= 768) {
+                  closeMobileMenu();
+                }
+              }
+            });
+          });
+          window.addEventListener('scroll', () => {
+            const currentScrollY = window.scrollY;
+            if (currentScrollY > 50) {
+              header.classList.add('visible');
+              header.style.opacity = '1';
+            } else {
+              header.classList.remove('visible');
+              header.style.opacity = '0';
+            }
+            lastScrollY = currentScrollY;
+          });
+          const observerOptions = {
+            threshold: 0.1
+          };
+          const observer = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                entry.target.classList.add("visible");
+              } else {
+                entry.target.classList.remove("visible");
+              }
+            });
+          }, observerOptions);
+          document.querySelectorAll('.section').forEach(section => {
+            observer.observe(section);
+          });
+          observer.observe(document.querySelector('.about'));
+
+          function toggleMobileMenu() {
+            mobileMenuBtn.classList.toggle('active');
+            header.classList.toggle('mobile-open');
+          }
+
+          function closeMobileMenu() {
+            mobileMenuBtn.classList.remove('active');
+            header.classList.remove('mobile-open');
+          }
+          if (mobileMenuBtn) {
+            mobileMenuBtn.addEventListener('click', toggleMobileMenu);
+            mobileMenuBtn.addEventListener('touchend', (e) => {
+              e.preventDefault();
+              toggleMobileMenu();
+            });
+          }
+          document.addEventListener('click', (e) => {
+            if (window.innerWidth <= 768 && header.classList.contains('mobile-open') && !header.contains(e.target) && !mobileMenuBtn.contains(e.target)) {
+              closeMobileMenu();
+            }
+          });
+          let resizeTimer;
+          window.addEventListener('resize', () => {
+            clearTimeout(resizeTimer);
+            resizeTimer = setTimeout(() => {
+              if (window.innerWidth > 768) {
+                closeMobileMenu();
+              }
+            }, 250);
+          });
+          window.addEventListener('load', () => {
+            if (window.location.hash !== "#welcome" && !welcomeSection.classList.contains('visible')) {
+              window.scrollTo(0, 0);
+              welcomeSection.scrollIntoView({
                 behavior: 'smooth',
                 block: 'start'
               });
             }
+            setTimeout(() => {
+              document.documentElement.style.scrollBehavior = 'smooth';
+              window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+              });
+            }, 0);
           });
-        });
-        window.addEventListener('scroll', () => {
-          const currentScrollY = window.scrollY;
-          header.classList.toggle('visible', currentScrollY > 50);
-          lastScrollY = currentScrollY;
-        });
-        getStartedBtn.addEventListener('click', () => {
-          document.querySelector('#roblox').scrollIntoView({
-            behavior: 'smooth',
-            block: 'start'
+          window.addEventListener('beforeunload', () => {
+            document.documentElement.style.scrollBehavior = 'auto';
+            window.scrollTo(0, 0);
           });
-          header.classList.add('visible');
-          document.documentElement.style.overflow = 'auto';
-        });
-        const observerOptions = {
-          threshold: 0.1
-        };
-        const observer = new IntersectionObserver((entries) => {
-          entries.forEach((entry) => {
-            if (entry.isIntersecting) {
-              entry.target.classList.add("visible");
-            } else {
-              entry.target.classList.remove("visible");
+          document.addEventListener('contextmenu', function(e) {
+            e.preventDefault();
+          });
+          document.addEventListener('keydown', function(e) {
+            if (e.ctrlKey && !(e.key === 'a' || e.key === 'v')) {
+              e.preventDefault();
+            }
+            if (e.keyCode === 123) {
+              e.preventDefault();
             }
           });
-        }, observerOptions);
-        document.querySelectorAll('.section').forEach(section => {
-          observer.observe(section);
-        });
-        observer.observe(document.querySelector('.about'));
-        window.addEventListener('load', () => {
-          if (window.location.hash !== "#welcome" && !welcomeSection.classList.contains('visible')) {
-            window.scrollTo(0, 0);
-            welcomeSection.scrollIntoView({
-              behavior: 'smooth',
-              block: 'start'
-            });
-          }
-          setTimeout(() => {
-            document.documentElement.style.scrollBehavior = 'smooth';
-            window.scrollTo({
-              top: 0,
-              behavior: 'smooth'
-            });
-          }, 0);
-        });
-        document.addEventListener('contextmenu', function(e) {
-          e.preventDefault();
-        });
-        document.addEventListener('keydown', function(e) {
-          if (e.ctrlKey && !(e.key === 'a' || e.key === 'v')) {
-            e.preventDefault();
-          }
-          if (e.keyCode === 123) {
-            e.preventDefault();
+          if (window.top !== window.self) {
+            document.body.innerHTML = ' < h1 > Blocked. < /h1>';
           }
         });
-        window.addEventListener('beforeunload', () => {
-          document.documentElement.style.scrollBehavior = 'auto';
-          window.scrollTo(0, 0);
-        });
-      });
-    </script>
+      </script>
     <script src="/securitycheck.js"></script>
-    <script>
-      if (window.top !== window.self) {
-        document.body.innerHTML = ' < h1 > Blocked. < /h1>';
-      }
-    </script>
-  </body>
+    </body>
 </html>
