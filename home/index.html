@@ -257,5 +257,10 @@
         });
       </script>
     <script src="/securitycheck.js"></script>
+      <script>
+        if (window.top !== window.self) {
+        document.body.innerHTML = 'Blocked.';
+      }
+      </script>
     </body>
 </html>
