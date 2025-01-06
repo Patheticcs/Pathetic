@@ -291,7 +291,8 @@
       }
 
       #exploits,
-      #roblox {
+      #roblox,
+      #tools {
         min-height: 100vh;
         display: flex;
         flex-direction: column;
