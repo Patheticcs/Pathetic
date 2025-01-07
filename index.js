@@ -75,6 +75,16 @@ function redirectToErrorPage(errorType) {
   window.location.href = `/?${errorType}=true`;
 }
 
+// Function to be called when the user logs in successfully
+function onLoginSuccessful(key) {
+  localStorage.setItem('loggedIn', true);
+  localStorage.setItem('loggedInKey', key);
+  localStorage.setItem('loginTimestamp', Date.now().toString()); // Set the current timestamp
+
+  console.debug('Login successful. Session started.');
+  checkAuth(); // Immediately check the auth after login
+}
+
 // Start the initial check and set an interval for periodic checks
 checkAuth();
 setInterval(checkAuth, 5 * 60 * 1000); // Every 5 minutes
