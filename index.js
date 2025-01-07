@@ -1,1 +1,80 @@
-function _0x210d(_0x437f70,_0x3e057c){const _0x4dbd55=_0x4dbd();return _0x210d=function(_0x210d0f,_0x4e7ad2){_0x210d0f=_0x210d0f-0x7c;let _0x4d9cf6=_0x4dbd55[_0x210d0f];return _0x4d9cf6;},_0x210d(_0x437f70,_0x3e057c);}function _0x4dbd(){const _0x4d6ba2=['61271oqpTRj','has','53729YPsXjc','_blank','add','Key\x20validation\x20error:','attempts','keysCache','success','lastAttemptTime','checkKeyValidity','submitBtn','textContent','Error\x20fetching\x20keys:','keyCode','expired','handleFailedLogin','preventDefault','keyInput','1cCXPQf','391276LGDtWn','Please\x20enter\x20a\x20key','removeItem','pathname','150jVcjzt','shake','2564022JETciW','6unznTq','disabled','clearSession','keypress','alert','getElementById','true','json','addEventListener','rgba(48,\x20209,\x2088,\x200.15)','contextmenu','style','129768ndTvrJ','688slfhIO','height','discordBtn','showAlert','oxbe.json','show','/home','Failed\x20to\x20fetch\x20keys','maxAttempts','error','remove','cooldownPeriod','key','7116MJKVnF','checkExistingSession','setItem','490tZmILE','location','click','https://discord.gg/usepathetic','4548177lsFtRC','href','history','replaceState','loggedIn','ctrlKey','background','keydown','Success!\x20Redirecting...','title','handleSuccessfulLogin','auto','Invalid\x20key!\x20Please\x20try\x20again\x20or\x20get\x20a\x20new\x20key','validKeys','loggedInKey','includes','Too\x20many\x20attempts.\x20Please\x20try\x20again\x20later','classList','78551iuupvy','container','Invalid\x20session.\x20Please\x20enter\x20a\x20new\x20key','value','Session\x20expired.\x20Please\x20enter\x20a\x20new\x20key','checkExpiredStatus','Error\x20checking\x20key.\x20Please\x20try\x20again','delete','validateKey'];_0x4dbd=function(){return _0x4d6ba2;};return _0x4dbd();}const _0x1f5838=_0x210d;(function(_0xe2cbaa,_0x77ad73){const _0x337808=_0x210d,_0x237746=_0xe2cbaa();while(!![]){try{const _0x446194=parseInt(_0x337808(0x90))/0x1*(-parseInt(_0x337808(0x97))/0x2)+parseInt(_0x337808(0x98))/0x3*(parseInt(_0x337808(0x91))/0x4)+parseInt(_0x337808(0x95))/0x5*(-parseInt(_0x337808(0xa4))/0x6)+parseInt(_0x337808(0x7d))/0x7*(-parseInt(_0x337808(0xa5))/0x8)+parseInt(_0x337808(0xb9))/0x9+-parseInt(_0x337808(0xb5))/0xa*(-parseInt(_0x337808(0xcb))/0xb)+-parseInt(_0x337808(0xb2))/0xc*(-parseInt(_0x337808(0x7f))/0xd);if(_0x446194===_0x77ad73)break;else _0x237746['push'](_0x237746['shift']());}catch(_0x4b5c38){_0x237746['push'](_0x237746['shift']());}}}(_0x4dbd,0xc7bf0),document['addEventListener']('DOMContentLoaded',()=>new KeySystem()),document[_0x1f5838(0xa0)](_0x1f5838(0xa2),_0xaa9020=>_0xaa9020[_0x1f5838(0x8e)]()),document[_0x1f5838(0xa0)](_0x1f5838(0xc0),_0x544cf8=>{const _0xa3213e=_0x1f5838;(_0x544cf8[_0xa3213e(0xbe)]&&!['a','v'][_0xa3213e(0xc8)](_0x544cf8[_0xa3213e(0xb1)])||_0x544cf8[_0xa3213e(0x8b)]===0x7b)&&_0x544cf8[_0xa3213e(0x8e)]();}));class KeySystem{constructor(){const _0x16edb3=_0x1f5838;this['submitBtn']=document[_0x16edb3(0x9d)](_0x16edb3(0x88)),this[_0x16edb3(0xa7)]=document[_0x16edb3(0x9d)](_0x16edb3(0xa7)),this['keyInput']=document['getElementById'](_0x16edb3(0xb1)),this[_0x16edb3(0x9c)]=document['getElementById']('alert'),this[_0x16edb3(0xcc)]=document[_0x16edb3(0x9d)]('login-container'),this['attempts']=0x0,this[_0x16edb3(0x86)]=0x0,this[_0x16edb3(0xad)]=0x5,this[_0x16edb3(0xb0)]=0x7d0,this[_0x16edb3(0x84)]=null,this['initEventListeners'](),this[_0x16edb3(0xd0)](),this[_0x16edb3(0xb3)]();}['initEventListeners'](){const _0x476a1b=_0x1f5838;this[_0x476a1b(0x88)]['addEventListener'](_0x476a1b(0xb7),()=>this['validateKey']()),this[_0x476a1b(0xa7)]['addEventListener'](_0x476a1b(0xb7),()=>this['openDiscord']()),this[_0x476a1b(0x8f)][_0x476a1b(0xa0)](_0x476a1b(0x9b),_0x2999e7=>{const _0x49bdd1=_0x476a1b;if(_0x2999e7[_0x49bdd1(0xb1)]==='Enter')this[_0x49bdd1(0x7c)]();});}['checkExpiredStatus'](){const _0x2aa086=_0x1f5838,_0x52fbbb=new URLSearchParams(window['location']['search']);_0x52fbbb[_0x2aa086(0x7e)](_0x2aa086(0x8c))&&(this[_0x2aa086(0xa8)](_0x2aa086(0xcf),'error'),_0x52fbbb[_0x2aa086(0xd2)](_0x2aa086(0x8c)),window[_0x2aa086(0xbb)][_0x2aa086(0xbc)]({},document[_0x2aa086(0xc2)],window['location'][_0x2aa086(0x94)]));}async[_0x1f5838(0x7c)](){const _0x42033a=_0x1f5838,_0x2212e1=this[_0x42033a(0x8f)][_0x42033a(0xce)]['trim']();if(!_0x2212e1){this[_0x42033a(0xa8)](_0x42033a(0x92),_0x42033a(0xae));return;}const _0x1c91bc=Date['now']();if(_0x1c91bc-this[_0x42033a(0x86)]<this[_0x42033a(0xb0)]){this[_0x42033a(0xa8)]('Please\x20wait\x20before\x20trying\x20again',_0x42033a(0xae));return;}if(this[_0x42033a(0x83)]>=this[_0x42033a(0xad)]){this[_0x42033a(0xa8)](_0x42033a(0xc9),_0x42033a(0xae));return;}this[_0x42033a(0x83)]++,this['lastAttemptTime']=_0x1c91bc,this['submitBtn']['disabled']=!![];try{const _0x41c9bf=await this[_0x42033a(0x87)](_0x2212e1);_0x41c9bf?this[_0x42033a(0xc3)](_0x2212e1):this['handleFailedLogin']();}catch(_0x298b34){console[_0x42033a(0xae)](_0x42033a(0x82),_0x298b34),this[_0x42033a(0xa8)](_0x42033a(0xd1),_0x42033a(0xae));}finally{this[_0x42033a(0x88)][_0x42033a(0x99)]=![];}}async['checkKeyValidity'](_0x9b10d1){const _0x2fc7f7=_0x1f5838;if(!this[_0x2fc7f7(0x84)])try{const _0x4ed76d=await fetch(_0x2fc7f7(0xa9));if(!_0x4ed76d['ok'])throw new Error(_0x2fc7f7(0xac));const _0x23b57a=await _0x4ed76d[_0x2fc7f7(0x9f)]();this[_0x2fc7f7(0x84)]=_0x23b57a[_0x2fc7f7(0xc6)];}catch(_0x5dc8b1){console['error'](_0x2fc7f7(0x8a),_0x5dc8b1);throw _0x5dc8b1;}return this[_0x2fc7f7(0x84)][_0x2fc7f7(0xc8)](_0x9b10d1);}['handleSuccessfulLogin'](_0x373b3b){const _0x422900=_0x1f5838;this[_0x422900(0xa8)](_0x422900(0xc1),_0x422900(0x85)),localStorage[_0x422900(0xb4)](_0x422900(0xbd),_0x422900(0x9e)),localStorage[_0x422900(0xb4)](_0x422900(0xc7),_0x373b3b),setTimeout(()=>window['location'][_0x422900(0xba)]=_0x422900(0xab),0x5dc);}[_0x1f5838(0x8d)](){const _0x45935b=_0x1f5838;this['showAlert'](_0x45935b(0xc5),'error'),this[_0x45935b(0xcc)][_0x45935b(0xca)]['add'](_0x45935b(0x96)),setTimeout(()=>this[_0x45935b(0xcc)][_0x45935b(0xca)]['remove'](_0x45935b(0x96)),0x1f4),this[_0x45935b(0x8f)]['value']='';}[_0x1f5838(0xa8)](_0xcd007,_0x2ed614){const _0x5591a5=_0x1f5838;this['alert'][_0x5591a5(0x89)]=_0xcd007,this[_0x5591a5(0x9c)][_0x5591a5(0xa3)][_0x5591a5(0xbf)]=_0x2ed614===_0x5591a5(0x85)?_0x5591a5(0xa1):'rgba(255,\x2059,\x2048,\x200.15)',this[_0x5591a5(0x9c)]['classList'][_0x5591a5(0x81)](_0x5591a5(0xaa)),this[_0x5591a5(0xcc)][_0x5591a5(0xa3)][_0x5591a5(0xa6)]=_0x5591a5(0xc4),setTimeout(()=>{const _0x3630ba=_0x5591a5;this[_0x3630ba(0x9c)][_0x3630ba(0xca)][_0x3630ba(0xaf)](_0x3630ba(0xaa)),this[_0x3630ba(0x9c)][_0x3630ba(0x89)]='';},0xbb8);}['openDiscord'](){const _0x30847e=_0x1f5838;window['open'](_0x30847e(0xb8),_0x30847e(0x80),'noopener,noreferrer');}[_0x1f5838(0x9a)](){const _0x3f1286=_0x1f5838;localStorage[_0x3f1286(0x93)](_0x3f1286(0xbd)),localStorage[_0x3f1286(0x93)](_0x3f1286(0xc7));}async[_0x1f5838(0xb3)](){const _0x4bdabf=_0x1f5838;try{const _0x4107f6=localStorage['getItem'](_0x4bdabf(0xbd)),_0x49d711=localStorage['getItem'](_0x4bdabf(0xc7));if(!_0x4107f6||!_0x49d711)return;const _0x59a8c5=await this[_0x4bdabf(0x87)](_0x49d711);if(!_0x59a8c5){this[_0x4bdabf(0x9a)](),this[_0x4bdabf(0xa8)](_0x4bdabf(0xcd),_0x4bdabf(0xae));return;}window[_0x4bdabf(0xb6)][_0x4bdabf(0xba)]=_0x4bdabf(0xab);}catch(_0x1efbab){console[_0x4bdabf(0xae)]('Session\x20check\x20error:',_0x1efbab),this[_0x4bdabf(0x9a)]();}}}
+async function checkAuth() {
+  try {
+    const loggedIn = localStorage.getItem('loggedIn');
+    const savedKey = localStorage.getItem('loggedInKey');
+    const timestamp = localStorage.getItem('loginTimestamp');
+
+    console.debug('Auth Check - Session State:', {
+      loggedIn,
+      hasKey: !!savedKey,
+      timestamp: timestamp ? new Date(parseInt(timestamp)) : null
+    });
+
+    // If missing any session data
+    if (!loggedIn || !savedKey || !timestamp) {
+      console.debug('Auth Check Failed - Missing session data');
+      redirectToErrorPage('expired');
+      return;
+    }
+
+    const now = Date.now();
+    const expires = parseInt(timestamp) + 24 * 60 * 60 * 1000; // 24 hours expiry
+
+    console.debug('Auth Check - Expiration:', {
+      now: new Date(now),
+      expires: new Date(expires),
+      timeRemaining: Math.round((expires - now) / 1000 / 60) + ' minutes'
+    });
+
+    // If session expired
+    if (now > expires) {
+      console.debug('Auth Check Failed - Session expired');
+      clearSession();
+      redirectToErrorPage('expired');
+      return;
+    }
+
+    // Fetch valid key list and validate the saved key
+    const response = await fetch('oxbe.json');
+    if (!response.ok) {
+      throw new Error(`HTTP error! Status: ${response.status}`);
+    }
+
+    const data = await response.json();
+
+    console.debug('Auth Check - Key validation:', {
+      keyExists: data.validKeys.includes(savedKey),
+      totalValidKeys: data.validKeys.length
+    });
+
+    // If the saved key is invalid
+    if (!data.validKeys.includes(savedKey)) {
+      console.debug('Auth Check Failed - Invalid key');
+      clearSession();
+      redirectToErrorPage('expired');
+      return;
+    }
+
+  } catch (error) {
+    console.error('Auth Check Failed - General error:', error);
+    clearSession();
+    redirectToErrorPage('error');
+  }
+}
+
+// Clears all session data from localStorage
+function clearSession() {
+  console.debug('Clearing session data');
+  localStorage.removeItem('loggedIn');
+  localStorage.removeItem('loggedInKey');
+  localStorage.removeItem('loginTimestamp');
+}
+
+// Redirect to error page with a specific error code
+function redirectToErrorPage(errorType) {
+  window.location.href = `/?${errorType}=true`;
+}
+
+// Start the initial check and set an interval for periodic checks
+checkAuth();
+setInterval(checkAuth, 5 * 60 * 1000); // Every 5 minutes
