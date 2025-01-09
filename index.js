@@ -117,7 +117,7 @@
   }
 
   openDiscord() {
-    window.open('https://discord.gg/Eg2EWXwYcn', '_blank', 'noopener,noreferrer');
+    window.open('https://discord.gg/QytwTYpTEx', '_blank', 'noopener,noreferrer');
   }
 
   clearSession() {
